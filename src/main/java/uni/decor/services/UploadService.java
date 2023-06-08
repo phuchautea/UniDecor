@@ -36,7 +36,7 @@ public class UploadService {
         return  null;
     }
     private String generateUniqueFileName(String filename) {
-        String uniqueFileName = UUID.randomUUID().toString() + filename; // tạo uniquename bằng random UUID + filename(original)
+        String uniqueFileName = filename+"_"+UUID.randomUUID().toString() ; // tạo uniquename bằng filename(original)+random UUID
         return uniqueFileName;
     }
 }
