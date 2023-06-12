@@ -1,0 +1,68 @@
+@import url('/template/user/assets/css/timber.css');
+@import url('/template/vendor/bootstrap/css/bootstrap.min.css');
+@import url('/template/vendor/bootstrap/css/bootstrap-icons.css');
+@import url('/template/vendor/animate/css/animate.min.css');
+@import url('/template/vendor/slick/css/slick.css');
+@import url('/template/vendor/owl-carousel/css/owl.carousel.min.css');
+@import url('/template/vendor/owl-carousel/css/owl.theme.default.min.css');
+@import url('/template/vendor/swiper-bundle/css/swiper-bundle.min.css');
+@import url('/template/vendor/icon-fonts/font-awesome/css/font-awesome.min.css');
+@import url('/template/vendor/icon-fonts/themify-icons/css/themify-icons.css');
+@import url('/template/vendor/icon-fonts/simple-line-icons/css/simple-line-icons.css');
+@import url('/template/vendor/icon-fonts/ionicons/css/ionicons.min.css');
+@import url('/template/vendor/magnific-popup/css/magnific-popup.css');
+
+@import url('/template/user/assets/css/cart.api.css');
+@import url('/template/user/assets/css/collection-template.css');
+@import url('/template/user/assets/css/theme-custom.css');
+@import url('/template/user/assets/css/skin-theme.css');
+@import url('/template/user/assets/css/swatch-color.css');
+@import url('/template/user/assets/css/style.css');
+@import url('/template/user/assets/css/breadcrumb.css');
+
+
+
+*,
+::after,
+::before {
+    box-sizing: border-box
+}
+
+body {
+    color: var(--font-color-body);
+    font-size: var(--font-size-body);
+    background-color: var(--background-color-body);
+    font-family: var(--font-stack-body);
+    font-weight: var(--font-weight-body);
+    font-style: var(--font-style-body);
+    line-height: normal;
+    letter-spacing: var(--font-letter-spacing-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--font-color-header);
+    font-family: var(--font-stack-header);
+    font-weight: var(--font-weight-header);
+    font-style: var(--font-style-header);
+}
+
+.section-title h2,
+.content-main-title h2,
+.my-account-page .page-title h2 {
+    color: var(--font-color-section-header);
+    font-family: SF-Pro-Display-Regular;
+    font-weight: 600;
+    font-style: normal;
+    text-transform: none;
+}
+
+p {
+    color: var(--font-color-paragraph);
+    font-family: var(--font-stack-paragraph);
+    line-height: var(--font-line-height-paragraph);
+}
