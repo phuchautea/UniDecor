@@ -1,0 +1,57 @@
+<!DOCTYPE>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+<th:block th:replace="admin/layout :: head"></th:block>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <th:block th:replace="admin/layout :: navbar"></th:block>
+    <th:block th:replace="admin/layout :: sidebar"></th:block>
+
+    <div class="content-wrapper">
+        <section class="content" style="margin-top: 15px">
+            <div class="container-fluid">
+                <!--                @include('admin.alerts')-->
+                <!--                @yield('content')-->
+                <!--                <div th:insert="~{::${content}}"></div>-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fa fa-plus-circle"></i> THÊM SẢN PHẨM
+                                </h3>
+                            </div>
+                            <form th:action="@{/admin/products/add}" th:object="${product}" method="POST">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>Tên sản phẩm</label>
+                                        <input type="text" class="form-control" id="name" name="name" th:field="*{name}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mô tả</label>
+                                        <textarea class="form-control" id="description" name="description" th:field="*{description}"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Danh mục</label>
+                                        <select class="form-control" id="category" name="category" th:field="*{category}">
+                                            <option value="0">Chọn danh mục</option>
+                                            <option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Thêm</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <th:block th:replace="admin/layout :: footer"></th:block>
+
+</div>
+</body>
+</html>
