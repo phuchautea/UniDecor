@@ -1,7 +1,10 @@
 package uni.decor.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import uni.decor.entity.Category;
 import uni.decor.entity.Product;
 import uni.decor.repository.ICategoryRepository;
@@ -49,14 +52,23 @@ public class ProductService {
         Category category = categoryRepository.findById(categoryId).orElse(null);
         if(existingProduct != null)
         {
+
             existingProduct.setName(product.getName());
             existingProduct.setDescription(product.getDescription());
+            String slug = SlugUtils.createSlug(product.getName());
+            product.setSlug(slug);
+            existingProduct.setImage(product.getImage());
             existingProduct.setCategory(category);
             existingProduct.setUpdatedAt(now);
             save(existingProduct);
 
         }
     }
-
+    ///Paging
+    public Page<Product> getPagingProducts( int page, int size)
+    {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return productRepository.findAll(pageRequest);
+    }
 }
 

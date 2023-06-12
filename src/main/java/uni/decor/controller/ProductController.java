@@ -5,15 +5,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import uni.decor.entity.Product;
 import uni.decor.service.CategoryService;
 import uni.decor.service.ProductService;
+import uni.decor.service.UploadService;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
 @RequestMapping("/admin/products")
 public class ProductController {
+    @Autowired
+    private  UploadService uploadService;
     @Autowired
     private ProductService productService;
     @Autowired
@@ -31,9 +36,9 @@ public class ProductController {
         return "admin/product/add";
     }
     @PostMapping("/add")
-    public String addProduct(@ModelAttribute("product") Product product, BindingResult result, Model model) {
+    public String addProduct(@ModelAttribute("product") Product product, BindingResult result, Model model) throws IOException {
+        model.addAttribute("product", product);
         if(result.hasErrors()){
-            model.addAttribute("product", product);
             return "admin/product/add";
         }
         productService.addProduct(product);

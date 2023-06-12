@@ -42,6 +42,8 @@ public class CategoryService {
     }
     public void updateCategory(Category category)
     {
+        String slug = SlugUtils.createSlug(category.getName());
+        category.setSlug(slug);
         save(category);
     }
 }

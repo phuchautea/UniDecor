@@ -34,6 +34,20 @@
                                         <textarea class="form-control" id="description" name="description" th:field="*{description}"></textarea>
                                     </div>
                                     <div class="form-group">
+                                        <label for="image">Hình ảnh</label>
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" id="image" name="image"
+                                                   th:value="*{image}">
+                                            <div class="input-group-append">
+                                                <label class="input-group-text btn btn-primary"
+                                                       for="image_file" id="uploadBtn">Chọn file</label>
+                                                <input type="file" class="form-control-file d-none"
+                                                       id="image_file" name="image_file">
+                                            </div>
+                                        </div>
+                                        <img th:src="*{image}" id="previewImg" class="img-fluid" alt="" style="width:30%;">
+                                    </div>
+                                    <div class="form-group">
                                         <label>Danh mục</label>
                                         <select class="form-control" id="category" name="category">
                                             <option value="0">Chọn danh mục</option>
@@ -58,5 +72,43 @@
     <th:block th:replace="admin/layout :: footer"></th:block>
 
 </div>
+<script type="text/javascript">
+        $('#image_file').on('change', function() {
+            let image = $('#image_file').prop('files')[0];
+            let formData = new FormData();
+            formData.append('image', image);
+
+            $.ajax({
+                url: '/upload',
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                console.log("SUCCSS");
+                    data = JSON.parse(data);
+                    if(data['path']){
+                        $('#image').val(data.path);
+                        $('#previewImg').attr('src', data.path);
+                        $('#previewImg').show();
+                    }else{
+                        $('#image').val('');
+                        $('#previewImg').attr('src', '');
+                        $('#previewImg').hide();
+                    }
+
+                },
+           error: function(jqXHR, textStatus, errorThrown){
+            if (jqXHR.status == 400) {
+                    var response = JSON.parse(jqXHR.responseText);
+                    alert(response.message);}
+
+  }
+            });
+        });
+    </script>
 </body>
 </html>

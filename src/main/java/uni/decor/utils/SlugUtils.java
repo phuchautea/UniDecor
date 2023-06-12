@@ -3,7 +3,6 @@ package uni.decor.utils;
 import java.text.Normalizer;
 import java.util.regex.Pattern;
 
-
 public class SlugUtils {
     public static String createSlug(String str) {
         str = str.toLowerCase();
