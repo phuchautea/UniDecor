@@ -1,0 +1,75 @@
+<!DOCTYPE>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+<th:block th:replace="admin/layout :: head"></th:block>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <th:block th:replace="admin/layout :: navbar"></th:block>
+    <th:block th:replace="admin/layout :: sidebar"></th:block>
+
+    <div class="content-wrapper">
+        <section class="content" style="margin-top: 15px">
+            <div class="container-fluid">
+                <!--                @include('admin.alerts')-->
+                <!--                @yield('content')-->
+                <!--                <div th:insert="~{::${content}}"></div>-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fa fa-list"></i> DANH SÁCH SẢN PHẨM - Tổng: <span th:text="${#lists.size(products)}"></span>
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-head-fixed text-nowrap">
+                                        <thead>
+                                        <tr>
+                                            <th>Hành động</th>
+                                            <th>ID</th>
+                                            <th>Tên</th>
+                                            <th>Slug</th>
+                                            <th>Mô tả</th>
+                                            <th>Danh mục</th>
+                                            <!--                                            <th>Thời gian thêm</th>-->
+                                            <!--                                            <th>Thời gian sửa</th>-->
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="product : ${products}">
+                                            <td style="width: 100px">
+                                                <a th:href="@{/admin/products/edit/{id}(id=${product.id})}"
+                                                   class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a onclick="return confirm('Không thể khôi phục sau khi xóa, bạn chắc chắn?')"
+                                                   th:href="@{/admin/products/delete/{id}(id=${product.id})}" class="btn btn-danger btn-sm">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
+                                            <td th:text="${product.id}"></td>
+                                            <td th:text="${product.name}"></td>
+                                            <td th:text="${product.slug}"></td>
+                                            <td th:text="${product.description}"></td>
+                                            <td th:text="${product.category.name}"></td>
+                                            <!--                                            <td th:text="${product.createdAt}"></td>-->
+                                            <!--                                            <td th:text="${product.updateAt}"></td>-->
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <th:block th:replace="admin/layout :: footer"></th:block>
+
+</div>
+</body>
+</html>

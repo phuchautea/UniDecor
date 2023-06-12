@@ -1,0 +1,75 @@
+<!DOCTYPE>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+<th:block th:replace="admin/layout :: head"></th:block>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <th:block th:replace="admin/layout :: navbar"></th:block>
+  <th:block th:replace="admin/layout :: sidebar"></th:block>
+
+  <div class="content-wrapper">
+    <section class="content" style="margin-top: 15px">
+      <div class="container-fluid">
+        <!--                @include('admin.alerts')-->
+        <!--                @yield('content')-->
+        <!--                <div th:insert="~{::${content}}"></div>-->
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fa fa-plus-circle"></i> CHỈNH SỬA VOUCHER #<span th:text="${voucher.discountCode}"></span>
+                </h3>
+              </div>
+              <form th:action="@{/admin/vouchers/edit}" th:object="${voucher}" method="POST">
+                <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:field="*{discountCode}">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>Discount Value</label>
+                    <input type="text" class="form-control" id="discountValue" name="discountValue" th:field="*{discountValue}">
+                  </div>
+                  <div class="form-group">
+                    <label>Minimum Spent</label>
+                    <input type="text" class="form-control" id="minimumSpent" name="minimumSpent" th:field="*{minimumSpent}">
+                  </div>
+                  <div class="form-group">
+                    <label>Disount Max Value</label>
+                    <input type="text" class="form-control" id="discountMaxValue" name="discountMaxValue" th:field="*{discountMaxValue}">
+                  </div>
+                  <div class="form-group">
+                    <label>Valid From</label>
+                    <input type="datetime-local" class="form-control" id="validFrom" name="validFrom" th:field="*{validFrom}">
+                  </div>
+                  <div class="form-group">
+                    <label>Valid To</label>
+                    <input type="datetime-local" class="form-control" id="validTo" name="validTo" th:field="*{validTo}">
+                  </div>
+                  <div class="form-group">
+                    <label>Max Usage</label>
+                    <input type="text" class="form-control" id="maxUsage" name="maxUsage" th:field="*{maxUsage}">
+                  </div>
+                  <div class="form-group">
+                    <label>Used count</label>
+                    <textarea class="form-control" id="usedCount" name="usedCount" th:field="*{usedCount}"></textarea>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <th:block th:replace="admin/layout :: footer"></th:block>
+
+</div>
+</body>
+</html>
+
+
+
