@@ -1,0 +1,66 @@
+<!DOCTYPE>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+<script src="https://cdn.ckeditor.com/4.9.2/full/ckeditor.js"></script>
+<th:block th:replace="admin/layout :: head"></th:block>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <th:block th:replace="admin/layout :: navbar"></th:block>
+    <th:block th:replace="admin/layout :: sidebar"></th:block>
+
+    <div class="content-wrapper">
+        <section class="content" style="margin-top: 15px">
+            <div class="container-fluid">
+                <!--                @include('admin.alerts')-->
+                <!--                @yield('content')-->
+                <!--                <div th:insert="~{::${content}}"></div>-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fa fa-plus-circle"></i> THÊM BÀI VIẾT
+                                </h3>
+                            </div>
+                            <form th:action="@{/admin/blogs/add}" th:object="${blog}" method="POST">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>Tiêu đề</label>
+                                        <input type="text" class="form-control" id="title" name="title" th:field="*{title}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Nội dung</label>
+                                        <textarea class="form-control" id="content" name="content" th:field="*{content}"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tác giả</label>
+                                        <input type="text" class="form-control" id="author" name="author" th:field="*{author}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Hình ảnh</label>
+                                        <input type="text" class="form-control" id="image" name="image" th:field="*{image}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Trạng thái</label>
+                                        <input type="text" class="form-control" id="published" name="published" th:field="*{published}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ngày đăng</label>
+                                        <input type="datetime-local" class="form-control" id="created_date" name="created_date" th:field="*{created_date}">
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Thêm</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <th:block th:replace="admin/layout :: footer"></th:block>
+    <script type="text/javascript">CKEDITOR.replace( 'content' );</script>
+</div>
+</body>
+</html>

@@ -20,14 +20,14 @@ public class VoucherController {
     private VoucherService voucherService;
     @GetMapping
     public String showAllVouchers(Model model) {
-        List<Voucher> categories = voucherService.getAllVouchers();
-        model.addAttribute("vouchers", categories);
+        List<Voucher> vouchers = voucherService.getAllVouchers();
+        model.addAttribute("vouchers", vouchers);
         return "admin/voucher/list";
     }
     @GetMapping("/add")
     public String addVoucherForm(Model model) {
         model.addAttribute("voucher", new Voucher());
-//        model.addAttribute("vouchers", voucherService.getAllVouchers());
+        model.addAttribute("vouchers", voucherService.getAllVouchers());
         return "admin/voucher/add";
     }
     @PostMapping("/add")
@@ -55,7 +55,7 @@ public class VoucherController {
     }
 
     @PostMapping("/edit")
-    public String editCategory(@ModelAttribute("voucher") Voucher updatedVoucher) {
+    public String editVoucher(@ModelAttribute("voucher") Voucher updatedVoucher) {
         voucherService.updateVoucher(updatedVoucher);
         return "redirect:/admin/vouchers";
     }
