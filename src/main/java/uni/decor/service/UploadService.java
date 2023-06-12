@@ -1,4 +1,4 @@
-package uni.decor.services;
+package uni.decor.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,7 @@ public class UploadService {
                 file.transferTo(serverFile);
 
                 // Lưu đường dẫn hình ảnh vào đối tượng Book
-                return serverFile.getName();
+                return serverFile.getPath();
             } catch (IOException e) {
                 e.printStackTrace();
                 // Xử lý lỗi khi lưu trữ tệp tin
