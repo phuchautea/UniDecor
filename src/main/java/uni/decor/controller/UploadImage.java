@@ -1,6 +1,7 @@
 package uni.decor.controller;
 
 import org.json.JSONException;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import uni.decor.service.UploadService;
@@ -21,7 +22,8 @@ import java.io.IOException;
 public class UploadImage {
     @Autowired
     private UploadService uploadService;
-
+    @Autowired
+    private ResourceLoader resourceLoader;
     @PostMapping
 //    public ResponseEntity<String> uploadImage(Model model, @RequestParam("image") MultipartFile file) throws IOException, JSONException {
 //        String name =uploadService.uploadImage(file);
@@ -34,7 +36,8 @@ public class UploadImage {
         JSONObject responseJson = new JSONObject();
         try {
         if (file == null || file.isEmpty()) {
-            return ResponseEntity.ok().body("Vui lòng chọn một tệp tin ảnh.");
+            responseJson.put("message","Chưa chọn ảnh !!");
+            return ResponseEntity.badRequest().body("Vui lòng chọn một tệp tin ảnh.");
         }
         // Kiểm tra định dạng tệp tin
         String originalFilename = StringUtils.cleanPath(file.getOriginalFilename());
@@ -47,7 +50,9 @@ public class UploadImage {
 
             String name = uploadService.uploadImage(file);
 
-            responseJson.put("path", name);
+
+//            responseJson.put("path", "/static/" + name);
+            responseJson.put("path", "/"+ name);
 
             return ResponseEntity.ok().body(responseJson.toString());
         } catch (IOException | JSONException e) {

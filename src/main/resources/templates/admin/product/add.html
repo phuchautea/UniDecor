@@ -25,7 +25,7 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label>Tên sản phẩm</label>
-                                        <input type="text" class="form-control" id="name" name="name" th:field="*{name}">
+                                        <input required type="text" class="form-control" id="name" name="name" th:field="*{name}">
                                     </div>
                                     <div class="form-group">
                                         <label>Mô tả</label>
@@ -44,21 +44,22 @@
                                             <div class="input-group-append">
                                                 <label class="input-group-text btn btn-primary"
                                                        for="image_file" id="uploadBtn">Chọn file</label>
-                                                <input type="file" class="form-control-file d-none"
+                                                <input  type="file" class="form-control-file d-none"
                                                        id="image_file" name="image_file">
                                             </div>
                                         </div>
-                                        <img id="previewImg" class="img-fluid" alt="" style="display:none;width:30%;">
+                                        <img id="previewImg" class="img-fluid" alt="" style="width:100px">
                                     </div>
                                     <div class="form-group">
                                         <label>Danh mục</label>
-                                        <select class="form-control" id="category" name="category" th:field="*{category}">
+                                        <select required class="form-control" id="category" name="category" th:field="*{category}" >
                                             <option value="0">Chọn danh mục</option>
                                             <option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
                                         </select>
                                     </div>
 
                                 </div>
+
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Thêm</button>
                                 </div>
@@ -73,6 +74,36 @@
 
 </div>
 <script type="text/javascript">
+ function uploadImage(id) {
+            let image = $('#image_file_'+id+'').prop('files')[0];
+            let formData = new FormData();
+            formData.append('image', image);
+
+            $.ajax({
+                url: '/upload',
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    if(data.path){
+                        $('#image_'+id+'').val(data.path);
+                        $('#previewImg_'+id+'').attr('src', data.path);
+                        $('#previewImg_'+id+'').show();
+                    }else{
+                        $('#image_'+id+'').val('');
+                        $('#previewImg_'+id+'').attr('src', '');
+                        $('#previewImg_'+id+'').hide();
+                    }
+
+                }
+            });
+        }
+
+
         $('#image_file').on('change', function() {
             let image = $('#image_file').prop('files')[0];
             let formData = new FormData();
@@ -109,6 +140,45 @@
   }
             });
         });
+
+
+<!--PRODUCT VARIANT-->
+        function addVariantRow() {
+            const generateId = generateRandomString(11);
+
+            const table = document.querySelector('table tbody');
+            const newRow = `
+				<tr>
+					<td><input required type="text" class="form-control" name="variant_name[]"></td>
+					<td><input required type="number" class="form-control" name="variant_quantity[]"></td>
+					<td><input required type="text" class="form-control format-price" name="variant_price[]"></td>
+					<td><input required type="text" class="form-control format-price" name="variant_discount_price[]"></td>
+                    <td><input required type="text" class="form-control" name="variant_description[]"></td>
+                    <td><div class="input-group mb-3">
+                            <input required type="text" class="form-control" id="image_${generateId}" name="variant_image[]" value="">
+                            <div class="input-group-append">
+                                <label class="input-group-text btn btn-primary" for="image_file_${generateId}">Chọn file</label>
+                                    <input type="file" class="form-control-file d-none" id="image_file_${generateId}" onchange="uploadImage('${generateId}')">
+                            </div>
+                        </div>
+                        <img id="previewImg_${generateId}" class="img-fluid" alt="" style="width:100px;"src="">
+                    </td>
+                    <td><button type="button" class="btn btn-danger" onclick="deleteVariantRow(this)">Xóa</button></td>
+				</tr>
+			`;
+            table.insertAdjacentHTML('beforeend', newRow);
+            $(".format-price").priceFormat({
+                limit: 15,
+                prefix: '',
+                centsLimit: 0
+            });
+        }
+
+        function deleteVariantRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+        }
+
     </script>
 
 </body>

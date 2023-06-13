@@ -21,19 +21,20 @@ public class UploadService {
                 String Fileextensiton = getFileExtension (file.getOriginalFilename());
 
                 String fileName = generateUniqueFileName(valueBeforeDot);
+//                String fileName =file.getOriginalFilename().toString();
                 System.out.println(valueBeforeDot);
-                String uploadDir = imageStorage; // Thay đổi thành đường dẫn thư mục lưu trữ thực tế trên server
+                String uploadDir = imageStorage;
 
                 File uploadPath = new File(uploadDir);
                 if (!uploadPath.exists()) {
                     uploadPath.mkdirs(); // Tạo thư mục lưu trữ nếu không tồn tại
                 }
 
-                File serverFile = new File(uploadPath.getAbsolutePath() + File.separator + fileName + Fileextensiton );
+                File serverFile = new File(uploadPath.getAbsolutePath() + File.separator + fileName+Fileextensiton );
                 file.transferTo(serverFile);
 
                 // Lưu đường dẫn hình ảnh vào đối tượng Book
-                return serverFile.getPath();
+                return serverFile.getName();
             } catch (IOException e) {
                 e.printStackTrace();
                 // Xử lý lỗi khi lưu trữ tệp tin

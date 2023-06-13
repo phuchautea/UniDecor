@@ -7,11 +7,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import uni.decor.entity.Product;
+import uni.decor.entity.ProductVariant;
 import uni.decor.service.CategoryService;
 import uni.decor.service.ProductService;
+import uni.decor.service.ProductVariantService;
 import uni.decor.service.UploadService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,6 +26,8 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private ProductVariantService productVariantService;
     @GetMapping
     public String showAllProducts(Model model) {
         List<Product> products = productService.getAllProducts();
@@ -32,18 +37,26 @@ public class ProductController {
     @GetMapping("/add")
     public String addProductForm(Model model) {
         model.addAttribute("product", new Product());
+//        List<ProductVariant> productVariants = new ArrayList<>();
+//        model.addAttribute("productVariants", productVariants);
         model.addAttribute("categories", categoryService.getAllCategories());
         return "admin/product/add";
     }
     @PostMapping("/add")
     public String addProduct(@ModelAttribute("product") Product product, BindingResult result, Model model) throws IOException {
-        model.addAttribute("product", product);
+
+//        model.addAttribute("productVariant",productVariant);
         if(result.hasErrors()){
+            model.addAttribute("product", product);
             return "admin/product/add";
         }
+
+
         productService.addProduct(product);
+//        productVariantService.addProductVariant(productVariant);
         return "redirect:/admin/products";
     }
+
 
     @GetMapping("/edit/{id}")
     public String editProductForm(@PathVariable("id") Long id, Model model) {
