@@ -1,0 +1,62 @@
+.ajax-spin-cart .cart-loading,
+.ajax-spin-cart.add-item .cart-title,
+.ajax-spin-cart .cart-added,
+.ajax-spin-cart .cart-unavailable,
+.ajax-spin-cart.loading.add-item .cart-added,
+.ajax-spin-cart.loading.add-item .cart-unavailable {
+    display: none
+}
+
+.ajax-spin-cart.loading .cart-loading,
+.ajax-spin-cart.add-item .cart-added,
+.modal-open .ajax-spin-cart.add-item .cart-unavailable {
+    display: inline-block
+}
+
+.modal-open .ajax-spin-cart.add-item .cart-loading,
+.modal-open .ajax-spin-cart.add-item .cart-added {
+    display: none
+}
+
+.wishlist-action a {
+    display: inline-block
+}
+
+.action-wishlist .loading-wishlist,
+.action-wishlist .remove-wishlist,
+a.go-to-wishlist {
+    display: none
+}
+
+.action-wishlist.loading-wishlist .loading-wishlist {
+    display: inline-block
+}
+
+.action-wishlist.loading-wishlist .add-wishlist,
+.action-wishlist.adding-wishlist .remove-wishlist,
+.action-wishlist.adding-wishlist+a.go-to-wishlist {
+    display: none
+}
+
+.action-wishlist.is-active .add-wishlist {
+    display: none
+}
+
+.action-wishlist.is-active .remove-wishlist,
+.action-wishlist.is-active+a.go-to-wishlist {
+    display: inline-block
+}
+
+.action-wishlist.is-active.adding-wishlist .remove-wishlist,
+.action-wishlist.is-active.adding-wishlist+a.go-to-wishlist {
+    display: inline-block
+}
+
+.action-wishlist.loading-wishlist.adding-wishlist .remove-wishlist,
+.action-wishlist.loading-wishlist.adding-wishlist+a.go-to-wishlist {
+    display: none
+}
+
+.swatch-element>input {
+    display: none
+}
