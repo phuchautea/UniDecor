@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="no-js supports-no-cookies mini2" lang="vi" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Register | UniDecor - Thiết kế không gian sống của bạn với nội thất chất lượng cao</title>
+    <th:block th:replace="layout/layout_user :: head-common"></th:block>
+</head>
+
+<body id="unidecor-template" class="template-index">
+    <div id="shopify-section-header" class="shopify-section" th:replace="layout/layout_user :: menu-common"></div>
+    <section class="breadcrumb-area" style="background-image: url('//cdn.shopify.com/s/files/1/0584/0909/1211/files/breadcrumb.jpg?v=1651238329');">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="breadcrumb-index">
+                        <div class="breadcrumb-title">
+                            <h2>Account</h2>
+                        </div>
+                        <ul class="breadcrumb-list">
+                            <li class="breadcrumb-item">
+                                <a href="/" title="Back to the home page">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <span>Account</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <main role="main">
+        <section class="customer-page section-ptb">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="acc-form">
+                            <div class="log-acc-page" id="CustomerLoginForm">
+                                <div class="content-main-title">
+                                    <div class="section-cont-title">
+                                        <h6>Tài khoản</h6>
+                                        <h2>
+                                            <span>Tạo tài khoản</span>
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="acc-page">
+                                    <div class="registers">
+                                        <form action="#" th:action="@{/user/register}" th:object="${user}" method="POST" id="create_customer">
+                                            <div class="login-form-container">
+                                                <ul class="fill-form">
+                                                    <li class="fname">
+                                                        <label for="name">Họ và Tên</label>
+                                                        <input type="text" name="name" id="name" class="input-full" placeholder="" autocapitalize="words" autofocus="">
+                                                        <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                                                    </li>
+
+                                                    <li class="log-email">
+                                                        <label for="email">Địa chỉ Email</label>
+                                                        <input type="email" name="email" id="email" class="input-full" placeholder="" autocorrect="off">
+                                                        <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                                                    </li>
+
+                                                    <li class="log-phone">
+                                                        <label for="phone">Số điện thoại</label>
+                                                        <input type="phone" name="phone" id="phone" class="input-full" placeholder="" autocorrect="off">
+                                                        <span class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+                                                    </li>
+
+                                                    <li class="log-pwd">
+                                                        <label for="password">Mật khẩu</label>
+                                                        <input type="password" name="password" id="password" class="input-full" placeholder="">
+                                                        <span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                                                    </li>
+
+                                                    <li class="log-pwd">
+                                                        <label for="re_password">Nhập lại Mật khẩu</label>
+                                                        <input type="password" name="re_password" id="re_password" class="input-full" placeholder="">
+                                                    </li>
+                                                </ul>
+                                                <div class="form-action-button">
+                                                    <button type="submit" class="btn btn-block btn-style2 create">Tạo tài khoản</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="acc-wrapper">
+                                        <h6>Bạn đã có tài khoản?</h6>
+                                        <div class="account-optional-action">
+                                            <a href="/user/login" id="customer_login_link">Đăng nhập</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+<!--                                <div class="acc-page">-->
+<!--                                    <div class="login">-->
+<!--                                        <form action="#" th:action="@{/user/register}" method="POST" id="customer_login">-->
+<!--                                            <div class="login-form-container">-->
+<!--                                                <div th:if="${param.error}" class="alert alert-danger">-->
+<!--                                                    Email hoặc mật khẩu không hợp lệ-->
+<!--                                                </div>-->
+<!--                                                <ul class="fill-form">-->
+<!--                                                    <li class="log-email">-->
+<!--                                                        <label for="email">Địa chỉ Email</label>-->
+<!--                                                        <input type="email" name="email" id="email" class="input-full" placeholder="" autocorrect="off" autocapitalize="off" autofocus>-->
+<!--                                                    </li>-->
+<!--                                                    <li class="log-pwd">-->
+<!--                                                        <label for="password">Mật khẩu</label>-->
+<!--                                                        <input type="password" value="" name="password" id="password" class="input-full" placeholder="">-->
+<!--                                                    </li>-->
+<!--                                                </ul>-->
+<!--                                                <div class="form-action-button">-->
+<!--                                                    <button type="submit" class="btn btn-style2">Tạo tài khoản</button>-->
+<!--                                                    <a href="#recover" id="RecoverPassword">Quên mật khẩu?</a>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </form>-->
+<!--                                    </div>-->
+<!--                                    <div class="acc-wrapper">-->
+<!--                                        <h6>Chưa có tài khoản?</h6>-->
+<!--                                        <div class="account-optional-action">-->
+<!--                                            <a href="/user/register" id="customer_register_link">Tạo tài khoản</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                            </div>
+                            <div class="log-acc-page" id="RecoverPasswordForm" style="display: none;">
+                                <div class="content-main-title">
+                                    <div class="section-cont-title">
+
+
+                                        <h6>Account</h6>
+
+                                        <h2>
+                                            <span>Reset your password</span>
+                                        </h2>
+                                    </div>
+
+                                    <p>We will send you an email to reset your password.</p>
+                                </div>
+                                <div class="acc-page">
+                                    <form method="post" action="/account/recover" accept-charset="UTF-8"><input type="hidden" name="form_type" value="recover_customer_password"><input type="hidden" name="utf8" value="✓">
+
+                                        <div class="login-form-container">
+
+                                            <ul class="fill-form">
+                                                <li class="log-email">
+                                                    <label for="Email">Email</label>
+                                                    <input type="email" value="" name="email" id="RecoverEmail" class="input-full" placeholder="Email" autocorrect="off" autocapitalize="off">
+                                                </li>
+                                                <li class="form-toggle-btn">
+                                                    <div class="form-action-button">
+                                                        <button class="btn btn-style2" type="submit">Submit</button>
+                                                        <a href="#" id="HideRecoverPasswordLink">Cancel</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <style>
+            .customer-page .acc-form .log-acc-page .acc-page {
+                max-width: 50%;
+                margin: 0 auto;
+                padding: 30px;
+                background-color: #ffffff;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+            }
+
+            @media (max-width: 1199px) {
+                .customer-page .acc-form .log-acc-page .acc-page {
+                    max-width: 60%;
+                }
+            }
+
+            @media (max-width: 991px) {
+                .customer-page .acc-form .log-acc-page .acc-page {
+                    max-width: 70%;
+                }
+            }
+
+            @media (max-width: 767px) {
+                .customer-page .acc-form .log-acc-page .acc-page {
+                    max-width: 100%;
+                    padding: 30px 15px;
+                }
+            }
+
+            /* form css */
+            .customer-page .log-acc-page .login-form-container ul.fill-form li {
+                margin-top: 13px;
+            }
+
+            .customer-page .log-acc-page .login-form-container ul.fill-form li:first-child {
+                margin-top: 0px;
+            }
+
+            .customer-page .log-acc-page .login-form-container ul.fill-form li label {
+                display: block;
+                margin-bottom: 8px;
+                cursor: auto;
+                line-height: 1;
+            }
+
+            .customer-page .log-acc-page .login-form-container input {
+                width: 100%;
+            }
+
+            .customer-page .log-acc-page .login-form-container .form-action-button {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                margin-top: 30px;
+            }
+
+            .customer-page .log-acc-page .login-form-container .form-action-button a {
+                display: block;
+                color: var(--font-color-body);
+                margin-top: 16px;
+                font-size: 16px;
+                text-decoration: underline;
+                line-height: 1;
+            }
+
+            .customer-page .log-acc-page .login-form-container .form-action-button a:hover {
+                color: var(--font-color-primary);
+            }
+
+            /* acc-link css */
+            .customer-page .log-acc-page .acc-wrapper {
+                margin-top: 23px;
+                text-align: center;
+            }
+
+            .customer-page .log-acc-page .acc-wrapper h6 {
+                font-size: 18px;
+                font-weight: 500;
+            }
+
+            .customer-page .log-acc-page .acc-wrapper .account-optional-action {
+                margin-top: 9px;
+                line-height: 1;
+            }
+
+            .customer-page .log-acc-page .acc-wrapper .account-optional-action a {
+                color: var(--font-color-primary);
+                font-size: 16px;
+                text-decoration: underline;
+                -webkit-transition: all 0s ease-in-out 0s;
+                -o-transition: all 0s ease-in-out 0s;
+                transition: all 0s ease-in-out 0s;
+            }
+
+            .customer-page .log-acc-page .acc-wrapper .account-optional-action a:hover {
+                color: var(--font-color-body);
+            }
+
+            /* error css */
+            .customer-page .log-acc-page .errors {
+                font-size: 14px;
+                padding: 10px 15px;
+                margin: 0px 0 13px;
+
+                text-align: left;
+
+                border-radius: 0;
+            }
+
+            .customer-page .log-acc-page .errors ul {
+
+                margin-left: 15px;
+
+                list-style: square;
+                border-radius: 0;
+            }
+
+            .customer-page .log-acc-page .errors ul li {
+                margin-top: 5px;
+            }
+
+            .customer-page .log-acc-page .errors ul li:first-child {
+                margin-top: 0px;
+            }
+
+            /*=====================================
+                guest css
+              ======================================*/
+            .customer-guest-page {
+                padding-bottom: 100px;
+            }
+
+            .customer-guest-page .log-acc-page .login-form-container {
+                text-align: center;
+            }
+
+            .customer-guest-page .log-acc-page .login-form-container input {
+                width: auto;
+            }
+
+            @media (max-width: 1199px) {
+                .customer-guest-page {
+                    padding-bottom: 80px;
+                }
+            }
+
+            @media (max-width: 767px) {
+                .customer-guest-page {
+                    padding-bottom: 60px;
+                }
+            }
+        </style>
+    </main>
+    <div id="shopify-section-footer" class="shopify-section" th:replace="layout/layout_user :: footer-common"></div>
+</body>
+</html>
