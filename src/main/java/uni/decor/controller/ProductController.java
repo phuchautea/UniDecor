@@ -2,6 +2,7 @@ package uni.decor.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import uni.decor.service.ProductVariantService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -36,5 +38,20 @@ public class ProductController {
         }else{
             return "redirect:/";
         }
+    }
+    @GetMapping("/search")
+    public String searchProduct(Model model, @RequestParam("keyword") String keyword) {
+        var items = productService.getAllProducts().stream()
+                .filter(m -> m.getName().toUpperCase().contains(keyword.toUpperCase())
+                        || m.getDescription().toUpperCase().contains(keyword.toUpperCase()))
+                .collect(Collectors.toList());
+
+        if (keyword.isEmpty() || items.isEmpty()) {
+            return "product/searchFailed";
+        }
+
+        model.addAttribute("products", items);
+        model.addAttribute("keyword", keyword);
+        return "product/search";
     }
 }

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html class="no-js supports-no-cookies mini2" lang="vi" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title>Tìm kiếm| UniDecor - Thiết kế không gian sống của bạn với nội thất chất lượng cao</title>
+  <th:block th:replace="layout/layout_user :: head-common"></th:block>
+</head>
+
+<body id="unidecor-template" class="template-index">
+<div id="shopify-section-header" class="shopify-section" th:replace="layout/layout_user :: menu-common"></div>
+<section class="breadcrumb-area" style="background-image: url('//cdn.shopify.com/s/files/1/0584/0909/1211/files/breadcrumb.jpg?v=1651238329');">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="breadcrumb-index">
+          <div class="breadcrumb-title">
+            <h2>Tìm kiếm</h2>
+          </div>
+          <ul class="breadcrumb-list">
+            <li class="breadcrumb-item">
+              <a href="/" title="Back to the home page">Trang chủ</a>
+            </li>
+            <li class="breadcrumb-item">
+              <span>Tìm kiếm</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<main role="main">
+  <div id="shopify-section-template--15088631709835__collection-template-without" class="shopify-section"><section class="main-content-wrap shop-page section-ptb">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="collection-img-wrap">
+
+
+          </div></div></div><!-- shop-top-bar start -->
+
+          <!-- shop-top-bar end -->
+          <script>
+  Shopify.queryParams = {};
+  if (location.search.length) {
+    for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+      aKeyValue = aCouples[i].split('=');
+      if (aKeyValue.length > 1) {
+        Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+      }
+    }
+  }
+
+  var $select = $('#SortBy');
+  $('a[href="#sort"]').click(function () {
+    $select.val( $(this).data('select') );
+    event.preventDefault();
+    Shopify.queryParams.sort_by = jQuery(this).data('select');
+    location.search = jQuery.param(Shopify.queryParams);
+  });
+
+  $('.list-change-view').on("click",function () {
+    event.preventDefault();
+    var data_grid = $(this).attr('data-grid-view');
+    if($('.shop-product-wrap').hasClass('grid-1') || $('.shop-product-wrap').hasClass('grid-2') || $('.shop-product-wrap').hasClass('grid-3') || $('.shop-product-wrap').hasClass('grid-4')){
+
+      $('.shop-product-wrap').removeClass('grid-1');
+      $('.shop-product-wrap').removeClass('grid-2');
+      $('.shop-product-wrap').removeClass('grid-3');
+      $('.shop-product-wrap').removeClass('grid-4');
+      $('.shop-product-wrap').addClass('grid-'+data_grid);
+    }else{
+      $('.shop-product-wrap').addClass('grid-'+data_grid);
+    }
+  });
+
+  $('.list-change-view').on("click",function () {
+    $('.list-change-view').removeClass('active');
+    $(this).addClass('active');
+  });
+
+  $(function() {
+    $('#SortBy').val('best-selling').bind('change', function() {
+      Shopify.queryParams.sort_by = jQuery(this).val();
+      location.search = jQuery.param(Shopify.queryParams);
+    });
+  });
+
+  $('.product-short a.short-title-lg').on('click', function () {
+    if ($('#select-wrap').hasClass('active')) {
+      $('#select-wrap').removeClass('active');
+      $(this).removeClass('active');
+    }
+    else {
+      $('#select-wrap').addClass('active');
+      $(this).addClass('active');
+    }
+  });
+</script>
+          <style>
+  /*=====================================
+    collection sorting css
+  ======================================*/
+  /* shop top bar css */
+  .shop-top-bar {
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e2e2e2;
+  }
+
+  /* filter button css */
+  .shop-top-bar .product-filter {
+    display: none;
+
+    margin-right: 15px;
+    padding-right: 15px;
+    border-right: 2px solid #e2e2e2;
+
+  }
+  .shop-top-bar .product-filter.without-sidebar {
+    display: block;
+  }
+  .shop-top-bar .product-filter button {
+    color: var(--font-color-body);
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    line-height: 0;
+  }
+  .shop-top-bar .product-filter button span {
+    display: block;
+    color: var(--font-color-body);
+    font-size: 14px;
+
+    margin-left: 5px;
+
+    text-transform: capitalize;
+    font-weight: 600;
+    line-height: 1;
+  }
+  @media (max-width: 991px) {
+    .shop-top-bar .product-filter {
+      display: block;
+    }
+  }
+  @media (max-width: 479px) {
+    .shop-top-bar .product-filter {
+
+      margin-right: 0px;
+      padding-right: 0px;
+      border-right: none;
+
+    }
+  }
+
+  /* grid-list css */
+  .shop-top-bar .product-view-mode {
+    display: flex;
+
+    margin-right: auto;
+
+  }
+  .shop-top-bar .product-view-mode .list-change-view {
+    display: block;
+    color: var(--font-color-body);
+    font-size: 16px;
+
+    margin-right: 15px;
+
+    opacity: 0.5;
+    cursor: pointer;
+    line-height: 0;
+    -webkit-transition: all 0s ease-in-out 0s;
+    -o-transition: all 0s ease-in-out 0s;
+    transition: all 0s ease-in-out 0s;
+  }
+  .shop-top-bar .product-view-mode .list-change-view:last-child {
+
+    margin-right: 0px;
+
+  }
+  .shop-top-bar .product-view-mode .list-change-view.active {
+    opacity: 1;
+  }
+  .shop-top-bar .product-view-mode .list-change-view i {
+    display: block;
+    line-height: 0;
+  }
+  @media (max-width: 479px) {
+    .shop-top-bar .product-view-mode {
+
+      margin-right: unset;
+
+    }
+  }
+
+  /* product sorting css */
+  .product-short {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .product-short label {
+    color: var(--font-color-header);
+    font-size: 14px;
+    margin-bottom: 0;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .product-short select {
+    display: none;
+    color: var(--font-color-body);
+    font-size: 13px;
+
+    padding: 0px 20px 0px 15px;
+    background-position: right 0px center;
+
+    min-width: 200px;
+    background-color: transparent;
+    border: none;
+  }
+  @media (max-width: 767px) {
+    .product-short select {
+      display: block;
+    }
+  }
+  @media (max-width: 479px) {
+    .product-short {
+      order: 1;
+      width: 100%;
+      margin-top: 30px;
+    }
+    .product-short label {
+      width: 85px;
+    }
+    .product-short select {
+      min-width: auto;
+      width: 100%;
+    }
+  }
+
+  /* product sorting ul li css */
+  .product-short a.short-title {
+    color: var(--font-color-body);
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0px 0px 0px 15px;
+
+  }
+  .product-short a.short-title:hover {
+    color: var(--font-color-header);
+  }
+  .product-short a.short-title span.sort-title {
+    display: block;
+    font-size: 13px;
+  }
+  .product-short a.short-title span.sort-icon {
+    font-size: 12px;
+    display: block;
+    line-height: 0;
+  }
+  .product-short a.short-title span.sort-icon i {
+    display: block;
+    line-height: 0;
+  }
+  .product-short a.short-title span.sort-icon i::before {
+    font-weight: 600!important;
+  }
+  .product-short a.short-title.short-title-lg {
+    display: none;
+  }
+  .product-short ul.collapse:not(.show) {
+    display: block;
+  }
+  .product-short ul {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+  }
+  .product-short:hover ul {
+    opacity: 1;
+    visibility: visible;
+  }
+  .product-short ul,
+  .product-short:hover ul {
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+  }
+  .product-short ul li a {
+    display: block;
+    color: var(--font-color-body);
+    font-size: 13px;
+    padding: 7px 15px;
+    background-color: #FFFFFF;
+  }
+  .product-short ul li:hover a,
+  .product-short ul li.selected a {
+    color: var(--font-color-header);
+    background-color: #F9F9F9;
+  }
+  @media (max-width: 1199px) {
+    .product-short a.short-title {
+      display: none;
+    }
+    .product-short a.short-title.short-title-lg {
+      color: var(--font-color-body);
+      display: flex;
+    }
+    .product-short a.short-title.short-title-lg.active {
+      color: var(--font-color-header);
+    }
+    .product-short ul.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .product-short ul,
+    .product-short:hover ul {
+      -webkit-transition: all 0s ease-in-out 0s;
+      -o-transition: all 0s ease-in-out 0s;
+      transition: all 0s ease-in-out 0s;
+    }
+    .product-short ul.collapse:not(.show) {
+      display: none;
+    }
+    .product-short ul.collapse:not(.show).active {
+      display: block;
+    }
+  }
+  @media (max-width: 767px) {
+    .product-short a.short-title.short-title-lg {
+      display: none;
+    }
+    .product-short ul {
+      display: none;
+    }
+  }
+  @media (max-width: 479px) {
+    .product-short a.short-title {
+      min-width: auto;
+      width: 100%;
+    }
+  }
+</style>
+          <div class="get-data-products">
+            <div class="shop-grid">
+              <div id="ProductGridContainer">
+                <div class="product-grid-view">
+                  <div class="shop-product-wrap grid-3 collection">
+                    <div class="row">
+                      <div class="col">
+          <h2 class="st-title" >
+              Không tìm thấy sản phẩm
+          </h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </section>
+
+    <style>
+  /*=====================================
+    collection-template css
+  ======================================*/
+
+  .shop-page {
+    background-color: #FFFFFF;
+  }
+
+  .shop-page .position-left {
+    flex-direction: row-reverse;
+  }
+
+  /* sidebar banner css */
+  .sidebar-banner {
+    margin-top: 30px;
+  }
+  .sidebar-banner.sidebar-without-banner {
+    display: none;
+  }
+  .sidebar-banner a.sidebar-img {
+    position: relative;
+  }
+  .sidebar-banner a.sidebar-img span {
+    display: block;
+  }
+  .sidebar-banner a.sidebar-img span.sidebar-banner-icon {
+    color: var(--font-color-header);
+    font-size: 32px;
+    position: absolute;
+    bottom: 50%;
+
+    left: 50%;
+    transform: translate(-50%, 50%);
+
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    border-radius: 100%;
+    line-height: 0;
+  }
+  .sidebar-banner:hover a.sidebar-img span.sidebar-banner-icon {
+    opacity: 1;
+    visibility: visible;
+  }
+  .sidebar-banner a.sidebar-img span.sidebar-banner-icon:hover {
+    color: var(--font-color-primary);
+  }
+  .sidebar-banner a.sidebar-img span.sidebar-banner-icon,
+  .sidebar-banner a.sidebar-img span.sidebar-banner-icon:hover {
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+  }
+  @media (max-width: 991px) {
+    .sidebar-banner {
+      display: none;
+    }
+  }
+
+  /* collection info title css */
+  .collection-img-wrap h6 {
+    font-size: 16px;
+
+    padding-left: 10px;
+
+    position: relative;
+    text-transform: capitalize;
+    line-height: 1;
+  }
+  .collection-img-wrap h6::before {
+    content: "";
+    position: absolute;
+    top: 0;
+
+    left: 0;
+
+    height: 100%;
+    width: 2px;
+    background-color: var(--font-color-primary);
+  }
+
+  /* collection-info css */
+  .collection-img-wrap .collection-info {
+    margin-top: 30px;
+  }
+  .collection-img-wrap .collection-info .collection-description {
+    margin-top: 30px;
+  }
+
+  /* empty product css */
+  .empty-product {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .empty-product .product-icon-title span {
+    display: block;
+    font-size: 64px;
+    line-height: 0;
+  }
+  .empty-product .product-icon-title span i {
+    display: block;
+    line-height: 0;
+  }
+  .empty-product .product-icon-title h2 {
+    font-size: 30px;
+    margin-top: 18px;
+  }
+  .empty-product .product-desc {
+    margin-top: 11px;
+  }
+  .empty-product .product-desc p {
+    font-size: 18px;
+  }
+  .empty-product .product-desc p a {
+    color: var(--font-color-header);
+    border-bottom: 1px solid;
+    opacity: 0.6;
+    -webkit-transition: all 0s ease-in-out 0s;
+    -o-transition: all 0s ease-in-out 0s;
+    transition: all 0s ease-in-out 0s;
+  }
+  .empty-product .product-desc p a:hover {
+    opacity: 1;
+  }
+</style></div>
+</main>
+<script type="text/javascript">
+
+</script>
+<div id="shopify-section-footer" class="shopify-section" th:replace="layout/layout_user :: footer-common"></div>
+</body>
+
+</html>
