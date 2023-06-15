@@ -69,6 +69,7 @@ public class CollectionController {
 
         }
         model.addAttribute("products", products);
+        model.addAttribute("totalProduct",productService.totalProduct());
         return "category/collections";
     }
 }
