@@ -35,5 +35,69 @@ public class OrderVariant {
     @ManyToOne
     @JoinColumn(name = "product_variant_id")
     private ProductVariant product_variant;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductVariantName() {
+        return productVariantName;
+    }
+
+    public void setProductVariantName(String productVariantName) {
+        this.productVariantName = productVariantName;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public ProductVariant getProduct_variant() {
+        return product_variant;
+    }
+
+    public void setProduct_variant(ProductVariant product_variant) {
+        this.product_variant = product_variant;
+    }
 }
 

@@ -1,5 +1,7 @@
 package uni.decor.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ import uni.decor.service.UserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Enumeration;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -46,7 +51,18 @@ public class UserController {
     }
 
     @GetMapping("/account")
-    public String user() {
+    public String user(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+
+        // Lấy tất cả thuộc tính có trong session
+        Enumeration<String> attributeNames = session.getAttributeNames();
+
+        while (attributeNames.hasMoreElements()) {
+            String attributeName = attributeNames.nextElement();
+            Object attributeValue = session.getAttribute(attributeName);
+            CustomLogger.error(attributeName);
+            // Sử dụng attributeName và attributeValue tùy ý
+        }
         return "user/account";
     }
     @GetMapping("/register")

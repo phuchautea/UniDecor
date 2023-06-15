@@ -2,10 +2,8 @@ package uni.decor.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import uni.decor.entity.Category;
-
+import uni.decor.entity.OrderVariant;
 
 @Repository
-public interface ICategoryRepository extends JpaRepository<Category, Long> {
-
+public interface IOrderVariantRepository extends JpaRepository<OrderVariant, Long> {
 }

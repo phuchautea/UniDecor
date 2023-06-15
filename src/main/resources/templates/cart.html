@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html class="no-js supports-no-cookies mini2" lang="vi" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Giỏ hàng | UniDecor - Thiết kế không gian sống của bạn với nội thất chất lượng cao</title>
+    <th:block th:replace="layout/layout_user :: head-common"></th:block>
+</head>
+
+<body id="unidecor-template" class="template-index">
+    <div id="shopify-section-header" class="shopify-section" th:replace="layout/layout_user :: menu-common"></div>
+    <section class="breadcrumb-area" style="background-image: url('//cdn.shopify.com/s/files/1/0584/0909/1211/files/breadcrumb.jpg?v=1651238329');">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="breadcrumb-index">
+                        <div class="breadcrumb-title">
+                            <h2>Giỏ hàng</h2>
+                        </div>
+                        <ul class="breadcrumb-list">
+                            <li class="breadcrumb-item">
+                                <a href="/" title="Back to the home page">Trang chủ</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <span>Giỏ hàng</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <main role="main">
+        <div id="shopify-section-template--15088631513227__cart-template" class="shopify-section">
+            <section class="cart-page section-ptb">
+                <div class="container">
+                    <th:block th:replace="layout/layout_user :: alert-common"></th:block>
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-8 col-md-12 col-12">
+                            <div class="cart-item-wrap">
+                                <div class="cart-title">
+                                    <h6>Giỏ hàng:</h6>
+                                    <span class="cart-count">
+                                        <span class="cart-counter" th:text="${totalCart}">0</span>
+                                        <span class="cart-item-title">Sản phẩm</span>
+                                    </span>
+                                </div>
+                                <div class="item-wrap">
+                                    <!--                                                <th:block th:each="cartItem : ${cartItemList}">-->
+                                    <ul class="cart-wrap" th:each="cartItem : ${cartItemList}">
+                                        <li class="item-info">
+                                            <div class="item-img">
+                                                <a th:href="@{/product/{slug}(slug=${cartItem.product.slug})}">
+                                                    <img class="img-fluid" src="//cdn.shopify.com/s/files/1/0584/0909/1211/products/1_0a7ace5d-1e19-4643-b816-cebbf03e262a_100x120_crop_center.jpg?v=1651321817" alt="Dining table - DarkCyan" />
+                                                </a>
+                                            </div>
+                                            <div class="item-title">
+                                                <b><a th:href="@{/product/{slug}(slug=${cartItem.product.slug})}" th:text="${cartItem.product.name}"></a></b>
+                                                <span class="item-option">
+                                                    <span class="pro-variant-title">Loại:</span>
+                                                    <b><span class="pro-variant-type" th:text="${cartItem.productVariant.name}"></span></b>
+                                                </span>
+                                                <span class="item-option">
+                                                    <span style="color:red" th:if="${cartItem.productVariant.discountPrice > 0}">
+                                                        (<del th:text="${@numberUtils.formatNumber(cartItem.productVariant.price)}"></del>) <span style="color:red" th:text="${@numberUtils.formatNumber(cartItem.productVariant.discountPrice)}"></span>đ
+                                                    </span>
+                                                    <span style="color:red" th:unless="${cartItem.productVariant.discountPrice > 0}">
+                                                        <span th:text="${@numberUtils.formatNumber(cartItem.productVariant.price)}"></span>đ
+                                                    </span>
+                                                    <!--                                                                                                                <span class="item-price" th:text="${@numberUtils.formatNumber(cartItem.productVariant.price)}"></span>đ-->
+                                                </span>
+                                            </div>
+                                        </li>
+                                        <li class="item-qty">
+                                            <div class="product-quantity-action">
+                                                <div class="product-quantity">
+                                                    <div class="cart-plus-minus">
+                                                        <div class="dec qtybutton" th:onclick="@{minusQuantity('{cartItemId}')(cartItemId=${cartItem.cartItemId})}">-</div>
+                                                        <input type="text" th:value="${cartItem.quantity}" th:name="@{quantity[{cartItemId}](cartItemId=${cartItem.cartItemId})}" class="qt" />
+                                                        <div class="inc qtybutton" th:onclick="@{plusQuantity('{cartItemId}')(cartItemId=${cartItem.cartItemId})}">+</div>
+                                                    </div>
+                                                    <span class="dec qtybtn"></span>
+                                                    <span class="inc qtybtn"></span>
+                                                </div>
+                                            </div>
+                                            <div class="item-remove">
+                                                <span class="remove-wrap">
+                                                    <a th:href="@{/cart/remove/{cartItemId}(cartItemId=${cartItem.cartItemId})}" class="text-danger">Xoá</a>
+                                                </span>
+                                            </div>
+                                        </li>
+                                        <li class="item-price">
+                                            <span class="amount full-price" th:if="${cartItem.productVariant.discountPrice > 0}">
+                                                <span th:text="${@numberUtils.formatNumber(cartItem.productVariant.discountPrice * cartItem.quantity)}"></span>đ
+                                            </span>
+                                            <span class="amount full-price" th:unless="${cartItem.productVariant.discountPrice > 0}">
+                                                <span th:text="${@numberUtils.formatNumber(cartItem.productVariant.price * cartItem.quantity)}"></span>đ
+                                            </span>
+                                        </li>
+                                    </ul>
+
+                                    <!--</th:block>-->
+
+                                </div>
+                                <div class="cart-buttons">
+                                    <!--                                                <input type="submit" value="Cập nhật giỏ hàng" />-->
+                                    <a href="/">Tiếp tục mua sắm</a>
+                                    <a href="/cart/clear">Xoá tất cả giỏ hàng</a>
+                                </div>
+                            </div>
+                            <div class="special-notes">
+                                <label for="CartSpecialInstructions">Ghi chú</label>
+                                <textarea name="note" id="CartSpecialInstructions" data-cart-notes></textarea>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-12">
+                            <div class="cart-info-wrap">
+                                <div class="cart-total-wrap cart-info">
+                                    <div class="cart-total">
+                                        <div class="total-amount">
+                                            <span class="total-title">Tổng tiền</span>
+                                            <span class="amount total-price" th:text="${@numberUtils.formatNumber(getTotalPrice)}">0</span>đ
+                                        </div>
+
+                                        <div class="cart-payment-icon">
+                                            <a href="javascript:void(0)" class="payment-icon">
+
+
+                                                <svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pi-visa">
+                                                    <title id="pi-visa">Visa</title>
+                                                    <path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" />
+                                                    <path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32" />
+                                                    <path d="M28.3 10.1H28c-.4 1-.7 1.5-1 3h1.9c-.3-1.5-.3-2.2-.6-3zm2.9 5.9h-1.7c-.1 0-.1 0-.2-.1l-.2-.9-.1-.2h-2.4c-.1 0-.2 0-.2.2l-.3.9c0 .1-.1.1-.1.1h-2.1l.2-.5L27 8.7c0-.5.3-.7.8-.7h1.5c.1 0 .2 0 .2.2l1.4 6.5c.1.4.2.7.2 1.1.1.1.1.1.1.2zm-13.4-.3l.4-1.8c.1 0 .2.1.2.1.7.3 1.4.5 2.1.4.2 0 .5-.1.7-.2.5-.2.5-.7.1-1.1-.2-.2-.5-.3-.8-.5-.4-.2-.8-.4-1.1-.7-1.2-1-.8-2.4-.1-3.1.6-.4.9-.8 1.7-.8 1.2 0 2.5 0 3.1.2h.1c-.1.6-.2 1.1-.4 1.7-.5-.2-1-.4-1.5-.4-.3 0-.6 0-.9.1-.2 0-.3.1-.4.2-.2.2-.2.5 0 .7l.5.4c.4.2.8.4 1.1.6.5.3 1 .8 1.1 1.4.2.9-.1 1.7-.9 2.3-.5.4-.7.6-1.4.6-1.4 0-2.5.1-3.4-.2-.1.2-.1.2-.2.1zm-3.5.3c.1-.7.1-.7.2-1 .5-2.2 1-4.5 1.4-6.7.1-.2.1-.3.3-.3H18c-.2 1.2-.4 2.1-.7 3.2-.3 1.5-.6 3-1 4.5 0 .2-.1.2-.3.2M5 8.2c0-.1.2-.2.3-.2h3.4c.5 0 .9.3 1 .8l.9 4.4c0 .1 0 .1.1.2 0-.1.1-.1.1-.1l2.1-5.1c-.1-.1 0-.2.1-.2h2.1c0 .1 0 .1-.1.2l-3.1 7.3c-.1.2-.1.3-.2.4-.1.1-.3 0-.5 0H9.7c-.1 0-.2 0-.2-.2L7.9 9.5c-.2-.2-.5-.5-.9-.6-.6-.3-1.7-.5-1.9-.5L5 8.2z" fill="#142688" />
+                                                </svg>
+
+                                                <svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" width="38" height="24" role="img" aria-labelledby="pi-paypal">
+                                                    <title id="pi-paypal">PayPal</title>
+                                                    <path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" />
+                                                    <path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32" />
+                                                    <path fill="#003087" d="M23.9 8.3c.2-1 0-1.7-.6-2.3-.6-.7-1.7-1-3.1-1h-4.1c-.3 0-.5.2-.6.5L14 15.6c0 .2.1.4.3.4H17l.4-3.4 1.8-2.2 4.7-2.1z" />
+                                                    <path fill="#3086C8" d="M23.9 8.3l-.2.2c-.5 2.8-2.2 3.8-4.6 3.8H18c-.3 0-.5.2-.6.5l-.6 3.9-.2 1c0 .2.1.4.3.4H19c.3 0 .5-.2.5-.4v-.1l.4-2.4v-.1c0-.2.3-.4.5-.4h.3c2.1 0 3.7-.8 4.1-3.2.2-1 .1-1.8-.4-2.4-.1-.5-.3-.7-.5-.8z" />
+                                                    <path fill="#012169" d="M23.3 8.1c-.1-.1-.2-.1-.3-.1-.1 0-.2 0-.3-.1-.3-.1-.7-.1-1.1-.1h-3c-.1 0-.2 0-.2.1-.2.1-.3.2-.3.4l-.7 4.4v.1c0-.3.3-.5.6-.5h1.3c2.5 0 4.1-1 4.6-3.8v-.2c-.1-.1-.3-.2-.5-.2h-.1z" />
+                                                </svg>
+
+                                                <svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pi-master">
+                                                    <title id="pi-master">Mastercard</title>
+                                                    <path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" />
+                                                    <path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32" />
+                                                    <circle fill="#EB001B" cx="15" cy="12" r="7" />
+                                                    <circle fill="#F79E1B" cx="23" cy="12" r="7" />
+                                                    <path fill="#FF5F00" d="M22 12c0-2.4-1.2-4.5-3-5.7-1.8 1.3-3 3.4-3 5.7s1.2 4.5 3 5.7c1.8-1.2 3-3.3 3-5.7z" />
+                                                </svg>
+
+                                                <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" aria-labelledby="pi-american_express">
+                                                    <title id="pi-american_express">American Express</title>
+                                                    <g fill="none">
+                                                        <path fill="#000" d="M35,0 L3,0 C1.3,0 0,1.3 0,3 L0,21 C0,22.7 1.4,24 3,24 L35,24 C36.7,24 38,22.7 38,21 L38,3 C38,1.3 36.6,0 35,0 Z" opacity=".07" />
+                                                        <path fill="#006FCF" d="M35,1 C36.1,1 37,1.9 37,3 L37,21 C37,22.1 36.1,23 35,23 L3,23 C1.9,23 1,22.1 1,21 L1,3 C1,1.9 1.9,1 3,1 L35,1" />
+                                                        <path fill="#FFF" d="M8.971,10.268 L9.745,12.144 L8.203,12.144 L8.971,10.268 Z M25.046,10.346 L22.069,10.346 L22.069,11.173 L24.998,11.173 L24.998,12.412 L22.075,12.412 L22.075,13.334 L25.052,13.334 L25.052,14.073 L27.129,11.828 L25.052,9.488 L25.046,10.346 L25.046,10.346 Z M10.983,8.006 L14.978,8.006 L15.865,9.941 L16.687,8 L27.057,8 L28.135,9.19 L29.25,8 L34.013,8 L30.494,11.852 L33.977,15.68 L29.143,15.68 L28.065,14.49 L26.94,15.68 L10.03,15.68 L9.536,14.49 L8.406,14.49 L7.911,15.68 L4,15.68 L7.286,8 L10.716,8 L10.983,8.006 Z M19.646,9.084 L17.407,9.084 L15.907,12.62 L14.282,9.084 L12.06,9.084 L12.06,13.894 L10,9.084 L8.007,9.084 L5.625,14.596 L7.18,14.596 L7.674,13.406 L10.27,13.406 L10.764,14.596 L13.484,14.596 L13.484,10.661 L15.235,14.602 L16.425,14.602 L18.165,10.673 L18.165,14.603 L19.623,14.603 L19.647,9.083 L19.646,9.084 Z M28.986,11.852 L31.517,9.084 L29.695,9.084 L28.094,10.81 L26.546,9.084 L20.652,9.084 L20.652,14.602 L26.462,14.602 L28.076,12.864 L29.624,14.602 L31.499,14.602 L28.987,11.852 L28.986,11.852 Z" />
+                                                    </g>
+                                                </svg>
+
+
+                                            </a>
+                                            <style>
+                                                .payment-icon {
+                                                    display: flex;
+                                                    flex-wrap: wrap;
+
+                                                    margin: -5px 0px 0px -5px;
+
+                                                }
+
+                                                .payment-icon svg {
+                                                    width: 38px;
+                                                    height: 24px;
+
+                                                    margin: 5px 0px 0px 5px;
+
+                                                }
+                                            </style>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cart-calculator cart-info">
+                                    <h6>Thông tin đặt hàng</h6>
+                                    <div class="culculate-shipping" id="shipping-calculator">
+                                        <th:block sec:authorize="!isAuthenticated()">
+                                            <b>Bạn đã có tài khoản? <a href="/account/login" style="color:red">Đăng nhập</a></b>
+                                            <hr>
+                                        </th:block>
+                                        <form action="/order" method="post" novalidate>
+                                            <ul>
+                                                <li class="field cpn-code">
+                                                    <label for="billing_name">Họ và tên</label>
+                                                    <input type="text" placeholder="Họ và tên" id="billing_name" name="billing_name" th:value="${userInfo.name}">
+                                                </li>
+                                                <li class="field cpn-code">
+                                                    <label for="billing_address">Địa chỉ nhận hàng</label>
+                                                    <input type="text" placeholder="Số nhà, tổ" id="billing_address" name="billing_address">
+                                                </li>
+                                                <li class="field">
+                                                    <label for="province">Tỉnh</label>
+                                                    <select class="form-control" id="province" name="province" required="">
+                                                        <option>---Chọn tỉnh---</option>
+                                                    </select>
+                                                    <input type="hidden" name="province_value" id="province_value">
+                                                </li>
+                                                <li class="field">
+                                                    <label for="district">Quận/Huyện</label>
+                                                    <select class="form-control" id="district" name="district" required="">
+                                                        <option>---Chọn quận/huyện---</option>
+                                                    </select>
+                                                    <input type="hidden" name="district_value" id="district_value">
+                                                </li>
+                                                <li class="field">
+                                                    <label for="ward">Phường/Xã</label>
+                                                    <select class="form-control" id="ward" name="ward" required="">
+                                                        <option>---Chọn phường/Xã---</option>
+                                                    </select>
+                                                    <input type="hidden" name="ward_value" id="ward_value">
+                                                </li>
+                                                <li class="field cpn-code">
+                                                    <label for="billing_phone">Số điện thoại</label>
+                                                    <input type="tel" placeholder="Số điện thoại" id="billing_phone" name="billing_phone" th:value="${userInfo.phone}">
+                                                </li>
+                                                <li class="field cpn-code">
+                                                    <label for="billing_email">Địa chỉ email</label>
+                                                    <input type="email" placeholder="Địa chỉ email" id="billing_email" name="billing_email" th:value="${userInfo.email}">
+                                                </li>
+                                                <li class="field cpn-code">
+                                                    <label for="billing_email">Phương thức thanh toán</label>
+                                                    <div class="col-md-10">
+                                                        <div class="custom-control custom-radio">
+                                                            <input id="cash" name="payment" type="radio" class="custom-control-input" checked="" required="" value="cash">
+                                                            <label class="custom-control-label" for="cash">
+                                                                <img style="width:30px" src="/template/user/assets/images/payment/cash.png"> Tiền mặt</label>
+                                                        </div>
+                                                        <div class="custom-control custom-radio">
+                                                            <input id="momo" name="payment" type="radio" class="custom-control-input" required="" value="momo">
+                                                            <label class="custom-control-label" for="momo">
+                                                                <img style="width:30px" src="/template/user/assets/images/payment/momo.png"> MoMo</label>
+                                                        </div>
+                                                        <div class="custom-control custom-radio">
+                                                            <input id="vnpay" name="payment" type="radio" class="custom-control-input" required="" value="vnpay">
+                                                            <label class="custom-control-label" for="vnpay">
+                                                                <img style="width:30px" src="/template/user/assets/images/payment/vnpay.png"> VNPay</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <div id="wrapper-response"></div>
+                                            <div class="shipping-info">
+                                                <button type="submit" class="btn btn-block btn-success">Thanh toán ngay</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js" type="text/javascript"></script>
+                                                <script src="/services/javascripts/countries.js" type="text/javascript"></script>
+                                                <script src="//cdn.shopify.com/s/files/1/0584/0909/1211/t/4/assets/cart-shipping-calculator.min.js?v=30020690315333423871656740490" type="text/javascript"></script> -->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <script>
+                $('.product-quantity').append('<span class="dec qtybtn"></span><span class="inc qtybtn"></span>');
+                $('.qtybtn').on('click', function() {
+                    var $button = $(this);
+                    var oldValue = $button.parent().find('input').val();
+                    if ($button.hasClass('inc')) {
+                        var newVal = parseFloat(oldValue) + 1;
+                    } else {
+                        // Don't allow decrementing below zero
+                        if (oldValue > 0) {
+                            var newVal = parseFloat(oldValue) - 1;
+                        } else {
+                            newVal = 0;
+                        }
+                    }
+                    $button.parent().find('input').val(newVal);
+                });
+            </script>
+
+            <style>
+                .cart-page .cart-item-wrap {
+                    padding: 30px;
+                    background-color: #ffffff;
+                    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+                }
+
+                .cart-page .cart-title {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 15px 0;
+                    border-top: 1px solid #e2e2e2;
+                    border-bottom: 1px solid #e2e2e2;
+                }
+
+                .cart-page .cart-title h6 {
+                    font-size: 18px;
+                    text-transform: capitalize;
+                    font-weight: 500;
+                    line-height: 1;
+                }
+
+                .cart-page .cart-title span.cart-count {
+                    color: var(--font-color-primary);
+                    font-weight: 600;
+                    border-bottom: 1px solid var(--font-color-primary);
+                    line-height: 1;
+                }
+
+                @media (max-width: 767px) {
+                    .cart-page .cart-item-wrap {
+                        padding: 30px 15px;
+                    }
+                }
+
+                /* cart item css */
+                .cart-page .item-wrap ul {
+                    display: flex;
+                    -ms-flex-wrap: wrap;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 15px 0;
+                    border-bottom: 1px solid #e2e2e2;
+                }
+
+                .cart-page .item-wrap ul li.item-info {
+                    width: 60%;
+                }
+
+                .cart-page .item-wrap ul li.item-qty,
+                .cart-page .item-wrap ul li.item-price {
+                    width: 20%;
+                }
+
+                @media (max-width: 991px) {
+                    .cart-page .item-wrap ul li.item-info {
+                        width: 100%;
+                    }
+
+                    .cart-page .item-wrap ul li.item-qty,
+                    .cart-page .item-wrap ul li.item-price {
+                        width: 50%;
+                        margin-top: 15px;
+                    }
+                }
+
+                /* cart image css */
+                .cart-page .item-wrap ul li.item-info {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .cart-page .item-wrap ul li.item-info .item-img {
+                    width: 100px;
+                }
+
+                .cart-page .item-wrap ul li.item-info .item-img a {
+                    border: 1px solid #e2e2e2;
+                }
+
+                .cart-page .item-wrap ul li.item-info .item-title {
+                    width: calc(100% - 100px);
+                    padding: 0 15px;
+                }
+
+                .cart-page .item-wrap ul li.item-info .item-title a {
+                    display: block;
+                    color: var(--font-color-header);
+                }
+
+                .cart-page .item-wrap ul li.item-info .item-title a:hover {
+                    color: var(--font-color-primary);
+                }
+
+                .cart-page .item-wrap ul li.item-info .item-title span.item-option {
+                    display: flex;
+                    margin-top: 11px;
+                    line-height: 1;
+                }
+
+                .cart-page .item-wrap ul li.item-info .item-title span.item-option:first-of-type {
+                    margin-top: 7px;
+                }
+
+                .cart-page .item-wrap ul li.item-info .item-title span.item-option span {
+                    color: var(--font-color-header);
+                    text-transform: capitalize;
+                }
+
+                .cart-page .item-wrap ul li.item-info .item-title span.item-option span.pro-variant-title {
+                    color: var(--font-color-header);
+                    font-weight: 500;
+                }
+
+                .cart-page .item-wrap ul li.item-info .item-title span.item-option span.pro-variant-type {
+
+                    margin-left: 5px;
+
+                }
+
+                /* cart qty css */
+                .cart-page .item-wrap ul li.item-qty {
+                    text-align: center;
+                }
+
+                .cart-page .item-wrap ul li.item-qty .product-quantity {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                .cart-page .item-wrap ul li.item-qty .item-remove {
+                    margin-top: 15px;
+                }
+
+                .cart-page .item-wrap ul li.item-qty .item-remove .remove-wrap a {
+                    text-decoration: underline;
+                }
+
+                @media (max-width: 991px) {
+                    .cart-page .item-wrap ul li.item-qty {
+                        display: flex;
+                        align-items: center;
+
+                        text-align: left;
+
+                    }
+
+                    .cart-page .item-wrap ul li.item-qty .item-remove {
+                        margin-top: 0;
+
+                        margin-left: 15px;
+
+                    }
+                }
+
+                /* cart price css */
+                .cart-page .item-wrap ul li.item-price {
+
+                    text-align: right;
+
+                }
+
+                .cart-page .item-wrap ul li.item-price span.amount {
+                    color: var(--font-color-primary);
+                    font-weight: 600;
+                }
+
+                /* cart button css */
+                .cart-page .cart-buttons {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 12px 0;
+                    border-bottom: 1px solid #e2e2e2;
+                }
+
+                .cart-page .cart-buttons input {
+                    color: var(--font-color-body);
+                    font-size: 16px;
+                    padding: 0;
+                    background-color: transparent;
+                    border: none;
+                    text-decoration: underline;
+                }
+
+                .cart-page .cart-buttons a {
+                    color: var(--font-color-body);
+                    font-size: 16px;
+                    text-decoration: underline;
+                    -webkit-transition: all 0s ease-in-out 0s;
+                    -o-transition: all 0s ease-in-out 0s;
+                    transition: all 0s ease-in-out 0s;
+                }
+
+                .cart-page .cart-buttons input:hover,
+                .cart-page .cart-buttons a:hover {
+                    color: var(--font-color-primary);
+                }
+
+                @media (max-width: 479px) {
+                    .cart-page .cart-buttons {
+                        flex-direction: column;
+                    }
+
+                    .cart-page .cart-buttons a {
+                        margin-top: 15px;
+                    }
+                }
+
+                /* special instruction css */
+                .cart-page .special-notes {
+                    padding: 30px;
+                    margin-top: 30px;
+                    background-color: #ffffff;
+                    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+                }
+
+                .cart-page .special-notes label {
+                    display: block;
+                    color: var(--font-color-header);
+                    font-size: 18px;
+                    padding: 15px 0;
+                    margin-bottom: 15px;
+                    text-transform: capitalize;
+                    font-weight: 500;
+                    border-bottom: 1px solid #e2e2e2;
+                    border-top: 1px solid #e2e2e2;
+                    cursor: auto;
+                    line-height: 1;
+                }
+
+                .cart-page .special-notes textarea {
+                    width: 100%;
+                }
+
+                @media (max-width: 767px) {
+                    .cart-page .special-notes {
+                        padding: 30px 15px;
+                    }
+                }
+
+                /* cart info css */
+                .cart-page .cart-info-wrap {
+                    position: sticky;
+                    top: 0;
+                }
+
+                .cart-page .cart-info-wrap .cart-info {
+                    margin-top: 30px;
+                }
+
+                .cart-page .cart-info-wrap .cart-info:first-child {
+                    margin-top: 0;
+                }
+
+                @media (max-width: 991px) {
+                    .cart-page .cart-info-wrap {
+                        position: unset;
+                        margin-top: 30px;
+                    }
+                }
+
+                /* cart shipping css */
+                .cart-page .cart-info-wrap .cart-calculator {
+                    padding: 30px;
+                    background-color: #f6f6f6;
+                    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+                }
+
+                .cart-page .cart-info-wrap .cart-calculator h6 {
+                    font-size: 18px;
+                    padding: 15px 0;
+                    text-transform: capitalize;
+                    font-weight: 500;
+                    border-top: 1px solid #e2e2e2;
+                    border-bottom: 1px solid #e2e2e2;
+                    line-height: 1;
+                }
+
+                .cart-page .cart-info-wrap .cart-calculator .culculate-shipping {
+                    margin-top: 15px;
+                }
+
+                .cart-page .cart-info-wrap .cart-calculator .culculate-shipping ul li.field {
+                    margin-top: 13px;
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .cart-page .cart-info-wrap .cart-calculator .culculate-shipping ul li.field:first-child {
+                    margin-top: 0px;
+                }
+
+                .cart-page .cart-info-wrap .cart-calculator .culculate-shipping ul li.field label {
+                    display: block;
+                    cursor: auto;
+                    margin-bottom: 8px;
+                    line-height: 1;
+                }
+
+                @media (max-width: 767px) {
+                    .cart-page .cart-info-wrap .cart-calculator {
+                        padding: 30px 15px;
+                    }
+                }
+
+                /* shipping calculator response text */
+                .cart-page .cart-info-wrap #wrapper-response p {
+                    padding: 10px 0;
+                    margin-top: 15px;
+                    text-align: center;
+                    border-top: 1px solid #e2e2e2;
+                    border-bottom: 1px solid #e2e2e2;
+                    line-height: normal;
+                }
+
+                .cart-page .cart-info-wrap #wrapper-response ul#shipping-rates li {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 14px 0;
+                    border-bottom: 1px solid #e2e2e2;
+                }
+
+                .cart-page .cart-info-wrap #wrapper-response ul#shipping-rates li span.calculate-title {
+                    color: var(--font-color-body);
+                }
+
+                .cart-page .cart-info-wrap #wrapper-response ul#shipping-rates li span.calculate-rate {
+                    color: var(--font-color-primary);
+                    font-weight: 600;
+                }
+
+                /* shippping calculate */
+                .cart-page .cart-info-wrap .cart-calculator .culculate-shipping .shipping-info {
+                    margin-top: 23px;
+                    text-align: center;
+                }
+
+                .cart-page .cart-info-wrap .cart-calculator .culculate-shipping .shipping-info a {
+                    color: var(--font-color-body);
+                    font-size: 16px;
+                    text-decoration: underline;
+                    -webkit-transition: all 0s ease-in-out 0s;
+                    -o-transition: all 0s ease-in-out 0s;
+                    transition: all 0s ease-in-out 0s;
+                }
+
+                .cart-page .cart-info-wrap .cart-calculator .culculate-shipping .shipping-info a:hover {
+                    color: var(--font-color-primary);
+                }
+
+                /* cart total css */
+                .cart-page .cart-total-wrap {
+                    padding: 30px;
+                    background-color: #f6f6f6;
+                    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+                }
+
+                .cart-page .cart-total-wrap .cart-total .total-amount {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 17px 0;
+                    border-top: 1px solid #e2e2e2;
+                    border-bottom: 1px solid #e2e2e2;
+                    line-height: 1;
+                }
+
+                .cart-page .cart-total-wrap .cart-total .total-amount span.total-title {
+                    color: var(--font-color-body);
+                }
+
+                .cart-page .cart-total-wrap .cart-total .total-amount span.amount {
+                    color: var(--font-color-primary);
+                    font-weight: 600;
+                }
+
+                .cart-page .cart-info-wrap .cart-total .proceed-to-discount {
+                    margin-top: 30px;
+                }
+
+                .cart-page .cart-info-wrap .cart-total .proceed-to-discount input {
+                    width: 100%;
+                }
+
+                .cart-page .cart-info-wrap .cart-total .proceed-to-checkout {
+                    margin-top: 23px;
+                    text-align: center;
+                }
+
+                .cart-page .cart-info-wrap .cart-total .proceed-to-checkout input {
+                    color: var(--font-color-body);
+                    font-size: 16px;
+                    padding: 0;
+                    background-color: transparent;
+                    border: none;
+                    text-decoration: underline;
+                }
+
+                .cart-page .cart-info-wrap .cart-total .proceed-to-checkout input:hover {
+                    color: var(--font-color-primary);
+                }
+
+                .cart-page .cart-info-wrap .cart-total .cart-payment-icon {
+                    margin-top: 25px;
+                }
+
+                .cart-page .cart-info-wrap .cart-total .cart-payment-icon a {
+                    justify-content: center;
+                }
+
+                @media (max-width: 767px) {
+                    .cart-page .cart-total-wrap {
+                        padding: 30px 15px;
+                    }
+                }
+
+                /* cart empty css */
+                .cart-page .empty-cart-page {
+                    max-width: 58.33%;
+                    margin: 0 auto;
+                    text-align: center;
+                }
+
+                .cart-page .empty-cart-page h2 {
+                    font-size: 60px;
+                    text-transform: capitalize;
+                    line-height: 1;
+                }
+
+                .cart-page .empty-cart-page h2 span {
+                    display: block;
+                }
+
+                .cart-page .empty-cart-page h6 {
+                    font-size: 18px;
+                    margin-top: 14px;
+                    font-weight: 500;
+                }
+
+                .cart-page .empty-cart-page p {
+                    font-size: 16px;
+                    margin-top: 16px;
+                }
+
+                .cart-page .empty-cart-page p a {
+                    color: var(--font-color-primary);
+                    text-decoration: underline;
+                }
+
+                @media (max-width: 1199px) {
+                    .cart-page .empty-cart-page {
+                        max-width: 66.66%;
+                    }
+                }
+
+                @media (max-width: 991px) {
+                    .cart-page .empty-cart-page {
+                        max-width: 83.33%;
+                    }
+                }
+
+                @media (max-width: 767px) {
+                    .cart-page .empty-cart-page {
+                        max-width: 100%;
+                    }
+                }
+            </style>
+        </div>
+    </main>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Lấy danh sách tỉnh
+            $.ajax({
+                url: 'https://api.phuchautea.com/public/VNAddress/province',
+                type: 'GET',
+                success: function(response) {
+                    // Xử lý kết quả trả về
+                    if (response.code === 200) {
+                        var provinces = response.data;
+                        // Sắp xếp theo ABC
+                        provinces.sort(function(a, b) {
+                            var nameA = a.ProvinceName.toUpperCase();
+                            var nameB = b.ProvinceName.toUpperCase();
+                            if (nameA < nameB) {
+                                return -1;
+                            }
+                            if (nameA > nameB) {
+                                return 1;
+                            }
+                            return 0;
+                        });
+                        // Lặp qua danh sách tỉnh/thành phố
+                        for (var i = 0; i < provinces.length; i++) {
+                            var province = provinces[i];
+
+                            // Tạo phần tử option và thêm vào thẻ select
+                            var option = $('<option>')
+                                .val(province.ProvinceID)
+                                .text(province.ProvinceName);
+
+                            $('#province').append(option);
+                        }
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+
+            /* Lấy danh sách quận/huyện */
+            // Xử lý sự kiện khi chọn tỉnh/thành phố
+            $('#province').on('change', function() {
+                var selectedProvinceID = parseInt($(this).val());
+                var selectedOption = $(this).find('option:selected');
+                var provinceName = selectedOption.text();
+                $('#province_value').val(provinceName);
+                // Xóa danh sách quận/huyện hiện tại
+                $('#district').empty();
+                $('#district').append("<option>---Chọn quận/huyện---</option>");
+
+                // Gọi API để lấy danh sách quận/huyện dựa trên ProvinceID
+                $.ajax({
+                    url: 'https://api.phuchautea.com/public/VNAddress/district',
+                    type: 'GET',
+                    data: {
+                        "province_id": selectedProvinceID
+                    },
+                    success: function(response) {
+                        if (response.code === 200) {
+
+                            var districts = response.data;
+                            // Sắp xếp theo ABC
+                            districts.sort(function(a, b) {
+                                var nameA = a.DistrictName.toUpperCase();
+                                var nameB = b.DistrictName.toUpperCase();
+                                if (nameA < nameB) {
+                                    return -1;
+                                }
+                                if (nameA > nameB) {
+                                    return 1;
+                                }
+                                return 0;
+                            });
+                            for (var i = 0; i < districts.length; i++) {
+                                var district = districts[i];
+                                var option = $('<option>')
+                                    .val(district.DistrictID)
+                                    .text(district.DistrictName);
+
+                                $('#district').append(option);
+                            }
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+
+            /* Lấy danh sách phường/xã */
+            // Xử lý sự kiện khi chọn quận/huyện
+            $('#district').on('change', function() {
+                var selectedDistrictID = parseInt($(this).val());
+                var selectedOption = $(this).find('option:selected');
+                var districtName = selectedOption.text();
+                $('#district_value').val(districtName);
+                // Xóa danh sách phường/xã hiện tại
+                $('#ward').empty();
+                $('#ward').append("<option>---Chọn phường/xã---</option>");
+
+                // Gọi API để lấy danh sách phường/xã dựa trên ProvinceID
+                $.ajax({
+                    url: 'https://api.phuchautea.com/public/VNAddress/ward',
+                    type: 'GET',
+                    data: {
+                        "district_id": selectedDistrictID
+                    },
+                    success: function(response) {
+                        if (response.code === 200) {
+
+                            var wards = response.data;
+                            // Sắp xếp theo ABC
+                            wards.sort(function(a, b) {
+                                var nameA = a.WardName.toUpperCase();
+                                var nameB = b.WardName.toUpperCase();
+                                if (nameA < nameB) {
+                                    return -1;
+                                }
+                                if (nameA > nameB) {
+                                    return 1;
+                                }
+                                return 0;
+                            });
+                            for (var i = 0; i < wards.length; i++) {
+                                var ward = wards[i];
+                                var option = $('<option>')
+                                    .val(ward.WardID)
+                                    .text(ward.WardName);
+
+                                $('#ward').append(option);
+                            }
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+            // Xử lý sự kiện khi chọn phường/xã
+            $('#ward').on('change', function() {
+                var selectedDistrictID = parseInt($(this).val());
+                var selectedOption = $(this).find('option:selected');
+                var wardName = selectedOption.text();
+                $('#ward_value').val(wardName);
+            });
+        });
+    </script>
+    <div id="shopify-section-footer" class="shopify-section" th:replace="layout/layout_user :: footer-common"></div>
+</body>
+
+</html>
