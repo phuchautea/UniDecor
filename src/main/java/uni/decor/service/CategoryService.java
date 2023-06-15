@@ -8,10 +8,6 @@ import uni.decor.utils.SlugUtils;
 
 
 import java.util.List;
-
-
-
-
 @Service
 public class CategoryService {
     @Autowired
@@ -45,5 +41,8 @@ public class CategoryService {
         String slug = SlugUtils.createSlug(category.getName());
         category.setSlug(slug);
         save(category);
+    }
+    public List<Category> getAll() {
+        return categoryRepository.findAll();
     }
 }

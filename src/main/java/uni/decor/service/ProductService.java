@@ -18,17 +18,38 @@ import java.util.List;
 public class ProductService {
     @Autowired
     private IProductRepository productRepository;
+
     @Autowired
     private ICategoryRepository categoryRepository;
     LocalDateTime now = LocalDateTime.now();
+
+    
     public List<Product> getAllProducts()
     {
         return productRepository.findAll();
     }
+
+    public Product getProductBySlug(String slug) {
+        return productRepository.findBySlug(slug);
+    }
+
+    public List<Product> getNewestProducts() {
+        return productRepository.findTop10ByOrderByCreatedAtDesc();
+    }
+
+    public List<Product> getBestSellingProducts() {
+        return productRepository.findTop10BySoldQuantity();
+    }
+
+    public Product getById(Long id) {
+        return productRepository.findById(id).orElse(null);
+    }
+
     public Product getProductById(Long id)
     {
         return productRepository.findById(id).orElse(null);
     }
+
     public Product save(Product product)
     {
         return productRepository.save(product);
@@ -42,10 +63,12 @@ public class ProductService {
         product.setUpdatedAt(now);
         save(product);
     }
+
     public void deleteCProduct(Long id)
     {
         productRepository.deleteById(id);
     }
+
     public void updateProduct(Product product, Long categoryId)
     {
         Product existingProduct = productRepository.findById(product.getId()).orElse(null);
@@ -64,11 +87,10 @@ public class ProductService {
 
         }
     }
-    ///Paging
+
     public Page<Product> getPagingProducts( int page, int size)
     {
         PageRequest pageRequest = PageRequest.of(page, size);
         return productRepository.findAll(pageRequest);
     }
 }
-
