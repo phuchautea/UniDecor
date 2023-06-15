@@ -1,4 +1,4 @@
-package uni.decor.utils;
+package uni.decor.util;
 
 import java.text.Normalizer;
 import java.util.regex.Pattern;
