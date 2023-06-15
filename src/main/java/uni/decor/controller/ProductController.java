@@ -40,27 +40,4 @@ public class ProductController {
             return "redirect:/";
         }
     }
-
-//    @GetMapping("/sort/{sortBy}")
-//    public String sortProducts(@PathVariable String sortBy, Model model)
-//    {
-//        List<Product> products = productService.getAllProducts();
-//        switch (sortBy) {
-//            case "price-ascending":
-//                products.sort(Comparator.comparingDouble(product -> Optional.ofNullable(product.getPrice()).orElse(0.0)));
-//                break;
-//            case "name-ascending":
-//                products.sort(Comparator.comparing(Product::getName, String.CASE_INSENSITIVE_ORDER));
-//                break;
-//            case "name-descending":
-//                products.sort(Comparator.comparing(Product::getName, String.CASE_INSENSITIVE_ORDER));
-//                Collections.reverse(products);
-//                break;
-//            default:
-//                break;
-//
-//        }
-//        model.addAttribute("products", products);
-//        return "product";
-//    }
 }
