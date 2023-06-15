@@ -2,7 +2,9 @@ package uni.decor.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import uni.decor.common.CustomLogger;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,48 +12,41 @@ import java.util.UUID;
 
 @Service
 public class UploadService {
-    @Value("${myapp.image-storage}")
+    @Value("${uniDecor.image-storage}")
     private String  imageStorage;
     public String uploadImage(MultipartFile file) throws IOException {
         if (!file.isEmpty()) {
             try {
                 // Lưu trữ tệp tin ảnh trên server
                 int lastDotIndex = file.getOriginalFilename().indexOf(".");
-                String valueBeforeDot = file.getOriginalFilename().substring(0,lastDotIndex);
-                String Fileextensiton = getFileExtension (file.getOriginalFilename());
+                String fileName = file.getOriginalFilename().substring(0,lastDotIndex);
+                String fileExtension = getFileExtension(file.getOriginalFilename());
 
-                String fileName = generateUniqueFileName(valueBeforeDot);
-//                String fileName =file.getOriginalFilename().toString();
-                System.out.println(valueBeforeDot);
-                String uploadDir = imageStorage;
+                String uniqueFileName = generateUniqueFileName(fileName);
+                CustomLogger.info("fileName: "+fileName+", fileExtension: "+fileExtension);
+                String uploadDir = imageStorage; // Thay đổi thành đường dẫn thư mục lưu trữ thực tế trên server
 
                 File uploadPath = new File(uploadDir);
                 if (!uploadPath.exists()) {
                     uploadPath.mkdirs(); // Tạo thư mục lưu trữ nếu không tồn tại
                 }
 
-                File serverFile = new File(uploadPath.getAbsolutePath() + File.separator + fileName+Fileextensiton );
+                File serverFile = new File(uploadPath.getAbsolutePath() + File.separator + uniqueFileName + "." + fileExtension);
                 file.transferTo(serverFile);
 
-                // Lưu đường dẫn hình ảnh vào đối tượng Book
-                return serverFile.getName();
+                return serverFile.getPath();
             } catch (IOException e) {
                 e.printStackTrace();
+                CustomLogger.error("UploadService: "+ e.getMessage());
                 // Xử lý lỗi khi lưu trữ tệp tin
             }
         }
         return  null;
     }
-    private String getFileExtension(String fileName) {
-        int lastDotIndex = fileName.lastIndexOf(".");
-        if (lastDotIndex != -1) {
-            return fileName.substring(lastDotIndex);
-        }
-        return "";
+    public String getFileExtension(String filename) {
+        return StringUtils.getFilenameExtension(filename);
     }
-
     private String generateUniqueFileName(String filename) {
-        String uniqueFileName = filename+"_"+UUID.randomUUID().toString();
-        return uniqueFileName;
+        return filename+"_"+UUID.randomUUID().toString();
     }
 }
