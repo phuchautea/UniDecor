@@ -4,12 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import uni.decor.entity.Category;
 import uni.decor.entity.Product;
 import uni.decor.repository.ICategoryRepository;
 import uni.decor.repository.IProductRepository;
-import uni.decor.utils.SlugUtils;
+import uni.decor.util.SlugUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
