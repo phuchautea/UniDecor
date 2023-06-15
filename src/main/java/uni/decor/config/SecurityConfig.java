@@ -94,7 +94,7 @@ public class SecurityConfig {
         return http.csrf().disable().authorizeHttpRequests(auth -> auth
                                 .requestMatchers("/user/login", "/user/register", "/oauth2/authorization/google")
                                 .anonymous()
-                                .requestMatchers( "/template/**", "/", "/user/logout", "/error", "/cart/**", "/product/**", "/order/**", "/pay/**")
+                                .requestMatchers( "/template/**", "/**", "/user/logout", "/error", "/cart/**", "/product/**", "/order/**", "/pay/**")
                                 .permitAll()
                                 .requestMatchers("/user/account")
                                 .hasAuthority("user")
