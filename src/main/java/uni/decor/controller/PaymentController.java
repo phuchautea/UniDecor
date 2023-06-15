@@ -54,7 +54,7 @@ public class PaymentController {
 //        return redirect('/pay/error'); // thanh toán thất bại
 //    }
     @GetMapping("/pay/vnpayResult")
-    public String vnpayResult(@RequestParam("resultCode") String vnp_ResponseCode, HttpSession session) {
+    public String vnpayResult(@RequestParam("vnp_ResponseCode") String vnp_ResponseCode, HttpSession session) {
         if (vnp_ResponseCode.equals("00")) {
             Order order = (Order) session.getAttribute("order");
             order.setPaymentStatus("paid");
