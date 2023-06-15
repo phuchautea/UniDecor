@@ -3,6 +3,7 @@ package uni.decor.controller;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,10 +11,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import uni.decor.common.CustomLogger;
 import uni.decor.dto.CartItemRequest;
 import uni.decor.dto.OrderRequest;
+import uni.decor.entity.Category;
+import uni.decor.entity.Order;
+import uni.decor.entity.OrderVariant;
 import uni.decor.service.OrderService;
 import uni.decor.util.EmailValidator;
 import uni.decor.util.PhoneNumberValidator;
 
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -23,7 +28,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
     @PostMapping("/order")
-    public String store(@ModelAttribute("orderRequest") OrderRequest orderRequest, HttpSession session, RedirectAttributes redirectAttributes) throws NoSuchAlgorithmException, InvalidKeyException {
+    public String store(@ModelAttribute("orderRequest") OrderRequest orderRequest, HttpSession session, RedirectAttributes redirectAttributes) throws NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException {
         String name = orderRequest.getBilling_name();
         String billing_address = orderRequest.getBilling_address();
         String province = orderRequest.getProvince_value();
@@ -84,4 +89,33 @@ public class OrderController {
     public String orderSuccess() {
         return "order/success";
     }
+
+    @GetMapping("/order/search")
+    public String orderSearch(Model model) {
+        model.addAttribute("order", new Order());
+        return "order/search";
+    }
+
+
+
+    @PostMapping("/order/search")
+    public String orderSearch(@ModelAttribute("order") Order order, Model model) {
+        try{
+            String code = order.getCode();
+            Order resultOrder = orderService.getByCode(code);
+            List<OrderVariant> orderVariants = resultOrder.getOrderVariants();
+            if(resultOrder == null)
+            {
+                System.out.println("Vui lòng nhập mã đơn hàng");
+            }
+            model.addAttribute("order", resultOrder);
+            model.addAttribute("orderVariants", orderVariants);
+            return "order/search";
+        } catch (Exception e) {
+            CustomLogger.info(e.getMessage());
+            return "order/search";
+        }
+
+    }
+
 }

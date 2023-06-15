@@ -361,7 +361,7 @@
                                         <ul class="main-menu">
                                             <li class="menu-link">
                                                 <a href="/" class="link-title">
-                                                    <span class="sp-link-title">Home<span class="header-link-label">Hot</span></span>
+                                                    <span class="sp-link-title">Trang chủ<span class="header-link-label">Hot</span></span>
                                                 </a>
                                             </li>
                                             <style>
@@ -407,7 +407,7 @@
                                                 </style>
                                             <li class="menu-link">
                                                 <a href="/collections/all" class="link-title">
-                                                    <span class="sp-link-title">Product</span>
+                                                    <span class="sp-link-title">SẢN PHẨM</span>
                                                     <span class="menu-arrow"><i class="fa fa-angle-down"></i></span>
                                                 </a>
                                                 <a href="#single-collapse-product" data-toggle="collapse" class="link-title link-title-lg">
@@ -782,11 +782,11 @@
 
                                             <li class="menu-link">
                                                 <a href="/collections/all" class="link-title">
-                                                    <span class="sp-link-title">Collection</span>
+                                                    <span class="sp-link-title">BỘ SƯU TẬP</span>
                                                     <span class="menu-arrow"><i class="fa fa-angle-down"></i></span>
                                                 </a>
                                                 <a href="#single-collapse-collection" data-toggle="collapse" class="link-title link-title-lg">
-                                                    <span class="sp-link-title">Collection</span>
+                                                    <span class="sp-link-title">BỘ SƯU TẬP</span>
                                                     <span class="menu-arrow"><i class="fa fa-angle-down"></i></span>
                                                 </a>
                                                 <ul class="menu-dropdown banner-menu collapse" id="single-collapse-collection">
@@ -851,12 +851,12 @@
                                                 </style>
 
                                             <li class="menu-link">
-                                                <a href="/blogs/news" class="link-title">
-                                                    <span class="sp-link-title">Blog</span>
+                                                <a href="/blog" class="link-title">
+                                                    <span class="sp-link-title">BÀI VIẾT</span>
                                                     <span class="menu-arrow"><i class="fa fa-angle-down"></i></span>
                                                 </a>
                                                 <a href="#single-collapse-blog" data-toggle="collapse" class="link-title link-title-lg">
-                                                    <span class="sp-link-title">Blog</span>
+                                                    <span class="sp-link-title">BÀI VIẾT</span>
                                                     <span class="menu-arrow"><i class="fa fa-angle-down"></i></span>
                                                 </a>
                                                 <ul class="menu-dropdown blog-menu collapse" id="single-collapse-blog">
@@ -1243,11 +1243,11 @@
 
                                             <li class="menu-link">
                                                 <a href="/" class="link-title">
-                                                    <span class="sp-link-title">Pages<span class="header-275a025f-e1d4-4985-afc8-0ac3af7f3528-label">New</span></span>
+                                                    <span class="sp-link-title">LIÊN HỆ<span class="header-275a025f-e1d4-4985-afc8-0ac3af7f3528-label">New</span></span>
                                                     <span class="menu-arrow"><i class="fa fa-angle-down"></i></span>
                                                 </a>
                                                 <a href="#sub-collapse-pages" data-toggle="collapse" class="link-title link-title-lg">
-                                                    <span class="sp-link-title">Pages</span>
+                                                    <span class="sp-link-title">LIÊN HỆ</span>
                                                     <span class="menu-arrow"><i class="fa fa-angle-down"></i></span>
                                                 </a>
                                                 <ul class="menu-dropdown sub-menu collapse" id="sub-collapse-pages">
@@ -1491,7 +1491,7 @@
                                         </li>
                                         <li class="side-wrap search-popup-wrap"><a href="#seachmodal" class="search-modal" data-toggle="modal">
                                             <span class="search-icon"><i class="bi bi-search"></i></span>
-                                            <span class="search-title">Search</span>
+                                            <span class="search-title">TÌM KIẾM</span>
                                         </a>
                                             <style>
                                                     a.search-modal {
@@ -1671,7 +1671,7 @@
                                                                                     </div>
                                                                                     <div class="acc-link acc-link-lg">
                                                                                         <div class="acc-link-wrap">
-                                                                                            <a href="/user/login"><i class="bi bi-person"></i></a>
+                                                                                            <a href="/user/login"><i class="bi bi-cart"></i></a>
                                                                                         </div>
                                                                                     </div>
                                                                                     <style>
@@ -10689,70 +10689,7 @@
         }
     </style>
 
-    <script>
-                                                                function updateCart(cartItemId, quantity) {
-                                                                    $.ajax({
-                                                                        url : '/cart/update/' + cartItemId + '/' + quantity + '',
-                                                                        type : "POST",
-<!--                                                                        dataType:"TEXT",-->
-<!--                                                                        success : function (result){-->
-<!--                                                                            console.log("Update thanh cong");-->
-<!--                                                                            -->
-<!--                                                                        }-->
-                                                                    });
-                                                                    location.reload();
-                                                                }
 
-                                                                // Plus number quantiy product detail
-                                                                var plusQuantity = function(cartItemId) {
-                                                                    if (jQuery('input[name="quantity[' + cartItemId + ']"]').val() != undefined) {
-                                                                        var quantity = 0;
-                                                                        var currentVal = parseInt(jQuery('input[name="quantity[' + cartItemId + ']"]').val());
-                                                                        if (!isNaN(currentVal)) {
-                                                                            jQuery('input[name="quantity[' + cartItemId + ']"]').val(currentVal + 1);
-                                                                            quantity = currentVal + 1;
-                                                                        } else {
-                                                                            jQuery('input[name="quantity[' + cartItemId + ']"]').val(1);
-                                                                            quantity = 1;
-                                                                        }
-                                                                        updateCart(cartItemId,quantity);
-                                                                    } else {
-                                                                        console.log('error: Not see element ' + jQuery('input[name="quantity[' + cartItemId + ']"]').val());
-                                                                    }
-                                                                }
-                                                                // Minus number quantiy product detail
-                                                                var minusQuantity = function(cartItemId) {
-                                                                    if (jQuery('input[name="quantity[' + cartItemId + ']"]').val() != undefined) {
-                                                                        var quantity = 0;
-                                                                        var currentVal = parseInt(jQuery('input[name="quantity[' + cartItemId + ']"]').val());
-                                                                        if (!isNaN(currentVal) && currentVal > 1) {
-                                                                            jQuery('input[name="quantity[' + cartItemId + ']"]').val(currentVal - 1);
-                                                                            quantity = currentVal - 1;
-                                                                        }
-                                                                        updateCart(cartItemId,quantity);
-                                                                    } else {
-                                                                        console.log('error: Not see element ' + jQuery('input[name="quantity[' + cartItemId + ']"]').val());
-                                                                    }
-                                                                }
-
-<!--        $(".cart-plus-minus").prepend('<div class="dec qtybutton">-</div>');-->
-<!--        $(".cart-plus-minus").append('<div class="inc qtybutton">+</div>');-->
-<!--        $(".qtybutton").on("click", function() {-->
-<!--            var $button = $(this);-->
-<!--            var oldValue = $button.parent().find("input").val();-->
-<!--            if ($button.text() == "+") {-->
-<!--                var newVal = parseFloat(oldValue) + 1;-->
-<!--            } else {-->
-<!--                // Don't allow decrementing below zero-->
-<!--                if (oldValue > 1) {-->
-<!--                    var newVal = parseFloat(oldValue) - 1;-->
-<!--                } else {-->
-<!--                    newVal = 1;-->
-<!--                }-->
-<!--            }-->
-<!--            $button.parent().find("input").val(newVal);-->
-<!--        });-->
-    </script>
     <script>
         $('.ajax-spin-cart').on('click', function() {
             $(this).addClass('loading add-item');

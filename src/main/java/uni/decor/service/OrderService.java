@@ -7,10 +7,12 @@ import uni.decor.common.CustomLogger;
 import uni.decor.config.SecurityUtils;
 import uni.decor.dto.OrderRequest;
 import uni.decor.entity.Order;
+import uni.decor.entity.Product;
 import uni.decor.entity.User;
 import uni.decor.repository.IOrderRepository;
 import uni.decor.util.RandomStringGenerator;
 
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -28,7 +30,7 @@ public class OrderService {
     private VnpayPaymentService vnpayPaymentService;
     @Autowired
     private OrderVariantService orderVariantService;
-    public String process(OrderRequest request, HttpSession session) throws NoSuchAlgorithmException, InvalidKeyException {
+    public String process(OrderRequest request, HttpSession session) throws NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException {
         String billing_name = request.getBilling_name();
         String billing_address = request.getBilling_address();
         String province_value = request.getProvince_value();
@@ -40,6 +42,8 @@ public class OrderService {
         User userInfo = new User();
         if(SecurityUtils.getEmailPrincipal() != "") {
             userInfo = userService.getUserByEmail(SecurityUtils.getEmailPrincipal());
+        }else{
+            userInfo = null;
         }
 //        Long userId = userInfo.getId();
 //        CustomLogger.info("userId:" + userId);
@@ -192,5 +196,11 @@ public class OrderService {
 //        }else{
 //            return redirect('/carts');
 //        }
+
+    }
+    public Order getByCode(String code) {
+        return orderRepository.findByCode(code);
     }
 }
+
+
