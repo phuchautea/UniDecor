@@ -1669,7 +1669,7 @@
                                                                                     </div>
                                                                                     <div class="acc-link acc-link-lg">
                                                                                         <div class="acc-link-wrap">
-                                                                                            <a href="/user/login"><i class="bi bi-person"></i></a>
+                                                                                            <a href="/user/login"><i class="bi bi-cart"></i></a>
                                                                                         </div>
                                                                                     </div>
                                                                                     <style>
@@ -10691,70 +10691,7 @@
         }
     </style>
 
-    <script>
-                                                                function updateCart(cartItemId, quantity) {
-                                                                    $.ajax({
-                                                                        url : '/cart/update/' + cartItemId + '/' + quantity + '',
-                                                                        type : "POST",
-<!--                                                                        dataType:"TEXT",-->
-<!--                                                                        success : function (result){-->
-<!--                                                                            console.log("Update thanh cong");-->
-<!--                                                                            -->
-<!--                                                                        }-->
-                                                                    });
-                                                                    location.reload();
-                                                                }
 
-                                                                // Plus number quantiy product detail
-                                                                var plusQuantity = function(cartItemId) {
-                                                                    if (jQuery('input[name="quantity[' + cartItemId + ']"]').val() != undefined) {
-                                                                        var quantity = 0;
-                                                                        var currentVal = parseInt(jQuery('input[name="quantity[' + cartItemId + ']"]').val());
-                                                                        if (!isNaN(currentVal)) {
-                                                                            jQuery('input[name="quantity[' + cartItemId + ']"]').val(currentVal + 1);
-                                                                            quantity = currentVal + 1;
-                                                                        } else {
-                                                                            jQuery('input[name="quantity[' + cartItemId + ']"]').val(1);
-                                                                            quantity = 1;
-                                                                        }
-                                                                        updateCart(cartItemId,quantity);
-                                                                    } else {
-                                                                        console.log('error: Not see element ' + jQuery('input[name="quantity[' + cartItemId + ']"]').val());
-                                                                    }
-                                                                }
-                                                                // Minus number quantiy product detail
-                                                                var minusQuantity = function(cartItemId) {
-                                                                    if (jQuery('input[name="quantity[' + cartItemId + ']"]').val() != undefined) {
-                                                                        var quantity = 0;
-                                                                        var currentVal = parseInt(jQuery('input[name="quantity[' + cartItemId + ']"]').val());
-                                                                        if (!isNaN(currentVal) && currentVal > 1) {
-                                                                            jQuery('input[name="quantity[' + cartItemId + ']"]').val(currentVal - 1);
-                                                                            quantity = currentVal - 1;
-                                                                        }
-                                                                        updateCart(cartItemId,quantity);
-                                                                    } else {
-                                                                        console.log('error: Not see element ' + jQuery('input[name="quantity[' + cartItemId + ']"]').val());
-                                                                    }
-                                                                }
-
-<!--        $(".cart-plus-minus").prepend('<div class="dec qtybutton">-</div>');-->
-<!--        $(".cart-plus-minus").append('<div class="inc qtybutton">+</div>');-->
-<!--        $(".qtybutton").on("click", function() {-->
-<!--            var $button = $(this);-->
-<!--            var oldValue = $button.parent().find("input").val();-->
-<!--            if ($button.text() == "+") {-->
-<!--                var newVal = parseFloat(oldValue) + 1;-->
-<!--            } else {-->
-<!--                // Don't allow decrementing below zero-->
-<!--                if (oldValue > 1) {-->
-<!--                    var newVal = parseFloat(oldValue) - 1;-->
-<!--                } else {-->
-<!--                    newVal = 1;-->
-<!--                }-->
-<!--            }-->
-<!--            $button.parent().find("input").val(newVal);-->
-<!--        });-->
-    </script>
     <script>
         $('.ajax-spin-cart').on('click', function() {
             $(this).addClass('loading add-item');
