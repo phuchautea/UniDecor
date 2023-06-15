@@ -1651,236 +1651,111 @@
                                                     }
                                                 </style>
                                         </li>
-                                        <li class="side-wrap wishlist-wrap"><a class="header-wishlist-btn" href="/pages/wishlist" title="Wishlist">
-                                                    <span class="wishlist-icon-counter">
-                                                        <span class="wishlist-icon"><i class="bi bi-heart"></i></span>
-                                                        <span class="wishlist-counter">0</span>
-                                                    </span>
-                                            <span class="wishlist-title">Wishlist</span>
-                                        </a>
-                                            <a class="header-wishlist-btn header-wishlist-btn-lg" href="/pages/wishlist" title="Wishlist">
-                                                    <span class="wishlist-icon-counter">
-                                                        <span class="wishlist-icon"><i class="bi bi-heart"></i></span>
-                                                        <span class="wishlist-counter">0</span>
-                                                    </span>
-                                                <span class="wishlist-title">Wishlist</span>
-                                            </a>
-                                            <style>
-                                                    a.header-wishlist-btn {
-                                                        display: flex;
-                                                        flex-direction: column;
-                                                        align-items: center;
-                                                        -webkit-transition: all 0s ease-in-out 0s;
-                                                        -o-transition: all 0s ease-in-out 0s;
-                                                        transition: all 0s ease-in-out 0s;
-                                                    }
-
-                                                    a.header-wishlist-btn.header-wishlist-btn-lg {
-                                                        display: none;
-                                                    }
-
-                                                    a.header-wishlist-btn span.wishlist-icon-counter {
-                                                        display: flex;
-                                                        align-items: center;
-                                                    }
-
-                                                    a.header-wishlist-btn span.wishlist-icon-counter span.wishlist-icon {
-                                                        display: block;
-                                                        color: var(--font-color-body);
-                                                        font-size: 16px;
-                                                        line-height: 0;
-                                                    }
-
-                                                    a.header-wishlist-btn:hover span.wishlist-icon-counter span.wishlist-icon {
-                                                        color: var(--font-color-header);
-                                                    }
-
-                                                    a.header-wishlist-btn span.wishlist-icon-counter span.wishlist-icon i {
-                                                        display: block;
-                                                        line-height: 0;
-                                                    }
-
-                                                    a.header-wishlist-btn span.wishlist-icon-counter span.wishlist-counter {
-                                                        color: var(--font-color-body);
-                                                        font-size: 12px;
-
-                                                        margin-left: 2px;
-
-                                                        font-weight: 500;
-                                                        line-height: 1;
-                                                    }
-
-                                                    a.header-wishlist-btn span.wishlist-icon-counter span.wishlist-counter::before {
-                                                        content: "(";
-                                                    }
-
-                                                    a.header-wishlist-btn span.wishlist-icon-counter span.wishlist-counter::after {
-                                                        content: ")";
-                                                    }
-
-                                                    a.header-wishlist-btn span.wishlist-title {
-                                                        color: var(--font-color-body);
-                                                        font-size: 12px;
-                                                        margin-top: 5px;
-                                                        text-transform: uppercase;
-                                                        font-weight: 500;
-                                                        line-height: 1;
-                                                    }
-
-                                                    a.header-wishlist-btn:hover span.wishlist-title {
-                                                        color: var(--font-color-primary);
-                                                    }
-
-                                                    @media (max-width: 1199px) {
-                                                        a.header-wishlist-btn {
-                                                            display: none;
-                                                        }
-
-                                                        a.header-wishlist-btn.header-wishlist-btn-lg {
-                                                            display: block;
-                                                        }
-
-                                                        a.header-wishlist-btn span.wishlist-icon-counter span.wishlist-icon {
-                                                            font-size: 16px;
-                                                        }
-
-                                                        a.header-wishlist-btn span.wishlist-title {
-                                                            display: none;
-                                                        }
-                                                    }
-                                                </style>
-                                        </li>
                                         <li class="side-wrap cart-wrap">
+                                                                                    <div class="acc-link">
+                                                                                        <div class="acc-link-wrap">
+
+                                                                                            <span class="acc-icon"><i class="bi bi-cart"></i></span>
+                                                                                            <div class="acc-title">
+
+                                                                                                <a href="/cart">Giỏ hàng</a>
 
 
 
+                                        <!--                                                        <a href="/user/register">Register</a>-->
+                                                                                            </div>
 
-                                            <div class="shopping-widget">
-                                                <div class="shopping-cart">
-                                                    <a href="javascript:void(0)" class="cart-count">
-                                                            <span class="cart-icon-wrap">
-                                                                <span class="cart-icon"><i class="bi bi-cart"></i></span>
-                                                                <span id="cart-total" class="bigcounter">0</span>
-                                                            </span>
-                                                        <span class="cart-title">Cart</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="acc-link acc-link-lg">
+                                                                                        <div class="acc-link-wrap">
+                                                                                            <a href="/user/login"><i class="bi bi-person"></i></a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <style>
+                                                                                            .acc-link .acc-link-wrap {
+                                                                                                display: flex;
+                                                                                                align-items: center;
+                                                                                                flex-direction: column;
+                                                                                                text-align: center;
+                                                                                                cursor: pointer;
+                                                                                            }
 
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <script>
-                                                    $(document).ready(function() {
-                                                        $(".mini2 .shopping-cart a.cart-count").click(function() {
-                                                            $(".mini2 .mini-cart").addClass("show");
-                                                            $(".mini2 .mm-fullscreen-bg").addClass("active");
-                                                            $(".mini2 body").addClass("hidden");
-                                                        });
-                                                        $(".mini2 .shopping-cart-close i").click(function() {
-                                                            $(".mini2 .mini-cart").removeClass("show");
-                                                            $(".mini2 .mm-fullscreen-bg").removeClass("active");
-                                                            $(".mini2 body").removeClass("hidden");
-                                                        });
-                                                        $(".mini2 .mm-fullscreen-bg").click(function() {
-                                                            $(".mini2 .mini-cart").removeClass("show");
-                                                            $(".mini2 .mm-fullscreen-bg").removeClass("active");
-                                                        });
-                                                    });
-                                                </script>
-                                            <style>
-                                                    /* mini cart css */
-                                                    .shopping-widget .shopping-cart {
-                                                        position: relative;
-                                                    }
+                                                                                            .acc-link .acc-link-wrap span.acc-icon {
+                                                                                                display: block;
+                                                                                                color: var(--font-color-body);
+                                                                                                font-size: 16px;
+                                                                                                line-height: 0;
+                                                                                            }
 
-                                                    .shopping-widget .shopping-cart a.cart-count {
-                                                        display: flex;
-                                                        flex-direction: column;
-                                                        align-items: center;
-                                                        -webkit-transition: all 0s ease-in-out 0s;
-                                                        -o-transition: all 0s ease-in-out 0s;
-                                                        transition: all 0s ease-in-out 0s;
-                                                    }
+                                                                                            .acc-link .acc-link-wrap:hover span.acc-icon {
+                                                                                                color: var(--font-color-header);
+                                                                                            }
 
-                                                    .shopping-widget .shopping-cart a.cart-count span.cart-icon-wrap {
-                                                        display: flex;
-                                                        align-items: center;
-                                                        position: relative;
-                                                    }
+                                                                                            .acc-link .acc-link-wrap span.acc-icon i {
+                                                                                                display: block;
+                                                                                                line-height: 0;
+                                                                                            }
 
-                                                    .shopping-widget .shopping-cart a.cart-count span.cart-icon-wrap span.cart-icon {
-                                                        display: block;
-                                                        color: var(--font-color-body);
-                                                        font-size: 16px;
-                                                        line-height: 0;
-                                                    }
+                                                                                            .acc-link .acc-link-wrap .acc-title {
+                                                                                                display: flex;
+                                                                                                align-items: center;
+                                                                                                margin-top: 5px;
+                                                                                                line-height: 1;
+                                                                                            }
 
-                                                    .shopping-widget .shopping-cart:hover a.cart-count span.cart-icon-wrap span.cart-icon {
-                                                        color: var(--font-color-header);
-                                                    }
+                                                                                            .acc-link .acc-link-wrap .acc-title a {
+                                                                                                color: var(--font-color-body);
+                                                                                                font-size: 12px;
+                                                                                                text-transform: uppercase;
+                                                                                                font-weight: 500;
+                                                                                                white-space: nowrap;
+                                                                                            }
 
-                                                    .shopping-widget .shopping-cart a.cart-count span.cart-icon-wrap span.cart-icon i {
-                                                        display: block;
-                                                        line-height: 0;
-                                                    }
+                                                                                            .acc-link .acc-link-wrap .acc-title a:hover {
+                                                                                                color: var(--font-color-primary);
+                                                                                            }
 
-                                                    .shopping-widget .shopping-cart a.cart-count span.cart-icon-wrap span.bigcounter {
-                                                        color: var(--font-color-body);
-                                                        font-size: 12px;
+                                                                                            .acc-link .acc-link-wrap .acc-title a::after {
+                                                                                                content: "|";
+                                                                                                margin: 0px 5px;
+                                                                                            }
 
-                                                        margin-left: 2px;
+                                                                                            .acc-link .acc-link-wrap .acc-title a:last-child::after {
+                                                                                                display: none;
+                                                                                            }
 
-                                                        font-weight: 500;
-                                                        line-height: 1;
-                                                    }
+                                                                                            .acc-link.acc-link-lg {
+                                                                                                display: none;
+                                                                                            }
 
-                                                    .shopping-widget .shopping-cart a.cart-count span.cart-icon-wrap span.bigcounter::before {
-                                                        content: "(";
-                                                    }
+                                                                                            @media (max-width: 1199px) {
+                                                                                                .acc-link {
+                                                                                                    display: none;
+                                                                                                }
 
-                                                    .shopping-widget .shopping-cart a.cart-count span.cart-icon-wrap span.bigcounter::after {
-                                                        content: ")";
-                                                    }
+                                                                                                .acc-link.acc-link-lg {
+                                                                                                    display: block;
+                                                                                                }
 
-                                                    .shopping-widget .shopping-cart a.cart-count span.cart-title {
-                                                        color: var(--font-color-body);
-                                                        font-size: 12px;
-                                                        margin-top: 5px;
-                                                        text-transform: uppercase;
-                                                        font-weight: 500;
-                                                        line-height: 1;
-                                                    }
+                                                                                                .acc-link.acc-link-lg .acc-link-wrap a {
+                                                                                                    display: block;
+                                                                                                    color: var(--font-color-body);
+                                                                                                    font-size: 16px;
+                                                                                                    line-height: 0;
+                                                                                                }
 
-                                                    .shopping-widget .shopping-cart a.cart-count:hover span.cart-title {
-                                                        color: var(--font-color-primary);
-                                                    }
+                                                                                                .acc-link.acc-link-lg .acc-link-wrap a:hover {
+                                                                                                    color: var(--font-color-header);
+                                                                                                }
 
-                                                    .shopping-widget .shopping-cart a.cart-count span.cart-detail {}
-
-                                                    .shopping-widget .shopping-cart a.cart-count span.cart-detail span.cart-title {
-                                                        display: block;
-                                                        text-transform: capitalize;
-                                                    }
-
-                                                    .shopping-widget .shopping-cart a.cart-count span.cart-detail span.subtotal-price {
-                                                        display: block;
-                                                    }
-
-                                                    @media (max-width: 1199px) {
-                                                        .shopping-widget .shopping-cart a.cart-count span.cart-icon-wrap span.cart-icon {
-                                                            font-size: 16px;
-                                                        }
-
-                                                        .shopping-widget .shopping-cart a.cart-count span.cart-title {
-                                                            display: none;
-                                                        }
-
-                                                        .shopping-widget .shopping-cart a.cart-count span.cart-detail {
-                                                            display: none;
-                                                        }
-                                                    }
-                                                </style>
-
-
-                                        </li>
+                                                                                                .acc-link.acc-link-lg .acc-link-wrap a i {
+                                                                                                    display: block;
+                                                                                                    line-height: 0;
+                                                                                                }
+                                                                                            }
+                                                                                        </style>
+                                                                                </li>
                                     </ul>
                                 </div>
                             </div>
@@ -9593,6 +9468,16 @@
                 }
             </style>
     </div>
+    <div class="alert-section" th:fragment="alert-common">
+        <div class="alert alert-danger" th:if="${errors != null and !#strings.isEmpty(errors)}">
+            <ul>
+                <li th:each="error : ${errors}" th:text="${error}"></li>
+            </ul>
+        </div>
+        <div class="alert alert-danger" th:if="${error != null and !#strings.isEmpty(error)}">
+            <th:block th:text="${error}"></th:block>
+        </div>
+    </div>
 </main>
 <div id="shopify-section-footer" class="shopify-section" th:fragment="footer-common">
     <section class="footer-top-area" data-section-id="footer" data-section-type="app-section-feed" data-section-settings=''>
@@ -10807,23 +10692,68 @@
     </style>
 
     <script>
-        $(".cart-plus-minus").prepend('<div class="dec qtybutton">-</div>');
-        $(".cart-plus-minus").append('<div class="inc qtybutton">+</div>');
-        $(".qtybutton").on("click", function() {
-            var $button = $(this);
-            var oldValue = $button.parent().find("input").val();
-            if ($button.text() == "+") {
-                var newVal = parseFloat(oldValue) + 1;
-            } else {
-                // Don't allow decrementing below zero
-                if (oldValue > 1) {
-                    var newVal = parseFloat(oldValue) - 1;
-                } else {
-                    newVal = 1;
-                }
-            }
-            $button.parent().find("input").val(newVal);
-        });
+                                                                function updateCart(cartItemId, quantity) {
+                                                                    $.ajax({
+                                                                        url : '/cart/update/' + cartItemId + '/' + quantity + '',
+                                                                        type : "POST",
+<!--                                                                        dataType:"TEXT",-->
+<!--                                                                        success : function (result){-->
+<!--                                                                            console.log("Update thanh cong");-->
+<!--                                                                            -->
+<!--                                                                        }-->
+                                                                    });
+                                                                    location.reload();
+                                                                }
+
+                                                                // Plus number quantiy product detail
+                                                                var plusQuantity = function(cartItemId) {
+                                                                    if (jQuery('input[name="quantity[' + cartItemId + ']"]').val() != undefined) {
+                                                                        var quantity = 0;
+                                                                        var currentVal = parseInt(jQuery('input[name="quantity[' + cartItemId + ']"]').val());
+                                                                        if (!isNaN(currentVal)) {
+                                                                            jQuery('input[name="quantity[' + cartItemId + ']"]').val(currentVal + 1);
+                                                                            quantity = currentVal + 1;
+                                                                        } else {
+                                                                            jQuery('input[name="quantity[' + cartItemId + ']"]').val(1);
+                                                                            quantity = 1;
+                                                                        }
+                                                                        updateCart(cartItemId,quantity);
+                                                                    } else {
+                                                                        console.log('error: Not see element ' + jQuery('input[name="quantity[' + cartItemId + ']"]').val());
+                                                                    }
+                                                                }
+                                                                // Minus number quantiy product detail
+                                                                var minusQuantity = function(cartItemId) {
+                                                                    if (jQuery('input[name="quantity[' + cartItemId + ']"]').val() != undefined) {
+                                                                        var quantity = 0;
+                                                                        var currentVal = parseInt(jQuery('input[name="quantity[' + cartItemId + ']"]').val());
+                                                                        if (!isNaN(currentVal) && currentVal > 1) {
+                                                                            jQuery('input[name="quantity[' + cartItemId + ']"]').val(currentVal - 1);
+                                                                            quantity = currentVal - 1;
+                                                                        }
+                                                                        updateCart(cartItemId,quantity);
+                                                                    } else {
+                                                                        console.log('error: Not see element ' + jQuery('input[name="quantity[' + cartItemId + ']"]').val());
+                                                                    }
+                                                                }
+
+<!--        $(".cart-plus-minus").prepend('<div class="dec qtybutton">-</div>');-->
+<!--        $(".cart-plus-minus").append('<div class="inc qtybutton">+</div>');-->
+<!--        $(".qtybutton").on("click", function() {-->
+<!--            var $button = $(this);-->
+<!--            var oldValue = $button.parent().find("input").val();-->
+<!--            if ($button.text() == "+") {-->
+<!--                var newVal = parseFloat(oldValue) + 1;-->
+<!--            } else {-->
+<!--                // Don't allow decrementing below zero-->
+<!--                if (oldValue > 1) {-->
+<!--                    var newVal = parseFloat(oldValue) - 1;-->
+<!--                } else {-->
+<!--                    newVal = 1;-->
+<!--                }-->
+<!--            }-->
+<!--            $button.parent().find("input").val(newVal);-->
+<!--        });-->
     </script>
     <script>
         $('.ajax-spin-cart').on('click', function() {
