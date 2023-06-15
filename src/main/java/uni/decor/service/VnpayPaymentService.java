@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import uni.decor.common.CustomLogger;
-import uni.decor.config.vnpayConfig;
 import uni.decor.encryption.VNPaySecurity;
 import uni.decor.entity.Order;
 
@@ -15,6 +14,8 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static uni.decor.encryption.VNPaySecurity.getRandomNumber;
 
 @Service
 public class VnpayPaymentService {
@@ -31,13 +32,14 @@ public class VnpayPaymentService {
     private String url;
     @Value("${uniDecor.vnpay.vnp_HashSecret}")
     private String hashSecret;
-
+    @Value("${uniDecor.vnpay.vnp_PayUrl}")
+    private String PayUrl;
 
     public String process(int total_price, HttpSession session) throws UnsupportedEncodingException {
         Order order = (Order) session.getAttribute("order");
         String amount = String.valueOf(total_price * 100);
 
-        String vnp_TxnRef = vnpayConfig.getRandomNumber(8); // này là mã đơn hàng
+        String vnp_TxnRef = getRandomNumber(8); // này là mã đơn hàng
         String vnp_TmnCode = tmnCode;
 
         Map<String, String> vnp_Params = new HashMap<>();
@@ -87,7 +89,7 @@ public class VnpayPaymentService {
         String queryUrl = query.toString();
         String vnp_SecureHash = VNPaySecurity.hmacSHA512(hashSecret, hashData.toString());
         queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
-        String payUrl = vnpayConfig.vnp_PayUrl + "?" + queryUrl;
+        String payUrl = PayUrl + "?" + queryUrl;
         CustomLogger.info(payUrl);
         return "redirect:"+payUrl;
 

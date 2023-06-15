@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import uni.decor.entity.Category;
 import uni.decor.entity.Product;
 import uni.decor.entity.ProductVariant;
 import uni.decor.service.ProductService;
+import uni.decor.service.CategoryService;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 public class CollectionController {
     @Autowired
     private ProductService productService;
+    private CategoryService categoryService;
     @GetMapping("/all")
     public String showAllProducts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "8") int size, Model model) {
         Page<Product> products = productService.getPagingProducts(page,size);
@@ -31,6 +34,7 @@ public class CollectionController {
         model.addAttribute("totalPages",products.getTotalPages());
         return "category/collections";
     }
+
 
     @GetMapping("/sort/{sortBy}")
     public String sortProducts(@PathVariable String sortBy, Model model)

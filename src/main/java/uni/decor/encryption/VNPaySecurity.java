@@ -14,6 +14,7 @@ import java.util.*;
 public class VNPaySecurity {
     @Value("${uniDecor.vnpay.vnp_HashSecret}")
     private static String hashSecret;
+
     public static String md5(String message) {
         String digest = null;
         try {
