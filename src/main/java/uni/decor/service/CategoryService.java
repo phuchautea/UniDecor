@@ -4,7 +4,7 @@ import uni.decor.entity.Category;
 import uni.decor.repository.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uni.decor.utils.SlugUtils;
+import uni.decor.util.SlugUtils;
 
 
 import java.util.List;
