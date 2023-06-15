@@ -40,7 +40,7 @@ public class UploadImageRestController {
 
             // Tiếp tục xử lý tệp tin ảnh nếu đúng định dạng
             String name = uploadService.uploadImage(file);
-            responseJson.put("path", name);
+            responseJson.put("path","\\"+ name);
             return ResponseEntity.ok().body(responseJson.toString());
         } catch (IOException | JSONException e) {
             e.printStackTrace();
