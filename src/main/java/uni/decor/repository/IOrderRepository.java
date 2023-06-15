@@ -6,4 +6,5 @@ import uni.decor.entity.Order;
 
 @Repository
 public interface IOrderRepository extends JpaRepository<Order, Long> {
+    Order findByCode(String code);
 }

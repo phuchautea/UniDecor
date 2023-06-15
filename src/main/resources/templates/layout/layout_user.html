@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js supports-no-cookies mini2" lang="vi" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html class="mini2" lang="vi" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>UniDecor - Thiết kế không gian sống của bạn với nội thất chất lượng cao</title>
@@ -117,7 +117,9 @@
         $(window).on('load', function() {
             $('#news-letter-modal').modal('show');
         });
-    </script>
+
+
+</script>
 <style>
         /* newletter popup css */
         .popup_wrapper .modal-content {
@@ -1418,15 +1420,15 @@
                                                 <a class="search-crap" data-toggle="collapse" href="#search-crap">
                                                     <i class="bi bi-search"></i>
                                                 </a>
-                                                <div class="crap-search collapse" id="search-crap">
-                                                    <form action="/search" method="get" class="search-bar" role="search">
+                                                <div class="crap-search collapse" >
+                                                    <form th:action="@{/collections/search}" class="search-bar" >
                                                         <div class="form-search">
-                                                            <input type="hidden" name="type" value="product">
-                                                            <input type="hidden" name="options[unavailable_products]" value="show">
-                                                            <input type="hidden" name="options[prefix]" value="last">
-                                                            <input type="search" name="q" value="" placeholder="Search product" id="search" class="input-text" aria-label="Search our store" required>
+                                                            <input type="search" name="keyword" th:value="${keyword}" placeholder="Nhập từ khóa tìm kiếm" id="search-input"  class="input-text" aria-label="Search our store" required>
                                                             <button class="search-btn" type="submit"><i class="bi bi-search"></i></button>
                                                         </div>
+                                                            <ul id="search-results" class="search-results" style="position: absolute; left: 0px; right: 0px; top: 100%; display: flex;"></ul>
+
+
                                                     </form>
                                                 </div>
                                             </div>
@@ -2296,17 +2298,12 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col">
+
+<!--                                    SEARCH 0000-->
                                     <div class="crap-search">
                                         <button type="button" class="pop-close" data-dismiss="modal" aria-label="Close"><i class="ti-close"></i></button>
-                                        <form action="/search" method="get" class="search-bar" role="search">
-                                            <div class="form-search">
-                                                <input type="hidden" name="type" value="product">
-                                                <input type="hidden" name="options[unavailable_products]" value="show">
-                                                <input type="hidden" name="options[prefix]" value="last">
-                                                <input type="search" name="q" value="" placeholder="Search product" id="search" class="input-text" aria-label="Search our store" required>
-                                                <button class="search-btn" type="submit"><i class="bi bi-search"></i></button>
-                                            </div>
-                                        </form>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -9479,6 +9476,7 @@
         </div>
     </div>
 </main>
+
 <div id="shopify-section-footer" class="shopify-section" th:fragment="footer-common">
     <section class="footer-top-area" data-section-id="footer" data-section-type="app-section-feed" data-section-settings=''>
         <div class="container">
@@ -10790,76 +10788,6 @@
             Currency.convertAll(shopCurrency, jQuery(".currency .active").attr('data-currency'));
         };
     </script>
-    <script>
-        $(function() {
-            // current Ajax request.
-            var currentAjaxRequest = null;
-            // grabbing all search forms on the page, and adding a .search-results list to each.
-            var searchForms = $('form[action="/search"]').css('position', 'relative').each(function() {
-                // grabbing text input.
-                var input = $(this).find('input[name="q"]');
-                // adding a list for showing search results.
-                var offSet = input.position().top + input.innerHeight();
-                $('<ul class="search-results"></ul>').css({
-                    'position': 'absolute',
-                    'left': '0px',
-                    'right': '0px',
-                    'top': '100%'
-                }).appendTo($(this)).hide();
-                // listening to keyup and change on the text field within these search forms.
-                input.attr('autocomplete', 'off').bind('keyup change', function() {
-                    // what's the search term?
-                    var term = $(this).val();
-                    // what's the search form?
-                    var form = $(this).closest('form');
-                    // what's the search URL?
-                    var searchURL = '/search?type=product&q=' + term;
-                    // what's the search results list?
-                    var resultsList = form.find('.search-results');
-                    // if that's a new term and it contains at least 3 characters.
-                    if (term.length > 0 && term != $(this).attr('data-old-term')) {
-                        // saving old query.
-                        $(this).attr('data-old-term', term);
-                        // killing any Ajax request that's currently being processed.
-                        if (currentAjaxRequest != null) currentAjaxRequest.abort();
-                        // pulling results.
-                        currentAjaxRequest = $.getJSON(searchURL + '&view=json', function(data) {
-                            // reset results.
-                            resultsList.empty();
-                            // if we have no results.
-                            if (data.results_count == 0) {
-                                // if there are results, let's serach you were looking text.
-                                resultsList.html('<p class="looking-for">Search for "' + term + '"</p><p>No results</p>');
-                                resultsList.fadeIn(150);
-                                // resultsList.hide();
-                            } else {
-                                // if we have results.
-                                $.each(data.results, function(index, item) {
-                                    var link = $('<a></a>').attr('href', item.url);
-                                    link.append('<img src="' + item.thumbnail + '" />');
-                                    link.append('<span class="title">' + item.title + '</span>');
-                                    link.wrap('<li></li>');
-                                    resultsList.append(link.parent());
-                                });
-                                // if there are more than 5, let's link to the search results page.
-                                if (data.results_count > 1) {
-                                    resultsList.prepend('<p class="looking-for">Search for "' + term + '"</p>');
-                                    resultsList.append('<p class="search-more"><a href="' + searchURL + '">See all results (' + data.results_count + ')</a></p>');
-                                }
-                                // the Ajax request will return at the most 5 results.
-                                resultsList.fadeIn(150);
-                                // resultsList.show();
-                            }
-                        });
-                    }
-                });
-            });
-            // clicking outside makes the results disappear.
-            $('body').bind('click', function() {
-                $('.search-results').hide();
-            });
-        });
-    </script>
     <style>
         .search-results {
             display: -ms-flexbox;
@@ -10946,8 +10874,91 @@
             opacity: 1;
         }
     </style>
+    <script type="text/javascript">
+<!--   SEARCH 000000-->
+    document.getElementById("search-input").addEventListener("keyup", function() {
+
+    var keyword = $("#search-input").val();
+    if (keyword.length === 0) { // nếu kí tự (search) truyền vào có độ dài là 0
+        $("#search-results").html('');
+<!--        document.getElementById("search-results").innerHTML = ""; // xóa kết quả-->
+    } else {
+        performSearchAjax(keyword);
+    }
+});
+document.getElementById("search-input").addEventListener("keydown", function(event) {
+    if (event.keyCode === 13) { // Kiểm tra mã phím có phải là 13 (Enter) hay không
+        event.preventDefault();
+        var keyword = document.getElementById("search-input").value;
+        window.location.href = "/product/search?keyword=" + keyword; // Chuyển hướng đến trang tìm kiếm
+    }
+});
+function performSearchAjax(keyword) {
+  $.ajax({
+    url: "/search",
+    method: "GET",
+    data: { keyword: keyword },
+    success: function(searchResults) {
+      var searchResults = JSON.parse(searchResults);//chuyển kiểu sang JSON
+      displaySearchResults(searchResults, keyword);
+    },
+    error: function(xhr, status, error) {
+      console.error("Lỗi khi gửi yêu cầu tìm kiếm: " + status);
+      displaySearchResults([]); // Hiển thị thông báo không có kết quả
+    }
+  });
+}
+function displaySearchResults(searchResults, keyword) {
+        var resultsContainer = document.getElementById("search-results");
+        resultsContainer.innerHTML = ""; // Xóa kết quả tìm kiếm trước đó
+        console.log(keyword);
+
+
+         if (searchResults.length === 0) { // nếu kết quả trả về có chiều dài  = 0
+        var noResultsElement = document.createElement("p");
+        noResultsElement.textContent = "Không tìm thấy kết quả phù hợp.";
+        noResultsElement.style.color = "red";
+        resultsContainer.appendChild(noResultsElement);
+    } else {
+        var count = 0;
+        // Hiển thị kết quả tìm kiếm
+        searchResults.forEach(function(product) {
+         if (count < 3) {
+         let html = `<p class="looking-for">Kết quả của: ${keyword}</p>`;
+         for (let i = 0; i < searchResults.length; i++) {
+          const product = searchResults[i];
+          html += `
+            <li class="${product.slug}"><a href="/product/${product.slug}">
+              <img src="${product.image}">
+              <span class="title">${highlightKeyword(product.name, keyword, 'green')}</span></a>
+            </li>`;
+
+        }
+        html += `<p class="search-more"><a href="/product/search?keyword=${keyword}">Xem tất cả (${searchResults.length})</a></p>`;
+        resultsContainer.innerHTML = html;
+
+             count++;
+
+
+            }
+        });
+
+
+    }
+ }
+    function highlightKeyword(text, keyword, color) {
+    var pattern = new RegExp(keyword, "gi"); // biểu thức chính quy với hai cờ g (global) và i(modifier: insensitive)
+    //g :tìm tất cả các trùng khớp trong đoạn văn bản, không chỉ trùng khớp đầu tiên
+    //i : Được sử dụng để tìm kiếm không phân biệt chữ hoa, chữ thường.[[a-zA-Z]]
+    return text.replace(pattern, "<span style='color: " + color + "; font-weight: bold;'>$&</span> ");
+}
+
+
+</script>
 
 </div>
+<!--<script th:src="@{/js/jquery-3.6.4.min.js}"></script>-->
+
 </body>
 
 </html>

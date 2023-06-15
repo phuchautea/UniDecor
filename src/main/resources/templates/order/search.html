@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html class="no-js supports-no-cookies mini2" lang="vi" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Tìm kiếm đơn hàng | UniDecor - Thiết kế không gian sống của bạn với nội thất chất lượng cao</title>
+    <th:block th:replace="layout/layout_user :: head-common"></th:block>
+</head>
+
+<body id="unidecor-template" class="template-index">
+<div id="shopify-section-header" class="shopify-section" th:replace="layout/layout_user :: menu-common"></div>
+<section class="breadcrumb-area" style="background-image: url('//cdn.shopify.com/s/files/1/0584/0909/1211/files/breadcrumb.jpg?v=1651238329');">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="breadcrumb-index">
+                    <div class="breadcrumb-title">
+                        <h2>Tra cứu đơn hàng</h2>
+                    </div>
+                    <ul class="breadcrumb-list">
+                        <li class="breadcrumb-item">
+                            <a href="/" title="Back to the home page">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <span>SearchOrder</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div th:if="${order != null}">
+<div class="page-layout">
+    <div class="wrapper-row pd-page">
+        <div class="container-fluid">
+            <div class="heading-page">
+                <div class="header-page">
+<!--                    <div style="text-align:center"><h1>Tra cứu đơn hàng</h1></div>-->
+                    <div style="margin-top:20px;text-align: center">
+                        <form th:action="@{/order/search}" th:object="${order}" method="POST">
+                            <input type="text" name="code" placeholder="Nhập mã đơn hàng" style="width: 50%">
+                            <button type="submit" class="search-btn" ><i class="bi bi-search" style="font-size: 20px"></i></button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row wrapbox-content-cart" >
+                <div class="col-md-12 col-sm-4 col-xs-12 sidebarCart-sticky">
+                    <div class="sidebox-order">
+                        <div class="sidebox-order-inner">
+                            <div class="sidebox-order_title" style="margin-top:20px">
+                                <h3>Thông tin đơn hàng</h3>
+                            </div>
+                            <div class="sidebox-order_text row"style="margin-bottom:20px">
+                                <div class="col-md-6 col-sm-4 col-xs-12">
+                                    <p>Mã đơn hàng: <b th:text="${order.code}"></b></p>
+                                    <p>Tên người nhận: <b th:text="${order.receiverName}"></b></p>
+                                    <p>Số điện thoại: <b th:text="${order.receiverPhone}"></b></p>
+                                    <p>Địa chỉ: <b th:text="${order.receiverAddress}"></b></p>
+                                </div>
+                                <div class="col-md-6 col-sm-4 col-xs-12">
+                                    <p>Địa chỉ email: <b th:text="${order.receiverEmail}"></b></p>
+                                    <p>Phương thức thanh toán: <b th:text="${order.paymentMethod}"></b></p>
+                                    <p>Tổng tiền: <b th:text="${order.finalPrice}">0</b>đ</p>
+                                    <p>Thời gian tạo: <b th:text="${order.createdAt}"></b></p>
+                                </div>
+                            </div>
+                            <div class="sidebox-order_text">
+                                <table class="table table-head-fixed text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Giá</th>
+                                        <th>Số lượng </th>
+                                        <th>Tổng tiền</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="orderVariant : ${orderVariants}">
+                                        <td th:text="${orderVariant.productName}"></td>
+                                        <td th:text="${@numberUtils.formatNumber(orderVariant.price)} + 'đ'"></td>
+                                        <td th:text="${orderVariant.quantity}"></td>
+                                        <td th:text="${@numberUtils.formatNumber(orderVariant.price * orderVariant.quantity)}+ 'đ'"></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div>
+<div id="shopify-section-footer" class="shopify-section" th:replace="layout/layout_user :: footer-common"></div>
+</body>
+</html>
