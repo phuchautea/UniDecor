@@ -6,7 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import uni.decor.common.CustomLogger;
+import uni.decor.dto.CreateProductVariantRequest;
 import uni.decor.entity.Product;
+import uni.decor.entity.ProductVariant;
 import uni.decor.service.CategoryService;
 import uni.decor.service.ProductService;
 import uni.decor.service.ProductVariantService;
@@ -40,12 +43,41 @@ public class ManageProductController {
         return "admin/product/add";
     }
     @PostMapping("/add")
-    public String addProduct(@ModelAttribute("product") Product product, BindingResult result, Model model) throws IOException {
+    public String addProduct(@ModelAttribute("product") Product product, BindingResult result, Model model, @ModelAttribute CreateProductVariantRequest createProductVariantRequest) throws IOException {
+
+
         model.addAttribute("product", product);
         if(result.hasErrors()){
             return "admin/product/add";
         }
         productService.addProduct(product);
+        List<String> variantNames = createProductVariantRequest.getVariant_name();
+        List<Integer> variantQuantity = createProductVariantRequest.getVariant_quantity();
+        List<String> variantPrices = createProductVariantRequest.getVariant_price();
+        List<String> variantDiscountPrices = createProductVariantRequest.getVariant_discount_price();
+        List<String> variantDescriptions = createProductVariantRequest.getVariant_description();
+        List<String> variantImages = createProductVariantRequest.getVariant_image();
+        CustomLogger.info("variantNames: "+variantNames);
+        CustomLogger.info("variantQuantity: " + variantQuantity);
+        CustomLogger.info("variantPrices: " + variantPrices);
+        CustomLogger.info("variantDiscountPrices: " + variantDiscountPrices);
+        CustomLogger.info("variantDescriptions: " + variantDescriptions);
+        CustomLogger.info("variantImages: " + variantImages);
+        // Lưu danh sách các giá trị vào cơ sở dữ liệu
+        for (int i = 0; i < variantNames.size(); i++) {
+            double price = Double.parseDouble(variantPrices.get(i).replaceAll(",", ""));
+            double discount_price = Double.parseDouble(variantDiscountPrices.get(i).replaceAll(",", ""));
+
+            ProductVariant variant = new ProductVariant();
+            variant.setName(variantNames.get(i));
+            variant.setStock(variantQuantity.get(i));
+            variant.setPrice(price);
+            variant.setDiscountPrice(discount_price);
+            variant.setImage(variantImages.get(i));
+            variant.setProduct(product);
+
+            productVariantService.add(variant);
+        }
         return "redirect:/admin/products";
     }
 
