@@ -21,6 +21,7 @@ import uni.decor.service.OrderService;
 import uni.decor.util.EmailValidator;
 import uni.decor.util.PhoneNumberValidator;
 
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class OrderController {
 
 
     @PostMapping("/order")
-    public String store(@ModelAttribute("orderRequest") OrderRequest orderRequest, HttpSession session, RedirectAttributes redirectAttributes) throws NoSuchAlgorithmException, InvalidKeyException {
+    public String store(@ModelAttribute("orderRequest") OrderRequest orderRequest, HttpSession session, RedirectAttributes redirectAttributes) throws NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException {
         String name = orderRequest.getBilling_name();
         String billing_address = orderRequest.getBilling_address();
         String province = orderRequest.getProvince_value();

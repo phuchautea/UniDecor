@@ -13,7 +13,7 @@ import java.util.UUID;
 @Service
 public class UploadService {
     @Value("${uniDecor.image-storage}")
-    private String  imageStorage;
+    private String imageStorage;
     public String uploadImage(MultipartFile file) throws IOException {
         if (!file.isEmpty()) {
             try {
@@ -34,7 +34,7 @@ public class UploadService {
                 File serverFile = new File(uploadPath.getAbsolutePath() + File.separator + uniqueFileName + "." + fileExtension);
                 file.transferTo(serverFile);
 
-                return serverFile.getPath();
+                return serverFile.getName();
             } catch (IOException e) {
                 e.printStackTrace();
                 CustomLogger.error("UploadService: "+ e.getMessage());

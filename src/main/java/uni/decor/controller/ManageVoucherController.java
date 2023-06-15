@@ -9,13 +9,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import uni.decor.service.VoucherService;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
 @RequestMapping("/admin/vouchers")
-public class VoucherController {
+public class ManageVoucherController {
     @Autowired
     private VoucherService voucherService;
     @GetMapping
