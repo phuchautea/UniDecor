@@ -1,0 +1,74 @@
+<!DOCTYPE>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+<th:block th:replace="admin/layout :: head"></th:block>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <th:block th:replace="admin/layout :: navbar"></th:block>
+    <th:block th:replace="admin/layout :: sidebar"></th:block>
+
+    <div class="content-wrapper">
+        <section class="content" style="margin-top: 15px">
+            <div class="container-fluid">
+                <!--                @include('admin.alerts')-->
+                <!--                @yield('content')-->
+                <!--                <div th:insert="~{::${content}}"></div>-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fa fa-list"></i> DANH SÁCH BÀI VIẾT - Tổng: <span th:text="${#lists.size(blogs)}"></span>
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-head-fixed text-nowrap">
+                                        <thead>
+                                        <tr>
+                                            <th>Hành động</th>
+                                            <th>ID</th>
+                                            <th>Tiêu Đề</th>
+                                            <th>Nội Dung</th>
+                                            <th>Tác Giả</th>
+                                            <th>Hình Ảnh</th>
+                                            <th>Trạng Thái</th>
+                                            <th>Ngày Đăng</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="blog : ${blogs}">
+                                            <td style="width: 100px">
+                                                <a th:href="@{/admin/blogs/edit/{id}(id=${blog.id})}"
+                                                   class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a onclick="return confirm('Không thể khôi phục sau khi xóa, bạn chắc chắn?')"
+                                                   th:href="@{/admin/blogs/delete/{id}(id=${blog.id})}" class="btn btn-danger btn-sm">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
+                                            <td th:text="${blog.id}"></td>
+                                            <td th:text="${blog.title}"></td>
+                                            <td><textarea th:text="${blog.content}"></textarea></td>
+                                            <td th:text="${blog.author}"></td>
+                                            <td th:text="${blog.image}"></td>
+                                            <td th:text="${blog.published}"></td>
+                                            <td th:text="${blog.created_date}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <th:block th:replace="admin/layout :: footer"></th:block>
+
+</div>
+</body>
+</html>

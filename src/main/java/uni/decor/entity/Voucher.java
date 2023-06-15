@@ -3,6 +3,7 @@ package uni.decor.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
