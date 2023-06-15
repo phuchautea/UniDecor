@@ -1,6 +1,7 @@
 <!DOCTYPE>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
 <th:block th:replace="admin/layout :: head"></th:block>
+
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
@@ -10,9 +11,6 @@
     <div class="content-wrapper">
         <section class="content" style="margin-top: 15px">
             <div class="container-fluid">
-                <!--                @include('admin.alerts')-->
-                <!--                @yield('content')-->
-                <!--                <div th:insert="~{::${content}}"></div>-->
                 <div class="row">
                     <div class="col-12">
                         <div class="card card-info">
@@ -31,10 +29,6 @@
                                         <label>Mô tả</label>
                                         <textarea class="form-control" id="description" name="description" th:field="*{description}"></textarea>
                                     </div>
-<!--                                    <div class="form-group">-->
-<!--                                        <label>Hình ảnh</label>-->
-<!--                                        <input type="file" class="form-control" id="image" name="image">-->
-<!--                                    </div>-->
                                     <div class="form-group">
                                         <label for="image">Hình ảnh</label>
                                         <div class="input-group mb-3">
@@ -56,7 +50,64 @@
                                             <option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
                                         </select>
                                     </div>
-
+                                    <div class="form-group table-responsive">
+                                        <label>Danh sách biến thể sản phẩm</label>
+                                        <table class="table table-head-fixed text-nowrap">
+                                            <thead>
+                                            <tr>
+                                                <th>Tên</th>
+                                                <th>Số lượng</th>
+                                                <th>Giá</th>
+                                                <th>Giá giảm</th>
+                                                <th>Mô tả ngắn</th>
+                                                <th>Hình ảnh</th>
+                                                <th>Hành động</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+<!--                                            @php $generateId = md5(time()); @endphp-->
+<!--                                            <tr>-->
+<!--                                                <td><input required type="text" class="form-control" name="variant_name[]"></td>-->
+<!--                                                <td><input required type="number" class="form-control" name="variant_quantity[]"></td>-->
+<!--                                                <td><input required type="text" class="form-control format-price" name="variant_price[]"></td>-->
+<!--                                                <td><input required type="text" class="form-control format-price" name="variant_discount_price[]"></td>-->
+<!--                                                <td><input required type="text" class="form-control" name="variant_description[]"></td>-->
+<!--                                                <td><div class="input-group mb-3">-->
+<!--                                                        <input required type="text" class="form-control" id="image_{{ $generateId }}" name="variant_image[]" value="">-->
+<!--                                                        <div class="input-group-append">-->
+<!--                                                            <label class="input-group-text btn btn-primary" for="image_file_{{ $generateId }}">Chọn file</label>-->
+<!--                                                            <input type="file" class="form-control-file d-none"-->
+<!--                                                                   id="image_file_{{ $generateId }}" onchange="uploadImage('{{ $generateId }}')">-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <img id="previewImg_{{ $generateId }}" class="img-fluid" style="width:100px;" src="">-->
+<!--                                                </td>-->
+<!--                                                <td><button type="button" class="btn btn-danger" onclick="deleteVariantRow(this)">Xóa</button></td>-->
+<!--                                            </tr>-->
+<!--                                            </tbody>-->
+<!--                                            <tbody>-->
+<!--                                                <tr>-->
+<!--                                                    <td><input required type="text" class="form-control" th:name="variant_name[]"></td>-->
+<!--                                                    <td><input required type="number" class="form-control" th:name="variant_quantity[]"></td>-->
+<!--                                                    <td><input required type="text" class="form-control format-price" th:name="variant_price[]"></td>-->
+<!--                                                    <td><input required type="text" class="form-control format-price" th:name="variant_discount_price[]"></td>-->
+<!--                                                    <td><input required type="text" class="form-control" th:name="variant_description[]"></td>-->
+<!--                                                    <td>-->
+<!--                                                        <div class="input-group mb-3">-->
+<!--                                                            <input required type="text" class="form-control" id="image_${generateId}" th:name="variant_image[]" value="">-->
+<!--                                                            <div class="input-group-append">-->
+<!--                                                                <label class="input-group-text btn btn-primary" for="image_file_${generateId}">Chọn file</label>-->
+<!--                                                                <input type="file" class="form-control-file d-none" id="image_file_${generateId}" onchange="uploadImage('${generateId}')">-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                        <img id="previewImg_${generateId}" class="img-fluid" style="width:100px;" src="">-->
+<!--                                                    </td>-->
+<!--                                                    <td><button type="button" class="btn btn-danger" onclick="deleteVariantRow(this)">Xóa</button></td>-->
+<!--                                                </tr>-->
+<!--                                            </tbody>-->
+                                        </table>
+                                        <button type="button" class="btn btn-info" onclick="addVariantRow()">Thêm biến thể</button>
+                                    </div>
                                 </div>
 
                                 <div class="card-footer">
@@ -73,7 +124,7 @@
 
 </div>
 <script type="text/javascript">
- function uploadImage(id) {
+        function uploadImage(id) {
             let image = $('#image_file_'+id+'').prop('files')[0];
             let formData = new FormData();
             formData.append('image', image);
@@ -88,7 +139,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
-                    if(data.path){
+                    data = JSON.parse(data);
+                    if(data['path']){
                         $('#image_'+id+'').val(data.path);
                         $('#previewImg_'+id+'').attr('src', data.path);
                         $('#previewImg_'+id+'').show();
@@ -139,46 +191,62 @@
   }
             });
         });
-
-
-<!--PRODUCT VARIANT-->
-        function addVariantRow() {
-            const generateId = generateRandomString(11);
-
-            const table = document.querySelector('table tbody');
-            const newRow = `
-				<tr>
-					<td><input required type="text" class="form-control" name="variant_name[]"></td>
-					<td><input required type="number" class="form-control" name="variant_quantity[]"></td>
-					<td><input required type="text" class="form-control format-price" name="variant_price[]"></td>
-					<td><input required type="text" class="form-control format-price" name="variant_discount_price[]"></td>
-                    <td><input required type="text" class="form-control" name="variant_description[]"></td>
-                    <td><div class="input-group mb-3">
-                            <input required type="text" class="form-control" id="image_${generateId}" name="variant_image[]" value="">
-                            <div class="input-group-append">
-                                <label class="input-group-text btn btn-primary" for="image_file_${generateId}">Chọn file</label>
-                                    <input type="file" class="form-control-file d-none" id="image_file_${generateId}" onchange="uploadImage('${generateId}')">
-                            </div>
-                        </div>
-                        <img id="previewImg_${generateId}" class="img-fluid" alt="" style="width:100px;"src="">
-                    </td>
-                    <td><button type="button" class="btn btn-danger" onclick="deleteVariantRow(this)">Xóa</button></td>
-				</tr>
-			`;
-            table.insertAdjacentHTML('beforeend', newRow);
-            $(".format-price").priceFormat({
-                limit: 15,
-                prefix: '',
-                centsLimit: 0
-            });
-        }
-
-        function deleteVariantRow(button) {
-            const row = button.closest('tr');
-            row.remove();
-        }
-
     </script>
+    <script type="text/javascript">
 
+            $(document).ready(function(){
+                $(".format-price").priceFormat({
+                    limit: 15,
+                    prefix: '',
+                    centsLimit: 0
+                });
+            });
+
+            function generateRandomString(length) {
+                let result = '';
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                for (let i = 0; i < length; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                return result;
+            }
+
+            function addVariantRow() {
+                const generateId = generateRandomString(20);
+
+                const table = document.querySelector('table tbody');
+                const newRow = `
+    				<tr>
+    					<td><input required type="text" class="form-control" name="variant_name[]"></td>
+    					<td><input required type="number" class="form-control" name="variant_quantity[]"></td>
+    					<td><input required type="text" class="form-control format-price" name="variant_price[]"></td>
+    					<td><input required type="text" class="form-control format-price" name="variant_discount_price[]"></td>
+                        <td><input required type="text" class="form-control" name="variant_description[]"></td>
+                        <td><div class="input-group mb-3">
+                                <input required type="text" class="form-control" id="image_${generateId}" name="variant_image[]" value="">
+                                <div class="input-group-append">
+                                    <label class="input-group-text btn btn-primary" for="image_file_${generateId}">Chọn file</label>
+                                        <input type="file" class="form-control-file d-none" id="image_file_${generateId}" onchange="uploadImage('${generateId}')">
+                                </div>
+                            </div>
+                            <img id="previewImg_${generateId}" class="img-fluid" alt="" style="width:100px;display:none;" src="">
+                        </td>
+                        <td><button type="button" class="btn btn-danger" onclick="deleteVariantRow(this)">Xóa</button></td>
+    				</tr>
+    			`;
+                table.insertAdjacentHTML('beforeend', newRow);
+                $(".format-price").priceFormat({
+                    limit: 15,
+                    prefix: '',
+                    centsLimit: 0
+                });
+            }
+
+            function deleteVariantRow(button) {
+                const row = button.closest('tr');
+                row.remove();
+            }
+
+        </script>
 </body>
 </html>

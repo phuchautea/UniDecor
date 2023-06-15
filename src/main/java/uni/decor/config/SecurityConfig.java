@@ -36,13 +36,6 @@ import java.util.Set;
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 @RequiredArgsConstructor
 public class SecurityConfig {
-//    @Autowired
-//    private CustomOAuth2UserService customOAuth2UserService;
-//    @Autowired
-//    private OAuth2UserService oAuth2UserService;
-
-    //    @Autowired
-//    private OAuthService oAuthService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -101,7 +94,7 @@ public class SecurityConfig {
         return http.csrf().disable().authorizeHttpRequests(auth -> auth
                                 .requestMatchers("/user/login", "/user/register", "/oauth2/authorization/google")
                                 .anonymous()
-                                .requestMatchers( "/template/**", "/", "/user/logout", "/error", "/cart/**", "/product/**", "/order", "/pay/**")
+                                .requestMatchers( "/template/**", "/", "/user/logout", "/error", "/cart/**", "/product/**", "/order/**", "/pay/**")
                                 .permitAll()
                                 .requestMatchers("/user/account")
                                 .hasAuthority("user")

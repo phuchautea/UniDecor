@@ -904,6 +904,46 @@
             });
         });
     </script>
+    <script type="text/javascript">
+        function updateCart(cartItemId, quantity) {
+            $.ajax({
+                url : '/cart/update/' + cartItemId + '/' + quantity + '',
+                type : "POST",
+            });
+            location.reload();
+        }
+        // Plus number quantiy product detail
+        var plusQuantity = function(cartItemId) {
+            if (jQuery('input[name="quantity[' + cartItemId + ']"]').val() != undefined) {
+                var quantity = 0;
+                var currentVal = parseInt(jQuery('input[name="quantity[' + cartItemId + ']"]').val());
+                if (!isNaN(currentVal)) {
+                    jQuery('input[name="quantity[' + cartItemId + ']"]').val(currentVal + 1);
+                    quantity = currentVal + 1;
+                } else {
+                    jQuery('input[name="quantity[' + cartItemId + ']"]').val(1);
+                    quantity = 1;
+                }
+                updateCart(cartItemId,quantity);
+            } else {
+                console.log('error: Not see element ' + jQuery('input[name="quantity[' + cartItemId + ']"]').val());
+            }
+        }
+        // Minus number quantiy product detail
+        var minusQuantity = function(cartItemId) {
+            if (jQuery('input[name="quantity[' + cartItemId + ']"]').val() != undefined) {
+                var quantity = 0;
+                var currentVal = parseInt(jQuery('input[name="quantity[' + cartItemId + ']"]').val());
+                if (!isNaN(currentVal) && currentVal > 1) {
+                    jQuery('input[name="quantity[' + cartItemId + ']"]').val(currentVal - 1);
+                    quantity = currentVal - 1;
+                }
+                updateCart(cartItemId,quantity);
+            } else {
+                console.log('error: Not see element ' + jQuery('input[name="quantity[' + cartItemId + ']"]').val());
+            }
+        }
+    </script>
     <div id="shopify-section-footer" class="shopify-section" th:replace="layout/layout_user :: footer-common"></div>
 </body>
 
