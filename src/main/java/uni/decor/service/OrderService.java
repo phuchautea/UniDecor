@@ -11,6 +11,7 @@ import uni.decor.entity.User;
 import uni.decor.repository.IOrderRepository;
 import uni.decor.util.RandomStringGenerator;
 
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -28,7 +29,7 @@ public class OrderService {
     private VnpayPaymentService vnpayPaymentService;
     @Autowired
     private OrderVariantService orderVariantService;
-    public String process(OrderRequest request, HttpSession session) throws NoSuchAlgorithmException, InvalidKeyException {
+    public String process(OrderRequest request, HttpSession session) throws NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException {
         String billing_name = request.getBilling_name();
         String billing_address = request.getBilling_address();
         String province_value = request.getProvince_value();
