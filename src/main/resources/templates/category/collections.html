@@ -54,33 +54,29 @@
 
                         <!-- product-short start -->
                         <div class="product-short">
-                            <label for="SortBy">Sort by:</label>
-                            <select class="nice-select" name="sortby" id="SortBy">
-                                <option value="manual">Featured</option>
-                                <option value="best-selling">Best selling</option>
-                                <option value="title-ascending">Alphabetically, A-Z</option>
-                                <option value="title-descending">Alphabetically, Z-A</option>
-                                <option value="price-ascending">Price, low to high</option>
-                                <option value="price-descending">Price, high to low</option>
-                                <option value="created-descending">Date, new to old</option>
-                                <option value="created-ascending">Date, old to new</option>
+                            <label for="SortBy">Lọc: </label>
+                            <select class="nice-select" name="sortBy" id="sortBy">
+                                <option value="name-ascending">Theo tên: A-Z</option>
+                                <option value="name-descending">Theo tên: Z-A</option>
+                                <option value="price-ascending">Giá: tăng dần</option>
+                                <option value="price-descending">Giá: giảm dần</option>
+                                <option value="newest">Mới nhất</option>
+                                <option value="oldest">Cũ nhất</option>
                             </select><a href="javascript:void(0)" class="short-title">
-                            <span class="sort-title">Best selling</span>
+                            <span class="sort-title">Sản phẩm nổi bật</span>
                             <span class="sort-icon"><i class="bi bi-chevron-down"></i></span>
                         </a>
                             <a href="javascript:void(0)" class="short-title short-title-lg">
-                                <span class="sort-title">Best selling</span>
+                                <span class="sort-title">Sản phẩm nổi bật</span>
                                 <span class="sort-icon"><i class="bi bi-chevron-down"></i></span>
                             </a>
                             <ul role="list" class="collapse" id="select-wrap">
-                                <li><a href="?sort_by=manual">Featured</a></li>
-                                <li class="selected"><a href="?sort_by=best-selling">Best selling</a></li>
-                                <li><a href="?sort_by=title-ascending">Alphabetically, A-Z</a></li>
-                                <li><a href="?sort_by=title-descending">Alphabetically, Z-A</a></li>
-                                <li><a href="?sort_by=price-ascending">Price, low to high</a></li>
-                                <li><a href="?sort_by=price-descending">Price, high to low</a></li>
-                                <li><a href="?sort_by=created-descending">Date, new to old</a></li>
-                                <li><a href="?sort_by=created-ascending">Date, old to new</a></li>
+                                <li><a href="/collections/sort/name-ascending">Theo tên: A-Z</a></li>
+                                <li><a href="/collections/sort/name-descending">Theo tên: Z-A</a></li>
+                                <li><a href="/collections/sort/price-ascending">Giá: tăng dần</a></li>
+                                <li><a href="/collections/sort/price-descending">Giá: giảm dần</a></li>
+                                <li><a href="/collections/sort/newest">Mới nhất</a></li>
+                                <li><a href="/collections/sort/oldest">Cũ nhất</a></li>
                             </ul>
                         </div>
 
