@@ -7,6 +7,7 @@ import uni.decor.common.CustomLogger;
 import uni.decor.config.SecurityUtils;
 import uni.decor.dto.OrderRequest;
 import uni.decor.entity.Order;
+import uni.decor.entity.Product;
 import uni.decor.entity.User;
 import uni.decor.repository.IOrderRepository;
 import uni.decor.util.RandomStringGenerator;
@@ -192,5 +193,11 @@ public class OrderService {
 //        }else{
 //            return redirect('/carts');
 //        }
+
+    }
+    public Order getByCode(String code) {
+        return orderRepository.findByCode(code);
     }
 }
+
+
