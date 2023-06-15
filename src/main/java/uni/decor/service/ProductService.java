@@ -92,4 +92,7 @@ public class ProductService {
         PageRequest pageRequest = PageRequest.of(page, size);
         return productRepository.findAll(pageRequest);
     }
+    public Long totalProduct(){
+        return productRepository.count();
+    }
 }
