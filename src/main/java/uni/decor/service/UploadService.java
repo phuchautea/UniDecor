@@ -34,7 +34,7 @@ public class UploadService {
                 File serverFile = new File(uploadPath.getAbsolutePath() + File.separator + uniqueFileName + "." + fileExtension);
                 file.transferTo(serverFile);
 
-                return serverFile.getPath();
+                return serverFile.getName();
             } catch (IOException e) {
                 e.printStackTrace();
                 CustomLogger.error("UploadService: "+ e.getMessage());
