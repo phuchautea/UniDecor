@@ -10924,14 +10924,13 @@ function displaySearchResults(searchResults, keyword) {
         // Hiển thị kết quả tìm kiếm
         searchResults.forEach(function(product) {
          if (count < 3) {
-         let html = `<p class="looking-for">Kết quả của : ${keyword}</p>`;
+         let html = `<p class="looking-for">Kết quả của: ${keyword}</p>`;
          for (let i = 0; i < searchResults.length; i++) {
           const product = searchResults[i];
           html += `
             <li class="${product.slug}"><a href="/product/${product.slug}">
               <img src="${product.image}">
-              <span class="title">${product.name}</span></a>
-
+              <span class="title">${highlightKeyword(product.name, keyword, 'green')}</span></a>
             </li>`;
 
         }
@@ -10951,7 +10950,7 @@ function displaySearchResults(searchResults, keyword) {
     var pattern = new RegExp(keyword, "gi"); // biểu thức chính quy với hai cờ g (global) và i(modifier: insensitive)
     //g :tìm tất cả các trùng khớp trong đoạn văn bản, không chỉ trùng khớp đầu tiên
     //i : Được sử dụng để tìm kiếm không phân biệt chữ hoa, chữ thường.[[a-zA-Z]]
-    return text.replace(pattern, "<span style='color: " + color + "; font-weight: bold;'>$&</span>");
+    return text.replace(pattern, "<span style='color: " + color + "; font-weight: bold;'>$&</span> ");
 }
 
 
