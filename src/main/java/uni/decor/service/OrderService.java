@@ -40,6 +40,8 @@ public class OrderService {
         User userInfo = new User();
         if(SecurityUtils.getEmailPrincipal() != "") {
             userInfo = userService.getUserByEmail(SecurityUtils.getEmailPrincipal());
+        }else{
+            userInfo = null;
         }
 //        Long userId = userInfo.getId();
 //        CustomLogger.info("userId:" + userId);
