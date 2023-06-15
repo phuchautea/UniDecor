@@ -30,6 +30,7 @@
                                             <th>ID</th>
                                             <th>Tên</th>
                                             <th>Slug</th>
+                                            <th>Hình ảnh</th>
                                             <th>Mô tả</th>
                                             <th>Danh mục</th>
                                             <!--                                            <th>Thời gian thêm</th>-->
@@ -51,6 +52,7 @@
                                             <td th:text="${product.id}"></td>
                                             <td th:text="${product.name}"></td>
                                             <td th:text="${product.slug}"></td>
+                                            <td class=""><img th:src="${product.image}" style="width:100px;"/></td>
                                             <td th:text="${product.description}"></td>
                                             <td th:text="${product.category.name}"></td>
                                             <!--                                            <td th:text="${product.createdAt}"></td>-->

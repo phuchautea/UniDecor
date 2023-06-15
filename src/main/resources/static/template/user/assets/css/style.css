@@ -107,7 +107,23 @@
 .product-tab-ptb .tab ul.nav-tabs li a.active {
     border: 1px solid var(--font-color-primary)
 }
-
+/*Paging*/
+.active .page-link{
+color: #fff;
+    background-color: var(--font-color-primary);
+    pointer-events: none;
+}
+.disabled .page-link{
+   display:none;
+}
+a.page-link :hover{
+border: 0;
+}
+a.page-link {
+    color: #000;
+    border: 0;
+    }
+/*Paging*/
 @media (max-width: 1199px) {
     .product-tab-ptb .tab ul.nav-tabs {
         margin-top: 40px

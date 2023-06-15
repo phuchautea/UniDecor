@@ -22,12 +22,12 @@ import java.util.Optional;
 
 
 @Controller
-@RequestMapping("")
+@RequestMapping("/product")
 public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/product/{slug}")
+    @GetMapping("/{slug}")
     public String getBySlug(@PathVariable("slug") String slug, Model model, HttpServletRequest request) {
         Product product = productService.getProductBySlug(slug);
         if(product != null) {

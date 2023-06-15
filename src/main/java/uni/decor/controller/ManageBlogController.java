@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/blogs")
-public class BlogController {
+public class ManageBlogController {
     @Autowired
     private BlogService blogService;
     @GetMapping
