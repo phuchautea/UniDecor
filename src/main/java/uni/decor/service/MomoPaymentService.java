@@ -34,46 +34,10 @@ public class MomoPaymentService {
 
     public String process(int total_price, HttpSession session) throws NoSuchAlgorithmException, InvalidKeyException {
         Order order = (Order) session.getAttribute("order");
-//        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-//        $partnerCode = env('MOMO_partnerCode');
-//        $accessKey = env('MOMO_accessKey');
-//        $secretKey = env('MOMO_secretKey');
-//        $orderInfo = "Thanh toán qua MoMo";
-//        $orderId = time() . "";
-//        $redirectUrl = env('MOMO_redirectUrl');
-//        $ipnUrl = env('MOMO_ipnUrl');
-//        $extraData = "";
-//
-//        $requestId = time() . "";
-//        $requestType = "captureWallet";
-//        $extraData = "";
-//        //before sign HMAC SHA256 signature
-//        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-//        $signature = hash_hmac("sha256", $rawHash, $secretKey);
-//        $data = array(
-//                'partnerCode' => $partnerCode,
-//                'partnerName' => "Test",
-//                'storeId' => "MomoTestStore",
-//                'requestId' => $requestId,
-//                'amount' => $amount,
-//                'orderId' => $orderId,
-//                'orderInfo' => $orderInfo,
-//                'redirectUrl' => $redirectUrl,
-//                'ipnUrl' => $ipnUrl,
-//                'lang' => 'vi',
-//                'extraData' => $extraData,
-//                'requestType' => $requestType,
-//                'signature' => $signature
-//        );
-//        String endPoint = env.getProperty("payment.momo.endpoint");
-//        String partnerCode = env.getProperty("payment.momo.partner-code");
-//        String accessKey = env.getProperty("payment.momo.access-key");
-//        String secretKey = env.getProperty("payment.momo.secret-key");
         String requestType = "captureWallet";
         String orderInfo = "Thanh toán đơn hàng";
         CustomLogger.info("Amount: "+total_price);
         String amount = String.valueOf(total_price);
-        //String amount1 = String.valueOf(total_price).replaceAll("[^\\d]", ""); // Xóa dấu phẩy
         String orderId = java.util.UUID.randomUUID().toString();
         String requestId = java.util.UUID.randomUUID().toString();
         String extraData = "";
@@ -90,7 +54,6 @@ public class MomoPaymentService {
                 "&requestType=" + requestType;
 
         MomoSecurity crypto = new MomoSecurity();
-        // Sign signature SHA256
         String signature = crypto.signSHA256(rawHash, secretKey);
 
         MomoRequest momoMessage = new MomoRequest();

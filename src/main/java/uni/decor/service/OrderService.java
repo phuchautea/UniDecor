@@ -63,7 +63,7 @@ public class OrderService {
                 case "momo":
                     return momoPaymentService.process((int)total_price, session);
                 case "vnpay":
-                    return vnpayPaymentService.process(total_price);
+                    return vnpayPaymentService.process((int)total_price, session);
                 default:
                     // Thêm order states ở đây ("đặt hàng");
                     // Add order, trạng thái chưa thanh toán, xóa session cart
