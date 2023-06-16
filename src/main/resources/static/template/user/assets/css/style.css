@@ -109,7 +109,7 @@
 }
 /*Paging*/
 .active .page-link{
-color: #fff;
+/*color: #fff;*/
     background-color: var(--font-color-primary);
     pointer-events: none;
 }

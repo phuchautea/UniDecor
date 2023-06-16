@@ -1,1 +1,61 @@
-Login success!
+<!DOCTYPE html>
+<html class="no-js supports-no-cookies mini2" lang="vi" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Tài khoản | UniDecor - Thiết kế không gian sống của bạn với nội thất chất lượng cao</title>
+    <th:block th:replace="layout/layout_user :: head-common"></th:block>
+</head>
+
+<body id="unidecor-template" class="template-index">
+    <div id="shopify-section-header" class="shopify-section" th:replace="layout/layout_user :: menu-common"></div>
+    <div class="page-layout">
+        <div class="row row-main">
+<!--                    <div class="col small-12 large-12">-->
+<!--                        <ul class="list-unstyled">-->
+<!--                        <li class="current"><a href="/admin/">Panel Admin</a></li>-->
+<!--                        <li class="current"><a href="/account">Thông tin tài khoản</a></li>-->
+<!--                        <li class="last"><a href="/user/logout">Đăng xuất</a></li>-->
+<!--                     </ul>-->
+<!--                    </div>-->
+                    <div class="col small-12 large-12">
+                        <div class="col-inner">
+                            <div class="page-layout">
+                                <div class="wrapper-row pd-page">
+                                    <div class="container-fluid">
+
+                                        <div class="col-xs-12 customer-table-wrap" id="customer_orders">
+                                        <a href="/user/logout" style=" margin-top: 10px; color: red;"><i class="fa fa-sign-out"></i> ĐĂNG XUẤT</a><hr>
+                                            <div class="customer_order customer-table-bg">
+                                                <h6>Danh sách đơn hàng mới nhất</h6>
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            <thead>
+                                                            <tr>
+                                                                <th class="order_number text-center">Mã đơn hàng</th>
+                                                                <th class="date text-center">Ngày đặt</th>
+                                                                <th class="total text-right">Thành tiền</th>
+                                                                <th class="payment_status text-center">Thanh toán</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody th:each="order : ${orders}">
+                                                                <tr class="odd ">
+                                                                    <td class="text-center"><a th:href="@{/order/search/{code}(code=${order.code})}" th:text="${order.code}"></a></td>
+                                                                    <td class="text-center"><span th:text="${order.createdAt}"></span></td>
+                                                                    <td class="text-right"><span class="total money" th:text="${@numberUtils.formatNumber(order.totalPrice)}">0</span>đ</td>
+                                                                    <td class="text-center"><b th:text="${order.paymentStatus}"></b></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    <div id="shopify-section-footer" class="shopify-section" th:replace="layout/layout_user :: footer-common"></div>
+</body>
+</html>

@@ -20,13 +20,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import uni.decor.common.CustomLogger;
 import uni.decor.common.Enum;
+import uni.decor.config.SecurityUtils;
+import uni.decor.entity.Order;
 import uni.decor.entity.User;
+import uni.decor.service.OrderService;
 import uni.decor.service.UserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Enumeration;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -35,6 +39,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("/login")
     public String login()
@@ -51,18 +58,29 @@ public class UserController {
     }
 
     @GetMapping("/account")
-    public String user(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-
-        // Lấy tất cả thuộc tính có trong session
-        Enumeration<String> attributeNames = session.getAttributeNames();
-
-        while (attributeNames.hasMoreElements()) {
-            String attributeName = attributeNames.nextElement();
-            Object attributeValue = session.getAttribute(attributeName);
-            CustomLogger.error(attributeName);
-            // Sử dụng attributeName và attributeValue tùy ý
+    public String user(HttpServletRequest request, Model model) {
+        List<Order> orders;
+        User userInfo = new User();
+        if(SecurityUtils.getEmailPrincipal() != "") {
+            userInfo = userService.getUserByEmail(SecurityUtils.getEmailPrincipal());
+            orders = userInfo.getOrders();
+        }else{
+            userInfo = null;
+            orders = null;
         }
+        model.addAttribute("orders", orders);
+
+//        HttpSession session = request.getSession();
+//
+//        // Lấy tất cả thuộc tính có trong session
+//        Enumeration<String> attributeNames = session.getAttributeNames();
+//
+//        while (attributeNames.hasMoreElements()) {
+//            String attributeName = attributeNames.nextElement();
+//            Object attributeValue = session.getAttribute(attributeName);
+//            CustomLogger.error(attributeName);
+//            // Sử dụng attributeName và attributeValue tùy ý
+//        }
         return "user/account";
     }
     @GetMapping("/register")

@@ -183,6 +183,10 @@ public class OrderService {
     public Order getByCode(String code) {
         return orderRepository.findByCode(code);
     }
+    public List<Order> getAll()
+    {
+        return orderRepository.findAll();
+    }
 }
 
 
