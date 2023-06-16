@@ -5,24 +5,24 @@
     --font-weight-body--bolder: 700;
     --font-color-body: #6f6f6f;
     --font-size-body: 14px;
-    --background-color-body: #FFFFFF;
+    --background-color-body: #f3e8dc;
     --font-stack-body: SF-Pro-Display-Regular;
     --font-weight-body: 400;
     --font-style-body: normal;
     --font-letter-spacing-body: .5px;
-    --font-color-header: #333333;
+    --font-color-header: #232323;
     --font-stack-header: SF-Pro-Display-Regular;
     --font-weight-header: 600;
     --font-style-header: normal;
-    --font-color-section-header: #333333;
+    --font-color-section-header: #232323;
     --font-weight-section-header: ;
     --font-style-section-header: ;
     --font-color-paragraph: #6f6f6f;
     --font-stack-paragraph: SF-Pro-Display-Regular;
     --font-line-height-paragraph: 25px;
     --font-stack-other: SF-Pro-Display-Regular;
-    --font-color-primary: #5e7332;
-    --font-color-secondary: #333333
+    --font-color-primary: #5be7d60;
+    --font-color-secondary: #232323
 }
 
 body {
