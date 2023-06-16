@@ -408,81 +408,54 @@
                                             <div class="col">
                                                 <ul class="product-view" id="product-grid" data-id="template--15088631709835__collection-template-without">
                                                     <li class="st-col-item st-col" th:each="product : ${products}">
-                                                        <div   class="single-product-wrap">
+                                                        <div class="single-product-wrap">
                                                             <div class="product-image">
-                                                                <a class="pro-img" th:href="@{/product/{slug} (slug=${product.slug})}">
-                                                                    <img class="img-fluid img1 resp-img1" th:src=${product.image} alt="File cabinet">
-
-                                                                    <img class="img-fluid img2 resp-img2" th:src=${product.image} alt="File cabinet">
-
+                                                                <a class="pro-img" th:href="@{/product/{slug}(slug=${product.slug})}">
+                                                                    <img class="img-fluid img1 resp-img1" th:src=${product.image}>
+                                                                    <img class="img-fluid img2 resp-img2" th:src=${product.image}>
                                                                 </a>
                                                                 <div class="product-label">
                                                                 </div>
-                                                                <div class="product-action"><a href="javascript:void(0);" onclick="quiqview('file-cabinet')" class="quick-view">
-                                                                    <span class="tooltip-text">Quickview</span>
-                                                                    <i class="bi bi-eye"></i>
-                                                                </a><a href="javascript:void(0)" class="action-wishlist tile-actions--btn wishlist-btn wishlist" data-product-handle="file-cabinet">
-                                                                    <span class="tooltip-text">Wishlist</span>
-                                                                    <span class="add-wishlist"><i class="bi bi-heart"></i></span>
-                                                                    <span class="loading-wishlist animated infinite rotateOut"><i class="bi bi-brightness-high"></i></span>
-                                                                    <span class="remove-wishlist"><i class="ion-android-close"></i></span>
-                                                                </a>
-                                                                </div>
                                                                 <div class="product-add-cart-action">
                                                                     <div class="product-action">
-
-                                                                        <a href="javascript:void(0);" onclick="Shopify.addItem(40238776680587, 1); return false;" class="add-to-cart ajax-spin-cart">
-                                                           <span>
-                                                               <span class="cart-title">
-                                                                   <span class="add-c-title">
-                                                                       <span class="cart-icon"><i class="bi bi-cart"></i></span>
-                                                                       <span class="add-title">Add to cart</span>
-                                                                   </span>
-                                                               </span>
-                                                               <span class="cart-loading animated infinite rotateOut"><i class="bi bi-brightness-high"></i></span>
-                                                               <span class="cart-added"><i class="bi bi-check2"></i></span>
-                                                               <span class="cart-unavailable"><i class="bi bi-exclamation-triangle"></i></span>
-                                                           </span>
+                                                                        <a th:href="@{/product/{slug}(slug=${product.slug})}" class="add-to-cart ajax-spin-cart">
+                                                                           <span>
+                                                                               <span class="cart-title">
+                                                                                   <span class="add-c-title">
+                                                                                       <span class="cart-icon"><i class="bi bi-cart"></i></span>
+                                                                                       <span class="add-title">Mua ngay</span>
+                                                                                   </span>
+                                                                               </span>
+                                                                               <span class="cart-loading animated infinite rotateOut"><i class="bi bi-brightness-high"></i></span>
+                                                                               <span class="cart-added"><i class="bi bi-check2"></i></span>
+                                                                               <span class="cart-unavailable"><i class="bi bi-exclamation-triangle"></i></span>
+                                                                           </span>
                                                                         </a>
-
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="product-content">
                                                                 <h6>
-                                                                    <a th:href="@{/product/{slug} (slug=${product.slug})}" title="File cabinet" th:text="${product.name}"></a>
+                                                                    <a th:href="@{/product/{slug}(slug=${product.slug})}" th:text="${product.name}"></a>
                                                                 </h6>
                                                                 <div class="price-box">
-                                                                    <span class="new-price">$36.00</span>
-
-                                                                    <span class="old-price">$39.00</span>
-
+                                                                    <span class="new-price" th:text="${product.getMinPrice()}"></span>đ
+<!--                                                                    <span class="old-price">$39.00</span>-->
                                                                 </div>
-
                                                                 <p class="product-description" th:text="${product.description}"></p>
-                                                                <div class="product-action"><a href="javascript:void(0);" onclick="quiqview('file-cabinet')" class="quick-view">
-                                                                    <span class="tooltip-text">Quickview</span>
-                                                                    <i class="bi bi-eye"></i>
-                                                                </a>
-                                                                    <a href="javascript:void(0);" onclick="Shopify.addItem(40238776680587, 1); return false;" class="add-to-cart ajax-spin-cart">
-                                                       <span>
-                                                           <span class="cart-title">
-                                                               <span class="add-c-title">
-                                                                   <span class="cart-icon"><i class="bi bi-cart"></i></span>
-                                                                   <span class="add-title">Add to cart</span>
-                                                               </span>
-                                                           </span>
-                                                           <span class="cart-loading animated infinite rotateOut"><i class="bi bi-brightness-high"></i></span>
-                                                           <span class="cart-added"><i class="bi bi-check2"></i></span>
-                                                           <span class="cart-unavailable"><i class="bi bi-exclamation-triangle"></i></span>
-                                                       </span>
-                                                                    </a>
-
-                                                                    <a href="javascript:void(0)" class="action-wishlist tile-actions--btn wishlist-btn wishlist" data-product-handle="file-cabinet">
-                                                                        <span class="tooltip-text">Wishlist</span>
-                                                                        <span class="add-wishlist"><i class="bi bi-heart"></i></span>
-                                                                        <span class="loading-wishlist animated infinite rotateOut"><i class="bi bi-brightness-high"></i></span>
-                                                                        <span class="remove-wishlist"><i class="ion-android-close"></i></span>
+                                                                <div class="product-action">
+                                                                    <a th:href="@{/product/{slug}(slug=${product.slug})}" class="add-to-cart ajax-spin-cart">
+                                                                       <span>
+                                                                           <span class="cart-title">
+                                                                               <span class="add-c-title">
+                                                                                   <span class="cart-icon"><i class="bi bi-cart"></i></span>
+                                                                                   <span class="add-title">Mua ngay</span>
+                                                                               </span>
+                                                                           </span>
+                                                                           <span class="cart-loading animated infinite rotateOut"><i class="bi bi-brightness-high"></i></span>
+                                                                           <span class="cart-added"><i class="bi bi-check2"></i></span>
+                                                                           <span class="cart-unavailable"><i class="bi bi-exclamation-triangle"></i></span>
+                                                                       </span>
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -496,24 +469,6 @@
                                     <div class="paginatoin-area" >
                                         <nav aria-label="Page navigation example" th:if="${totalPages > 1}">
                                         <ul class= "pagination-box">
-<!--                                            <li class="page-item" th:class="${products.hasPrevious() ? '' : 'disabled'}">-->
-<!--                                                <a class="page-link" th:href="@{/collections/all?page=__${products.number-1}__}" aria-label="Previous">-->
-<!--                                                    <i aria-hidden="true" class="bi bi-chevron-double-left"></i>-->
-<!--                                                </a>-->
-<!--                                            </li>-->
-<!--                                            <li class="page-item" th:each="page : ${#numbers.sequence(0, totalPages - 1)}"-->
-<!--                                                th:class="${products.number == page ? 'active' : ''}">-->
-<!--                                                <a class="page-link "th:href="@{/collections/all?page=__${page}__}" th:text="${page + 1}"></a>-->
-<!--                                            </li>-->
-<!--                                            <li class="page-item" th:class="${products.hasNext() ? '' : 'disabled'}">-->
-<!--                                                <a-->
-<!--                                                        class="page-link" aria-label="Next" title="Next »"-->
-<!--                                                        th:href="@{/collections/all?page=__${products.number+1}__}" >-->
-<!--                                                    <i aria-hidden="true" class="bi bi-chevron-double-right"></i>-->
-
-<!--                                                </a>-->
-<!--                                            </li>-->
-
                                             <li class="page-item" th:class="${products.hasPrevious() ? '' : 'disabled'}">
                                                 <a class="page-link" th:href="@{/collections/all?page=__${products.number-1}__}" aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
@@ -528,192 +483,154 @@
                                                     <span aria-hidden="true">&raquo;</span>
                                                 </a>
                                             </li>
-
-
-
-
-<!--                                            <li class="number active">-->
-<!--                                                <a href="javascript:void(0)">1</a>-->
-<!--                                            </li>-->
-
-
-
-
-<!--                                            <li class="number" th:each="page : ${#numbers.sequence(0, totalPages - 1)}"-->
-<!--                                                th:class="${products.number == page ? 'active' : ''}">-->
-<!--                                                <a class="page-link "th:href="@{/collections/all?page=__${page}__}" th:text="${page + 1}"></a></li>-->
-
-
-<!--                                        <li class="next np-icon">-->
-<!--                                                <a href="/collections/collection?page=2" class="next" aria-label="Next" title="Next »">-->
-<!--                                                    <i class="bi bi-chevron-double-right"></i>-->
-<!--                                                </a>-->
-<!--                                            </li>-->
-
                                         </ul>
                                         </nav>
-
-<!--                                        <script>-->
-<!--                           $(".theme-default-pagination .disabled a").removeAttr("href");-->
-<!--                           $(".theme-default-pagination li.active a").removeAttr("href");-->
-<!--                       </script>-->
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
-        </div>
+            </div>
         </div>
     </section>
+            <style>
+      /*=====================================
+        collection-template css
+      ======================================*/
 
-        <style>
-  /*=====================================
-    collection-template css
-  ======================================*/
+      .shop-page {
+        background-color: #FFFFFF;
+      }
 
-  .shop-page {
-    background-color: #FFFFFF;
-  }
+      .shop-page .position-left {
+        flex-direction: row-reverse;
+      }
 
-  .shop-page .position-left {
-    flex-direction: row-reverse;
-  }
+      /* sidebar banner css */
+      .sidebar-banner {
+        margin-top: 30px;
+      }
+      .sidebar-banner.sidebar-without-banner {
+        display: none;
+      }
+      .sidebar-banner a.sidebar-img {
+        position: relative;
+      }
+      .sidebar-banner a.sidebar-img span {
+        display: block;
+      }
+      .sidebar-banner a.sidebar-img span.sidebar-banner-icon {
+        color: var(--font-color-header);
+        font-size: 32px;
+        position: absolute;
+        bottom: 50%;
 
-  /* sidebar banner css */
-  .sidebar-banner {
-    margin-top: 30px;
-  }
-  .sidebar-banner.sidebar-without-banner {
-    display: none;
-  }
-  .sidebar-banner a.sidebar-img {
-    position: relative;
-  }
-  .sidebar-banner a.sidebar-img span {
-    display: block;
-  }
-  .sidebar-banner a.sidebar-img span.sidebar-banner-icon {
-    color: var(--font-color-header);
-    font-size: 32px;
-    position: absolute;
-    bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
 
-    left: 50%;
-    transform: translate(-50%, 50%);
+        height: 60px;
+        width: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #FFFFFF;
+        z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+        border-radius: 100%;
+        line-height: 0;
+      }
+      .sidebar-banner:hover a.sidebar-img span.sidebar-banner-icon {
+        opacity: 1;
+        visibility: visible;
+      }
+      .sidebar-banner a.sidebar-img span.sidebar-banner-icon:hover {
+        color: var(--font-color-primary);
+      }
+      .sidebar-banner a.sidebar-img span.sidebar-banner-icon,
+      .sidebar-banner a.sidebar-img span.sidebar-banner-icon:hover {
+        -webkit-transition: all 0.3s ease-in-out 0s;
+        -o-transition: all 0.3s ease-in-out 0s;
+        transition: all 0.3s ease-in-out 0s;
+      }
+      @media (max-width: 991px) {
+        .sidebar-banner {
+          display: none;
+        }
+      }
 
-    height: 60px;
-    width: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #FFFFFF;
-    z-index: 1;
-    opacity: 0;
-    visibility: hidden;
-    border-radius: 100%;
-    line-height: 0;
-  }
-  .sidebar-banner:hover a.sidebar-img span.sidebar-banner-icon {
-    opacity: 1;
-    visibility: visible;
-  }
-  .sidebar-banner a.sidebar-img span.sidebar-banner-icon:hover {
-    color: var(--font-color-primary);
-  }
-  .sidebar-banner a.sidebar-img span.sidebar-banner-icon,
-  .sidebar-banner a.sidebar-img span.sidebar-banner-icon:hover {
-    -webkit-transition: all 0.3s ease-in-out 0s;
-    -o-transition: all 0.3s ease-in-out 0s;
-    transition: all 0.3s ease-in-out 0s;
-  }
-  @media (max-width: 991px) {
-    .sidebar-banner {
-      display: none;
-    }
-  }
+      /* collection info title css */
+      .collection-img-wrap h6 {
+        font-size: 16px;
 
-  /* collection info title css */
-  .collection-img-wrap h6 {
-    font-size: 16px;
+        padding-left: 10px;
 
-    padding-left: 10px;
+        position: relative;
+        text-transform: capitalize;
+        line-height: 1;
+      }
+      .collection-img-wrap h6::before {
+        content: "";
+        position: absolute;
+        top: 0;
 
-    position: relative;
-    text-transform: capitalize;
-    line-height: 1;
-  }
-  .collection-img-wrap h6::before {
-    content: "";
-    position: absolute;
-    top: 0;
+        left: 0;
 
-    left: 0;
+        height: 100%;
+        width: 2px;
+        background-color: var(--font-color-primary);
+      }
 
-    height: 100%;
-    width: 2px;
-    background-color: var(--font-color-primary);
-  }
+      /* collection-info css */
+      .collection-img-wrap .collection-info {
+        margin-top: 30px;
+      }
+      .collection-img-wrap .collection-info .collection-description {
+        margin-top: 30px;
+      }
 
-  /* collection-info css */
-  .collection-img-wrap .collection-info {
-    margin-top: 30px;
-  }
-  .collection-img-wrap .collection-info .collection-description {
-    margin-top: 30px;
-  }
-
-  /* empty product css */
-  .empty-product {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    margin-top: 30px;
-  }
-  .empty-product .product-icon-title span {
-    display: block;
-    font-size: 64px;
-    line-height: 0;
-  }
-  .empty-product .product-icon-title span i {
-    display: block;
-    line-height: 0;
-  }
-  .empty-product .product-icon-title h2 {
-    font-size: 30px;
-    margin-top: 18px;
-  }
-  .empty-product .product-desc {
-    margin-top: 11px;
-  }
-  .empty-product .product-desc p {
-    font-size: 18px;
-  }
-  .empty-product .product-desc p a {
-    color: var(--font-color-header);
-    border-bottom: 1px solid;
-    opacity: 0.6;
-    -webkit-transition: all 0s ease-in-out 0s;
-    -o-transition: all 0s ease-in-out 0s;
-    transition: all 0s ease-in-out 0s;
-  }
-  .empty-product .product-desc p a:hover {
-    opacity: 1;
-  }
-</style></div>
+      /* empty product css */
+      .empty-product {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 30px;
+      }
+      .empty-product .product-icon-title span {
+        display: block;
+        font-size: 64px;
+        line-height: 0;
+      }
+      .empty-product .product-icon-title span i {
+        display: block;
+        line-height: 0;
+      }
+      .empty-product .product-icon-title h2 {
+        font-size: 30px;
+        margin-top: 18px;
+      }
+      .empty-product .product-desc {
+        margin-top: 11px;
+      }
+      .empty-product .product-desc p {
+        font-size: 18px;
+      }
+      .empty-product .product-desc p a {
+        color: var(--font-color-header);
+        border-bottom: 1px solid;
+        opacity: 0.6;
+        -webkit-transition: all 0s ease-in-out 0s;
+        -o-transition: all 0s ease-in-out 0s;
+        transition: all 0s ease-in-out 0s;
+      }
+      .empty-product .product-desc p a:hover {
+        opacity: 1;
+      }
+    </style>
+</div>
 </main>
-<script type="text/javascript">
-
-    </script>
 <div id="shopify-section-footer" class="shopify-section" th:replace="layout/layout_user :: footer-common"></div>
 </body>
 
