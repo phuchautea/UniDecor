@@ -31,11 +31,13 @@ public class ProductController {
     @GetMapping("/{slug}")
     public String getBySlug(@PathVariable("slug") String slug, Model model, HttpServletRequest request) {
         Product product = productService.getProductBySlug(slug);
+        List<Product> relativeProducts = productService.getProductByCategorySlug(product.getCategory().getSlug());
         if(product != null) {
             String currentUrl = request.getRequestURL().toString();
             model.addAttribute("product", product);
             model.addAttribute("currentUrl", currentUrl);
             model.addAttribute("productVariantList", product.getProductVariants());
+            model.addAttribute("relativeProducts", relativeProducts);
             return "product";
         }else{
             return "redirect:/";
