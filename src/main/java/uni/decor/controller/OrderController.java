@@ -111,7 +111,7 @@ public class OrderController {
             List<OrderVariant> orderVariants = resultOrder.getOrderVariants();
             if(resultOrder == null)
             {
-                System.out.println("Vui lòng nhập mã đơn hàng");
+                CustomLogger.error("Vui lòng nhập mã đơn hàng");
             }
             model.addAttribute("order", resultOrder);
             model.addAttribute("orderVariants", orderVariants);

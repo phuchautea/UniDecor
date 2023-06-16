@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Data
@@ -135,5 +136,11 @@ public class Product {
 
     public void setOrderVariants(List<OrderVariant> orderVariants) {
         this.orderVariants = orderVariants;
+    }
+    public Double getMinPrice() {
+        return getProductVariants().stream()
+                .map(variant -> variant.getDiscountPrice() > 0 ? variant.getDiscountPrice() : variant.getPrice())
+                .min(Comparator.naturalOrder())
+                .orElse(null);
     }
 }

@@ -1,0 +1,114 @@
+<!DOCTYPE>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+<th:block th:replace="admin/layout :: head"></th:block>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <th:block th:replace="admin/layout :: navbar"></th:block>
+    <th:block th:replace="admin/layout :: sidebar"></th:block>
+
+    <div class="content-wrapper">
+        <section class="content" style="margin-top: 15px">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fa fa-list"></i> DANH SÁCH ĐƠN HÀNG - Tổng: <span th:text="${#lists.size(orders)}"></span>
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-head-fixed text-nowrap">
+                                        <thead>
+                                        <tr>
+                                            <th>Hành động</th>
+                                            <th>ID</th>
+                                            <th>Mã đơn</th>
+                                            <th>Khách hàng</th>
+                                            <th>Phương thức</th>
+                                            <th>Thanh toán</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Tạo lúc</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="order : ${orders}">
+                                            <div class="modal fade" th:id="@{#edit_{id}(id=${order.id})}" style="display: none;" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" th:text="@{Chỉnh sửa đơn hàng #{code}(code=${order.code})}"></h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form>
+                                                                <div class="card-body">
+                                                                    <div class="form-group">
+                                                                        <label>Tình trạng thanh toán</label>
+                                                                        <select class="form-control" th:id="@{payment_status_{id}(id=${order.id})}">
+                                                                            <option th:each="payment_status : ${payment_status_list}"
+                                                                                    th:value="${#strings.toUpperCase(payment_status.getName())}"
+                                                                                    th:selected="${order.paymentStatus == #strings.toUpperCase(payment_status.getName())}"
+                                                                                    th:text="${payment_status.getName()}"></option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Tình trạng đơn hàng</label>
+                                                                        <select class="form-control" th:id="@{order_status_{id}(id=${order.id})}">
+                                                                            <option th:each="order_status : ${order_status_list}"
+                                                                                    th:value="${#strings.toUpperCase(order_status.getName())}"
+                                                                                    th:text="${order_status.getName()}"></option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+<!--                                                            <button type="button" class="btn btn-primary" id="btn_edit_${order.id}" onclick="update(${order.id});">Lưu thay đổi</button>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <td style="width: 100px">
+                                                <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" th:data-target="@{#edit_{id}(id=${order.id})}">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" th:data-target="@{#orderDetails_{id}(id=${order.id})}">
+                                                    <i class="fa fa-list"></i>
+                                                </a>
+                                            </td>
+                                            <td th:text="${order.id}"></td>
+                                            <td th:text="${order.code}"></td>
+                                            <td>
+                                                <span th:text="${order.receiverName}"></span><br>
+                                                <span th:text="${order.receiverPhone}"></span><br>
+                                                <span th:text="${order.receiverEmail}"></span><br>
+                                                <span th:text="${order.receiverAddress}"></span>
+                                            </td>
+                                            <td th:text="${order.paymentMethod}"></td>
+                                            <td th:text="${order.paymentStatus}"></td>
+                                            <td th:text="${@numberUtils.formatNumber(order.totalPrice)}"></td>
+                                            <td th:text="${order.createdAt}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <th:block th:replace="admin/layout :: footer"></th:block>
+
+</div>
+</body>
+</html>

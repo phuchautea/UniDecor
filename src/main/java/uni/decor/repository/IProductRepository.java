@@ -13,4 +13,5 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p JOIN p.productVariants pv GROUP BY p.id ORDER BY SUM(pv.soldQuantity) DESC")
     List<Product> findTop10BySoldQuantity();
     Product findBySlug(String slug);
+    List<Product> findByCategorySlug(String categorySlug);
 }

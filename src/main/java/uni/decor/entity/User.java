@@ -139,8 +139,6 @@ public class User {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority("user"));
         authorities.add(new SimpleGrantedAuthority("admin"));
-        System.out.println("authorities nek: ");
-        System.out.println(authorities);
 //        String[] roles = this.getRoles();
 //        for(String role : roles)
 //        {

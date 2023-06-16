@@ -27,6 +27,10 @@ public class ProductService {
     {
         return productRepository.findAll();
     }
+    public List<Product> findByCategorySlug(String categorySlug)
+    {
+        return productRepository.findByCategorySlug(categorySlug);
+    }
 
     public Product getProductBySlug(String slug) {
         return productRepository.findBySlug(slug);
@@ -92,7 +96,14 @@ public class ProductService {
         PageRequest pageRequest = PageRequest.of(page, size);
         return productRepository.findAll(pageRequest);
     }
+    public List<Product> getProductByCategorySlug(String categorySlug)
+    {
+        return productRepository.findByCategorySlug(categorySlug);
+    }
     public Long totalProduct(){
         return productRepository.count();
+    }
+    public Long totalProductByCategorySlug(String categorySlug){
+        return getProductByCategorySlug(categorySlug).stream().count();
     }
 }

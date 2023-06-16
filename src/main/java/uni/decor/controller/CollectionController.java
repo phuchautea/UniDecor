@@ -1,5 +1,6 @@
 package uni.decor.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,18 @@ public class CollectionController {
         model.addAttribute("totalProduct",productService.totalProduct());
         model.addAttribute("totalPages",products.getTotalPages());
         return "category/collections";
+    }
+
+    @GetMapping("/{slug}")
+    public String showAllProductsBySlug(@PathVariable("slug") String slug, Model model) {
+        List<Product> products = productService.getProductByCategorySlug(slug);
+        if(products != null) {
+            model.addAttribute("products", products);
+            model.addAttribute("totalProduct",productService.totalProductByCategorySlug(slug));
+            return "category/collections";
+        }else{
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/sort/{sortBy}")

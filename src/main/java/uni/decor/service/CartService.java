@@ -100,8 +100,7 @@ public class CartService {
 
         // Lưu giỏ hàng vào session
         session.setAttribute("carts", carts);
-        System.out.println("THÊM THÀNH CÔNG");
-        System.out.println(session.getAttribute("carts"));
+        CustomLogger.info("Thêm vào giỏ hàng thành công");
         // ...
         getCartItems(session);
         return true;
@@ -181,13 +180,6 @@ public class CartService {
                 ProductVariant productVariant = productVariantService.getById(cartItem.getProductVariantId());
                 Long productVariantId = cartItem.getProductVariantId();
                 int quantity = cartItem.getQuantity();
-
-                // Thực hiện xử lý với từng thuộc tính của cartItem
-                System.out.println("CartItemId: " + cartItemId);
-                System.out.println("ProductId: " + productId);
-                System.out.println("ProductVariantId: " + productVariantId);
-                System.out.println("Quantity: " + quantity);
-                // ...
             }
         }
 
@@ -214,16 +206,9 @@ public class CartService {
                     hasProductSoldOut = 1;
                     continue;
                 }
-
-                // Thực hiện xử lý với từng thuộc tính của cartItem
-                System.out.println("CartItemId: " + cartItemId);
-                System.out.println("ProductId: " + productId);
-                System.out.println("ProductVariantId: " + productVariantId);
-                System.out.println("Quantity: " + quantity);
-                // ...
             }
             if (hasProductSoldOut == 1) {
-                //Session.flash("error", "Đã có sản phẩm không đủ số lượng tồn kho, vui lòng kiểm tra lại");
+                CustomLogger.error("Đã có sản phẩm không đủ số lượng tồn kho, vui lòng kiểm tra lại");
                 return false;
             }
             return true;
@@ -238,8 +223,6 @@ public class CartService {
             List<CartItem> cartItems = new ArrayList<>(carts.values());
             for (CartItem cartItem : cartItems) {
                 String cartItemId = cartItem.getCartItemId();
-                // Thực hiện xử lý với từng thuộc tính của cartItem
-                System.out.println("CartItemId: " + cartItemId);
                 double total = cartItem.getTotal();
                 totalPrice += total;
                 // ...
@@ -257,10 +240,7 @@ public class CartService {
 
             for (CartItem cartItem : cartItems) {
                 String cartItemId = cartItem.getCartItemId();
-                // Thực hiện xử lý với từng thuộc tính của cartItem
-                System.out.println("CartItemId: " + cartItemId);
                 count++;
-                // ...
             }
         }
 

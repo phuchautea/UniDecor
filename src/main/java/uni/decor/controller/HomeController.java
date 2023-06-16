@@ -8,6 +8,7 @@ import uni.decor.entity.Category;
 import uni.decor.entity.Product;
 import uni.decor.service.CategoryService;
 import uni.decor.service.ProductService;
+import uni.decor.service.StatisticsService;
 
 import java.util.List;
 
@@ -17,6 +18,8 @@ public class HomeController {
     private CategoryService categoryService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private StatisticsService statisticsService;
     @GetMapping("/")
     public String index(Model model){
         List<Category> categories = categoryService.getAll();
@@ -26,5 +29,14 @@ public class HomeController {
         model.addAttribute("newestProducts", newestProducts);
         model.addAttribute("bestSellingProducts", bestSellingProducts);
         return "index";
+    }
+    @GetMapping("/admin")
+    public String indexStats(Model model) {
+        model.addAttribute("title", "Dashboard Admin");
+//        model.addAttribute("salesStatistics", statisticsService.getSalesStatistics());
+        model.addAttribute("paymentMethodStatistics", statisticsService.getPaymentMethodStatistics());
+        model.addAttribute("soldQuantityStatistics", statisticsService.getBestSellingProducts());
+
+        return "admin/home";
     }
 }

@@ -1,14 +1,14 @@
 package uni.decor.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import uni.decor.common.CustomLogger;
 import uni.decor.common.Enum;
 import uni.decor.entity.User;
 import uni.decor.repository.IRoleRepository;
 import uni.decor.repository.IUserRepository;
 
-import static uni.decor.util.RandomStringGenerator.generateRandomString;
 
 @Service
 public class UserService {
@@ -36,13 +36,10 @@ public class UserService {
         if(userRepository.findByEmail(email) != null)
             return;
         User user = new User();
-        //user.setPhone("0832798188");
         user.setEmail(email);
         user.setName(fullName);
-        //String passwordRandom = generateRandomString(12);
-        //user.setPassword(new BCryptPasswordEncoder().encode(passwordRandom));
         user.setProvider(Enum.Provider.GOOGLE);
         save(user);
-        System.out.println("Created new user: " + email);
+        CustomLogger.info("Created new user: " + email);
     }
 }
